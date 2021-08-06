@@ -1,7 +1,6 @@
 {
     "name": "oboyda/wp-plugin-bootstrap",
-    "description": "Bootstrap plugin that makes it easier to start a new plugin development",
-    "version": "1.0.0.dev",
+    "version": "1.2.dev",
     "autoload": {
         "psr-4": {
             "WPPB\\": "src/classes"
