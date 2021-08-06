@@ -2,14 +2,14 @@
 /**
  * Plugin Name: WPPB Plugin
  * Description: Bootstrap plugin that makes it easier to start a new plugin development
- * Version: 1.1.dev
+ * Version: 1.3.dev
  * Author: Alexis Boyda
  * Author URI: https://aleapp.com
  * Text Domain: wppb
  */
 
 define('WPPB_NAME', 'WPPB Plugin');
-define('WPPB_VERSION', '1.1.dev');
+define('WPPB_VERSION', '1.3.dev');
 define('WPPB_DIR', dirname(__FILE__));
 define('WPPB_INDEX', plugins_url('', __FILE__));
 
