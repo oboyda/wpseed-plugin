@@ -24,10 +24,12 @@ add_action('plugins_loaded', function()
     
     if($deps->check())
     {
+        require WPPB_DIR . '/src/utils.php';
         require WPPB_DIR . '/src/classes/load.php';
-        require WPPB_DIR . '/src/functions.php';
         require WPPB_DIR . '/src/debug.php';
         require WPPB_DIR . '/src/scripts.php';
+
+        require WPPB_DIR . '/inc/inc.php';
     }
     
 }, 100);

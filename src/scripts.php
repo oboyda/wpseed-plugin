@@ -78,6 +78,10 @@ function wppb_enqueue_scripts()
     //wp_enqueue_script('axios');
     //wp_enqueue_script('qs');
     //wp_localize_script('vue', 'vueVars', apply_filters('vue_vars', []));
+
+    wp_localize_script('wppb-front', 'wppbFrontVars', apply_filters('wppb_front_vars', [
+        'ajaxurl' => admin_url('admin-ajax.php')
+    ]));
 }
 
 /*

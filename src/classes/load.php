@@ -1,14 +1,8 @@
-<?php
+<?php 
 
 /*
- * Init WPTB\Action classes
- * ------------------------------
+ * Autoload action classes
+ * -------------------------
  */
-
-
-
-/*
- * Init WPTB\Filter classes
- * ------------------------------
- */
-if(class_exists('\WPPB\Filter\View')) (new \WPPB\Filter\View());
+wpseed_load_dir_classes(dirname(__FILE__) . '/Action', '\WPPBOOT\Action');
+wpseed_load_dir_classes(dirname(__FILE__) . '/Filter', '\WPPBOOT\Filter');
