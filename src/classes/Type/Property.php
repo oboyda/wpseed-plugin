@@ -64,13 +64,13 @@ class Property extends Post
                 'type' => 'taxonomy',
                 'import_key' => 'Type'
             ],
-            'property_feature' => [
-                'type' => 'taxonomy',
-                'import_key' => 'Features'
-            ],
             'property_condition' => [
                 'type' => 'taxonomy',
                 'import_key' => 'Condition'
+            ],
+            'property_feature' => [
+                'type' => 'taxonomy',
+                'import_key' => 'Features'
             ],
 
             // 'sale_price' => [
@@ -157,20 +157,71 @@ class Property extends Post
         return (int)$wpdb->get_var($wpdb->prepare("SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key=%s AND meta_value=%s", 'ref', $ref));
     }
 
+    /*
+    Images
+    -------------------------
+    */
+
     public function getFeaturedImageId()
     {
         return get_post_thumbnail_id($this->get_id());
     }
 
-    public function getFeaturedImageSrc()
+    public function getGalleryImages()
     {
-        return $this->get_meta('thumbnail_url');
+        return $this->get_meta('gallery_urls', true, []);
+    }
+
+    public function getFeaturedImageSrc($size='Original')
+    {
+        $meta = $this->get_meta('thumbnail_url', true);
+
+        if($size !== 'Original' && $meta)
+        {
+            $gallery_meta = $this->getGalleryImages();
+            foreach($gallery_meta as $g_meta)
+            {
+                if(isset($g_meta['Original']) && $meta === $g_meta['Original'] && isset($g_meta[$size]))
+                {
+                    $meta = $g_meta[$size];
+                }
+            }
+        }
+
+        return $meta;
+    }
+
+    public function getGalleryImageSrcs($size='Original')
+    {
+        $images_meta = $this->getGalleryImages();
+        $images = [];
+
+        foreach($images_meta as $image)
+        {
+            if(isset($image[$size]))
+            {
+                $images[] = $image[$size];
+            }
+        }
+        return $images;
     }
 
     /*
-    Property general info
+    Property details
     -------------------------
     */
+
+    public function getTitle()
+    {
+        return $this->get_data('post_title', '');
+    }
+
+    public function getDescription($autop=false)
+    {
+        $data = $this->get_data('post_content', '');
+
+        return ($autop && $data) ? wpautop($data) : $data;
+    }
 
     public function getAddressFormatted()
     {
@@ -179,57 +230,95 @@ class Property extends Post
 
     public function getSalePrice($format=false)
     {
-        $price = (int)$this->get_meta('sale_price');
+        $meta = (int)$this->get_meta('sale_price', true);
 
-        return $format ? Utils_Property::formatPrice($price) : $price;
+        return $format ? Utils_Property::formatPrice($meta) : $meta;
     }
 
     public function getReference()
     {
-        return $this->get_meta('ref');
+        return $this->get_meta('ref', true);
     }
 
     public function getNetArea($formatted=false)
     {
-        $area = (int)$this->get_meta('net_area');
+        $meta = (int)$this->get_meta('net_area', true);
 
-        return $formatted ? Utils_Property::formatArea($area) : $area;
+        return $formatted ? Utils_Property::formatArea($meta) : $meta;
     }
 
     public function getGrossArea($formatted=false)
     {
-        $area = (int)$this->get_meta('gross_area');
+        $meta = (int)$this->get_meta('gross_area', true);
         
-        return $formatted ? Utils_Property::formatArea($area) : $area;
+        return $formatted ? Utils_Property::formatArea($meta) : $meta;
     }
 
     public function getLandArea($formatted=false)
     {
-        $area = (int)$this->get_meta('land_area');
+        $meta = (int)$this->get_meta('land_area', true);
         
-        return $formatted ? Utils_Property::formatArea($area) : $area;
+        return $formatted ? Utils_Property::formatArea($meta) : $meta;
     }
 
     public function getBedrooms()
     {
-        return (int)$this->get_meta('bedrooms');
+        return (int)$this->get_meta('bedrooms', true);
     }
 
     public function getBathrooms()
     {
-        return (int)$this->get_meta('bathrooms');
+        return (int)$this->get_meta('bathrooms', true);
+    }
+
+    public function getFloor()
+    {
+        return (int)$this->get_meta('floor', true);
     }
 
     /*
-    Property specifications
+    Property terms
     -------------------------
     */
 
-    public function getDescription($autop=false)
+    public function getCountry($names=false)
     {
-        $desc = $this->get_data('post_content');
+        return $this->getTerms('country', $names, true);
+    }
 
-        return ($autop && $desc) ? wpautop($desc) : $desc;
+    public function getState($names=false)
+    {
+        return $this->getTerms('state', $names, true);
+    }
+
+    public function getCity($names=false)
+    {
+        return $this->getTerms('city', $names, true);
+    }
+
+    public function getPerish($names=false)
+    {
+        return $this->getTerms('perish', $names, true);
+    }
+
+    public function getZone($names=false)
+    {
+        return $this->getTerms('zone', $names, true);
+    }
+
+    public function getType($names=false)
+    {
+        return $this->getTerms('property_type', $names, true);
+    }
+
+    public function getCondition($names=false)
+    {
+        return $this->getTerms('property_condition', $names, true);
+    }
+
+    public function getFeatures($names=false, $as_array=false)
+    {
+        return $this->getTerms('property_feature', $names, false, $as_array);
     }
 
     /*
@@ -237,5 +326,48 @@ class Property extends Post
     -------------------------
     */
 
+    /*
+    Helpers
+    -------------------------
+    */
 
+    // protected function getTermsObjects($taxonomy)
+    // {
+    //     $terms = get_terms([
+    //         'taxonomy' => $taxonomy,
+    //         'hide_empty' => false,
+    //         'include' => $this->get_terms($taxonomy, [])
+    //     ]);
+    //     $_terms = is_wp_error($terms) ? [] : $terms;
+    // }
+
+    protected function getTerms($taxonomy, $names=false, $single=true, $as_array=false)
+    {
+        if($names)
+        {
+            return $as_array ? $this->getTermsNames($taxonomy) : $this->getTermsNames($taxonomy, ', ');
+        }
+
+        $term_ids = $this->get_terms($taxonomy, []);
+
+        if($single)
+        {
+            return isset($term_ids[0]) ? $term_ids[0] : false;
+        }
+        
+        return $term_ids;
+    }
+
+    protected function getTermsNames($taxonomy, $concat=false)
+    {
+        $terms = get_terms([
+            'taxonomy' => $taxonomy,
+            'hide_empty' => false,
+            'include' => $this->get_terms($taxonomy, []),
+            'fields' => 'names'
+        ]);
+        $_terms = is_wp_error($terms) ? [] : $terms;
+
+        return $concat ? implode($concat, $_terms) : $_terms;
+    }
 }
