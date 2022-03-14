@@ -1,6 +1,6 @@
 <?php
 
-namespace HSP;
+namespace WPPB;
 
 class Deps
 {
@@ -28,7 +28,7 @@ class Deps
                 $check = false;
 
                 $notice  = '<div class="notice notice-warning is-dismissible">';
-                    $notice .= '<p>' . sprintf(__('%s requires %s to work properly.', 'hsp'), HSP_NAME, $dep) . '</p>';
+                    $notice .= '<p>' . sprintf(__('%s requires %s to work properly.', 'wppb'), WPPB_NAME, $dep) . '</p>';
                 $notice .= '</div>';
                 
                 $this->notices[] = $notice;
