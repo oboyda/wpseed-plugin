@@ -1,0 +1,14 @@
+{
+    "name": "wp-plugin-bootstrap",
+    "version": "1.0.0",
+    "private": true,
+    "main": "build/index.js",
+    "module": "src/index.js",
+    "scripts": {
+        "start": "wp-scripts start",
+        "build": "wp-scripts build"
+    },
+    "devDependencies": {
+        "@wordpress/scripts": "16.0.0"
+    }
+}
