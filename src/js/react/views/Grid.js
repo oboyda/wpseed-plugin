@@ -71,7 +71,7 @@ class Grid extends View
             }
         }
 
-        this.setState({
+        this._setState({
             gridConfig: gridConfig
         });
     }
@@ -79,18 +79,13 @@ class Grid extends View
     setCellSize()
     {
         const cellSize = Math.round(this.domRef.current.offsetWidth / this.gridSizeX);
-        this.setState({
+        this._setState({
             cellSize: cellSize
         });
     }
 
-    placeTile(gridX, gridY, tileConfig, removeTileId)
+    placeTile(gridX, gridY, tileConfig)
     {
-        if(typeof removeTileId !== 'undefined')
-        {
-            this.removeTile(removeTileId);
-        }
-
         const tileElem = (tileConfig instanceof Tile) ? tileConfig : new Tile({
             ...tileConfig,
             gridTile: true,
@@ -101,10 +96,13 @@ class Grid extends View
             app: this.app
         });
 
-        tileElem.setObjectProps({
+        tileElem._setProps({
             gridX: gridX,
             gridY: gridY
         });
+
+        // Remove previous instance if exist
+        this.removeTile(tileElem.id);
 
         const rotationConfig = tileElem.getTypeRotationConfig();
 
@@ -129,7 +127,7 @@ class Grid extends View
                 });
             });
             
-            this.setState({
+            this._setState({
                 gridConfig: gridConfig
             });
         }
@@ -148,7 +146,7 @@ class Grid extends View
             });
         });
 
-        this.setState({
+        this._setState({
             gridConfig: gridConfig
         });
     }
@@ -205,16 +203,16 @@ class Grid extends View
                         <div className={`grid-row row-${y}`} key={`${y}`}>
                             {row.map((cell, x) => {
 
-                                const tileElem = Utils.isSet(cell.tile) ? React.createElement(Tile, cell.tile) : null;
-
                                 let cellClasses = ['grid-cell', 'cell-' + y + '-' + x];
+                                let tileElem = null;
 
-                                if(Utils.isSet(cell.tileId))
+                                if(cell.tileId)
                                 {
                                     cellClasses.push(cell.tileId);
                                 }
-                                if(Utils.isSet(cell.tile))
+                                if(cell.tile)
                                 {
+                                    tileElem = React.createElement(Tile, cell.tile);
                                     cellClasses.push("tile-root");
                                 }
                                 if(cell.filled)

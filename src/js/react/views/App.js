@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Utils from '../Utils';
 import View from './View';
-import TilesBar from './TilesBar';
+import ToolsBar from './ToolsBar';
 // import ToolsBar from './ToolsBar';
 import Grid from './Grid';
 import Modal from './Modal';
@@ -65,9 +65,8 @@ class App extends View {
         return (
             <div className="tilec-app">
                 <div className='app-editor'>
-                    <TilesBar app={this} />
+                    <ToolsBar app={this} />
                     <Grid app={this} gridSizeX={25} gridSizeY={25} />
-                    {/* <ToolsBar app={this} /> */}
                 </div>
                 {/* <FeaturesBar app={this} /> */}
                 <Modal app={this} />

@@ -45,7 +45,7 @@ class Modal extends View
 
     // openModal(headerTitle, bodyContent)
     // {
-    //     this.setState({
+    //     this._setState({
     //         opened: true,
     //         headerTitle: headerTitle,
     //         bodyContent: bodyContent
@@ -54,7 +54,7 @@ class Modal extends View
 
     handleCloseModal()
     {
-        this.setState({
+        this._setState({
             opened: false,
             headerTitle: '',
             bodyContent: ''

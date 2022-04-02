@@ -1,7 +1,7 @@
 import View from './View';
 import TileOptions from './TileOptions';
 
-class TilesBar extends View 
+class ToolsBar extends View 
 {
     constructor(props)
     {
@@ -23,4 +23,4 @@ class TilesBar extends View
     }
 }
 
-export default TilesBar;
+export default ToolsBar;

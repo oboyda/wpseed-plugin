@@ -22,7 +22,7 @@ class Tile extends View
 
         if(typeof this.id === 'undefined')
         {
-            this.setObjectProps({
+            this._setProps({
                 id: 'tile-' + Utils.genRandomString(12)
             });
         }
@@ -195,10 +195,10 @@ class Tile extends View
 
     rotate(r=0)
     {
-        this.setObjectProps({
+        this._setProps({
             rotation: r
         });
-        this.setState({
+        this._setState({
             // rotationConfig: this.getTypeRotationConfig(this.type, r),
             rotationConfig: this.getTypeRotationConfig()
         });
@@ -206,7 +206,7 @@ class Tile extends View
 
     setColor(c)
     {
-        this.setState({
+        this._setState({
             color: c
         });
     }

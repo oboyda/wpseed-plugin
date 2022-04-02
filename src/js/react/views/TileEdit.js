@@ -22,7 +22,6 @@ class TileEdit extends View
 
         if(grid.isPlacementAvailable(tile.gridX, tile.gridY, tile, r, tile.id))
         {
-            grid.removeTile(tile.id);
             tile.rotate(r);
             grid.placeTile(tile.gridX, tile.gridY, tile);
             this.app.modalClose();
@@ -55,7 +54,6 @@ class TileEdit extends View
 
         if(grid.isPlacementAvailable(gridX, gridY, tile, tile.rotation, tile.id))
         {
-            grid.removeTile(tile.id);
             grid.placeTile(gridX, gridY, tile);
             this.app.modalClose();
         }

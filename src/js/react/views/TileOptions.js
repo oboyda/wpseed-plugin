@@ -37,7 +37,7 @@ class TileOptions extends View
     // enableOptions(e)
     // {
     //     const detail = e.detail;
-    //     this.setState({
+    //     this._setState({
     //         gridX: detail.gridX,
     //         gridY: detail.gridY,
     //         enabled: true
@@ -46,7 +46,7 @@ class TileOptions extends View
 
     // disableOptions(e)
     // {
-    //     this.setState({
+    //     this._setState({
     //         enabled: false
     //     });
     // }

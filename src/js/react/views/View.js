@@ -6,16 +6,17 @@ class View extends Component
     constructor(props, propsDefault, subscribedEvents)
     {
         super(props);
+
         this._props = {};
-        this.setObjectProps(Utils.parseArgs(this.props, propsDefault));
+        this.state = {};
+
+        this._setProps(Utils.parseArgs(this.props, propsDefault));
 
         this.classname = this.constructor.name.toLowerCase();
 
         this.subscribedEvents = Utils.parseArgs(subscribedEvents, {
             set_state: false
         });
-
-        this.state = {};
 
         this.eventSetState = this.eventSetState.bind(this);
     }
@@ -56,16 +57,48 @@ class View extends Component
     {
         if(typeof e.detail !== 'undefined')
         {
-            this.setState(e.detail);
+            this._setState(e.detail);
         }
     }
 
-    setObjectProps(_props)
+    _setState(state, syncProps=true)
     {
+        this.setState(state);
+
+        let stateProps = {};
+        Object.keys(state).forEach((s) => {
+            if(typeof this._props[s] !== 'undefined')
+            {
+                stateProps[s] = state[s];
+            }
+        });
+
+        // Sync props from state
+        if(syncProps && Object.keys(stateProps).length)
+        {
+            this._setProps(stateProps, false);
+        }
+    }
+
+    _setProps(_props, syncState=true)
+    {
+        let stateProps = {};
+
         Object.keys(_props).forEach((p) => {
             this._props[p] = _props[p];
             this[p] = this._props[p];
+
+            if(typeof this.state[p] !== 'undefined')
+            {
+                stateProps[p] = this._props[p];
+            }
         });
+
+        // Sync state from props
+        if(syncState && Object.keys(stateProps).length)
+        {
+            this._setState(stateProps, false);
+        }
     }
 
     getProps()
