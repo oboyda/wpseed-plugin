@@ -1,5 +1,5 @@
 import View from './View';
-import TileOptions from './TileOptions';
+// import TileOptions from './TileOptions';
 
 class ToolsBar extends View 
 {
@@ -7,17 +7,24 @@ class ToolsBar extends View
     {
         super(props, {
             app: null
+        }, {
+            set_state: true
         });
 
-        // this.state = {
-        // };
+        this.state = {
+            opened: false,
+            barContent: null
+        };
     }
 
     render()
     {
+        const openedClass = this.state.opened ? ' opened' : '';
+
         return (
-            <div className='view tiles-bar'>
-                <TileOptions app={this.app} />
+            <div className={`view tools-bar${openedClass}`}>
+                {/* <TileOptions app={this.app} /> */}
+                {this.state.barContent}
             </div>
         );
     }

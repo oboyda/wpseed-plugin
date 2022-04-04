@@ -24,7 +24,7 @@ class TileEdit extends View
         {
             tile.rotate(r);
             grid.placeTile(tile.gridX, tile.gridY, tile);
-            this.app.modalClose();
+            // this.app.modalClose();
         }
     }
 
@@ -55,20 +55,21 @@ class TileEdit extends View
         if(grid.isPlacementAvailable(gridX, gridY, tile, tile.rotation, tile.id))
         {
             grid.placeTile(gridX, gridY, tile);
-            this.app.modalClose();
+            // this.app.modalClose();
         }
     }
 
     handleToolSetColor(c)
     {
         this.tile.setColor(c);
-        this.app.modalClose();
+        // this.app.modalClose();
     }
 
     handleToolRemove()
     {
         this.tile.grid.removeTile(this.tile.id);
-        this.app.modalClose();
+        // this.app.modalClose();
+        this.app.toolsBarClose();
     }
 
     render()
@@ -82,35 +83,32 @@ class TileEdit extends View
                     <div className='tools-label'>
                         <strong>{indexVars.translations.tileEdit.tools.rotateToolsLabel}</strong>
                     </div>
-                    <div className='tools-inner'>
+                    <div className='tools-controls'>
                         <button 
-                            className={`tool-btn rotate rotate-left rotate-${prevRotation}`}
+                            className={`tool-btn icon-btn rotate left rotate-${prevRotation}`}
                             onClick={() => { this.handleToolRotate(prevRotation); }}
-                        >
-                            {indexVars.translations.tileEdit.tools.rotateLeftLabel}
-                        </button>
+                            title={indexVars.translations.tileEdit.tools.rotateLeftLabel}
+                        ></button>
                         <button 
-                            className={`tool-btn rotate rotate-right rotate-${nextRotation}`}
+                            className={`tool-btn icon-btn rotate right rotate-${nextRotation}`}
                             onClick={() => { this.handleToolRotate(nextRotation); }}
-                        >
-                            {indexVars.translations.tileEdit.tools.rotateRightLabel}
-                        </button>
+                            title={indexVars.translations.tileEdit.tools.rotateRightLabel}
+                        ></button>
                     </div>
                 </div>
                 <div className='edit-tools move'>
                     <div className='tools-label'>
                         <strong>{indexVars.translations.tileEdit.tools.moveToolsLabel}</strong>
                     </div>
-                    <div className='tools-inner'>
+                    <div className='tools-controls'>
                         {this.tile.moves.map((m, i) => {
                             return (
                                 <button 
                                     key={i}
-                                    className={`tool-btn move move-${m}`}
+                                    className={`tool-btn icon-btn move ${m}`}
                                     onClick={() => { this.handleToolMove(m); }}
-                                >
-                                    {m}
-                                </button>
+                                    title={m}
+                                ></button>
                             );
                         })}
                     </div>
@@ -119,16 +117,15 @@ class TileEdit extends View
                     <div className='tools-label'>
                         <strong>{indexVars.translations.tileEdit.tools.colorToolsLabel}</strong>
                     </div>
-                    <div className='tools-inner'>
+                    <div className='tools-controls'>
                         {this.tile.colors.map((c, i) => {
                             return (
                                 <button 
                                     key={i} 
-                                    className='tool-btn color'
+                                    className={`tool-btn color ${c}`}
                                     onClick={() => { this.handleToolSetColor(c); }}
-                                >
-                                    {c}
-                                </button>
+                                    title={c}
+                                >&nbsp;</button>
                             );
                         })}
                     </div>
@@ -137,13 +134,12 @@ class TileEdit extends View
                     <div className='tools-label'>
                         <strong>{indexVars.translations.tileEdit.tools.miscToolsLabel}</strong>
                     </div>
-                    <div className='tools-inner'>
+                    <div className='tools-controls'>
                         <button 
-                            className='tool-btn remove'
+                            className='tool-btn icon-btn remove'
                             onClick={() => { this.handleToolRemove(); }}
-                        >
-                            {indexVars.translations.tileEdit.tools.removeLabel}
-                        </button>
+                            title={indexVars.translations.tileEdit.tools.removeLabel}
+                        ></button>
                     </div>
                 </div>
             </div>

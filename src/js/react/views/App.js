@@ -33,20 +33,35 @@ class App extends View {
         });
     }
 
-    tileOptionsEnable(gridX, gridY)
+    toolsBarOpen(barContent)
     {
-        Utils.dispatchEvent('tileoptions__set_state', {
-            enabled: true,
-            gridX: gridX,
-            gridY: gridY
+        Utils.dispatchEvent('toolsbar__set_state', {
+            opened: true,
+            barContent: barContent
         });
     }
-    tileOptionsDisable()
+    toolsBarClose()
     {
-        Utils.dispatchEvent('tileoptions__set_state', {
-            enabled: false
+        Utils.dispatchEvent('toolsbar__set_state', {
+            opened: false,
+            barContent: null
         });
     }
+
+    // tileOptionsEnable(gridX, gridY)
+    // {
+    //     Utils.dispatchEvent('tileoptions__set_state', {
+    //         enabled: true,
+    //         gridX: gridX,
+    //         gridY: gridY
+    //     });
+    // }
+    // tileOptionsDisable()
+    // {
+    //     Utils.dispatchEvent('tileoptions__set_state', {
+    //         enabled: false
+    //     });
+    // }
 
     gridPlaceTile(tileType, gridX, gridY)
     {
@@ -58,12 +73,13 @@ class App extends View {
             gridX: gridX,
             gridY: gridY
         });
-        this.modalClose();
+        // this.modalClose();
+        this.toolsBarClose();
     }
     
     render() {
         return (
-            <div className="tilec-app">
+            <div className='view tilec-app'>
                 <div className='app-editor'>
                     <ToolsBar app={this} />
                     <Grid app={this} gridSizeX={25} gridSizeY={25} />

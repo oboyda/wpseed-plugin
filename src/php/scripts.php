@@ -97,5 +97,12 @@ add_action('wp_enqueue_scripts', 'tilec_enqueue_styles');
 
 function tilec_enqueue_styles()
 {
+    global $post;
+    
     wp_enqueue_style('tilec-style');
+
+    if(isset($post) && has_shortcode($post->post_content, 'tiles-configurator'))
+    {
+        wp_enqueue_style('dashicons');
+    }
 }

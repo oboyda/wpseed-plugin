@@ -18,7 +18,7 @@ function tilec_shortcode_tiles_configurator_scripts()
 {
     global $post;
     
-    if(has_shortcode($post->post_content, 'tiles-configurator'))
+    if(isset($post) && has_shortcode($post->post_content, 'tiles-configurator'))
     {
         wp_enqueue_script('tilec-react-app-main');
         wp_enqueue_style('tilec-react-app-main');

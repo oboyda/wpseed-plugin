@@ -20,7 +20,7 @@ class Tile extends View
             app: null
         });
 
-        if(typeof this.id === 'undefined')
+        if(!this.id)
         {
             this._setProps({
                 id: 'tile-' + Utils.genRandomString(12)
@@ -64,8 +64,11 @@ class Tile extends View
             return;
         }
 
-        this.app.modalOpen(
-            indexVars.translations.tileEdit.title,
+        // this.app.modalOpen(
+        //     indexVars.translations.tileEdit.title,
+        //     <TileEdit app={this.app} tile={this} />
+        // );
+        this.app.toolsBarOpen(
             <TileEdit app={this.app} tile={this} />
         );
     }

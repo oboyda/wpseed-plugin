@@ -1,4 +1,29 @@
+
+$breakpoint_desktop: 992px;
+
+$c-1: #333333;
+$c-2: #a53c3c;
+$c-3: #2f8b5d;
+
 .tilec-app {
+
+    .app-editor {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        @media (min-width: $breakpoint_desktop)
+        {
+            flex-direction: row;
+
+            .view.tools-bar {
+                width: 25%;
+            }
+            .view.grid {
+                width: 75%;
+            }
+        }
+    }
 
     /*
     * .view.grid
@@ -79,13 +104,13 @@
         /* ----- tile colors ----- */
 
         &.c-1 .tile-cell.filled {
-            background-color: #333333;
+            background-color: $c-1;
         }
         &.c-2 .tile-cell.filled {
-            background-color: #a53c3c;
+            background-color: $c-2;
         }
         &.c-3 .tile-cell.filled {
-            background-color: #2f8b5d;
+            background-color: $c-3;
         }
 
         &:hover .tile-cell.filled {
@@ -100,19 +125,9 @@
     */
 
     .view.tile-options {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
 
         .tile-option {
-            min-width: 25%;
-            padding: 0.5rem;
             cursor: pointer;
-
-            .option-inner {
-                padding: 0.5rem;
-                border: 1px solid #333333;
-            }
         }
     }
 
@@ -183,4 +198,120 @@
             padding: 2rem 2rem;
         }
     }
+
+    /*
+    * .view.tools-bar
+    * ------------------------------
+    */
+
+    .view.tools-bar {
+
+        padding: 0 1rem;
+
+        visibility: hidden;
+        &.opened {
+            visibility: visible;
+        }
+
+        .view.tile-options {
+
+            .tile-option {
+                margin: 0 0 1rem;
+                
+                .option-inner {
+                    padding: 0.5rem;
+                    border: 1px solid #333333;
+                }
+            }
+        }
+    }
+
+    /*
+    * .view.tile-edit
+    * ------------------------------
+    */
+
+    .view.tile-edit {
+
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+
+        @media (min-width: $breakpoint_desktop)
+        {
+            flex-direction: column;
+        }
+
+        .edit-tools {
+
+            margin: 0 1rem 0 0;
+
+            @media (min-width: $breakpoint_desktop)
+            {
+                margin: 0 0 1rem;
+            }
+            
+            .tools-label {
+                margin: 0 0 0.5rem;
+                font-size: 1rem;
+            }
+
+            .tools-controls {
+
+                .tool-btn {
+                    display: inline-block;
+                    font-size: 1rem;
+                    border: 2px solid #6666;
+                    border-radius: 3px;
+                    background-color: #e3e3e3;
+                    color: #333333;
+                    padding: 0.25em 0.75em;
+                    text-align: center;
+                    margin: 0 0.25em 0.25em 0;
+
+                    &.icon-btn {
+                        &:before {
+                            display: block;
+                            font-family: "dashicons";
+                        }
+
+                        &.rotate.left:before {
+                            content: "\f166";
+                        }
+                        &.rotate.right:before {
+                            content: "\f167";
+                        }
+
+                        &.move.left:before {
+                            content: "\f341";
+                        }
+                        &.move.right:before {
+                            content: "\f345";
+                        }
+                        &.move.up:before {
+                            content: "\f343";
+                        }
+                        &.move.down:before {
+                            content: "\f347";
+                        }
+
+                        &.remove:before {
+                            content: "\f335";
+                        }
+                    }
+
+                    &.color.c-1 {
+                        background-color: $c-1;
+                    }
+                    &.color.c-2 {
+                        background-color: $c-2;
+                    }
+                    &.color.c-3 {
+                        background-color: $c-3;
+                    }
+                }
+            }
+        }
+    }
+
 }

@@ -54,8 +54,11 @@ class Grid extends View
 
     handleOpenTileOptions(gridX, gridY)
     {
-        this.app.modalOpen(
-            indexVars.translations.tileOptions.title, 
+        // this.app.modalOpen(
+        //     indexVars.translations.tileOptions.title, 
+        //     <TileOptions app={this.app} gridX={gridX} gridY={gridY} />
+        // );
+        this.app.toolsBarOpen(
             <TileOptions app={this.app} gridX={gridX} gridY={gridY} />
         );
     }
@@ -131,6 +134,8 @@ class Grid extends View
                 gridConfig: gridConfig
             });
         }
+        // console.log(tileConfig);
+        // console.log(gridConfig);
     }
 
     removeTile(tileId)
