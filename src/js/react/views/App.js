@@ -82,7 +82,7 @@ class App extends View {
             <div className='view tilec-app'>
                 <div className='app-editor'>
                     <ToolsBar app={this} />
-                    <Grid app={this} gridSizeX={25} gridSizeY={25} />
+                    <Grid app={this} gridSizeX={20} gridSizeY={10} />
                 </div>
                 {/* <FeaturesBar app={this} /> */}
                 <Modal app={this} />

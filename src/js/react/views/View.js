@@ -64,6 +64,10 @@ class View extends Component
     _setState(state, syncProps=true)
     {
         this.setState(state);
+        // if(this.classname === 'tile')
+        // {
+        //     console.log(state, this.state.color);
+        // }
 
         let stateProps = {};
         Object.keys(state).forEach((s) => {

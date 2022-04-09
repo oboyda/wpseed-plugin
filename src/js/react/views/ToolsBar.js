@@ -19,7 +19,7 @@ class ToolsBar extends View
 
     render()
     {
-        const openedClass = this.state.opened ? ' opened' : '';
+        const openedClass = this.state.opened ? ' enabled' : '';
 
         return (
             <div className={`view tools-bar${openedClass}`}>

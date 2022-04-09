@@ -87,26 +87,26 @@ class Grid extends View
         });
     }
 
-    placeTile(gridX, gridY, tileConfig)
+    placeTile(gridX, gridY, tile)
     {
-        const tileElem = (tileConfig instanceof Tile) ? tileConfig : new Tile({
-            ...tileConfig,
+        const tileElem = (tile instanceof Tile) ? tile : new Tile({
+            ...tile,
             gridTile: true,
             cellSize: this.state.cellSize,
-            // gridX: gridX,
-            // gridY: gridY,
             grid: this,
             app: this.app
         });
 
+        // Set tile grid coordinates
         tileElem._setProps({
             gridX: gridX,
             gridY: gridY
         });
 
-        // Remove previous instance if exist
+        // Remove previous tile config from grid if exist
         this.removeTile(tileElem.id);
 
+        // Update grid config
         const rotationConfig = tileElem.getTypeRotationConfig();
 
         const avail = this.isPlacementAvailable(gridX, gridY, tileElem);
@@ -134,18 +134,24 @@ class Grid extends View
                 gridConfig: gridConfig
             });
         }
-        // console.log(tileConfig);
-        // console.log(gridConfig);
     }
 
-    removeTile(tileId)
+    removeTile(tileId, detach=false)
     {
+        let detachedTile = null;
+        let removed = false;
+
         const gridConfig = Utils.cloneObject(this.state.gridConfig);
 
         gridConfig.forEach((row, ri) => {
             row.forEach((cell, ci) => {
                 if(cell.tileId === tileId)
                 {
+                    if(detach)
+                    {
+                        detachedTile = cell.tile;
+                    }
+
                     gridConfig[ri][ci] = Utils.cloneObject(this.cellInit);
                 }
             });
@@ -154,6 +160,13 @@ class Grid extends View
         this._setState({
             gridConfig: gridConfig
         });
+
+        return detach ? detachedTile : removed;
+    }
+
+    detachTile(tileId)
+    {
+        return this.removeTile(tileId, true);
     }
 
     isPlacementAvailable(gridX, gridY, tileType, tileRotation=0, skipTileId)

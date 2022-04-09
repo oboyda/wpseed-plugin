@@ -7,6 +7,11 @@ $c-3: #2f8b5d;
 
 .tilec-app {
 
+    padding: 3rem 0;
+    font-size: 14px;
+    line-height: 1.4em;
+    color: #333333;
+    
     .app-editor {
         width: 100%;
         display: flex;
@@ -34,8 +39,8 @@ $c-3: #2f8b5d;
         font-size: 1rem;
         display: flex;
         flex-direction: column;
-        border-top: 1px solid #333333;
-        border-left: 1px solid #333333;
+        border-top: 2px solid #666666;
+        border-left: 2px solid #666666;
 
         .grid-row {
             display: flex;
@@ -125,9 +130,20 @@ $c-3: #2f8b5d;
     */
 
     .view.tile-options {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
 
         .tile-option {
             cursor: pointer;
+            width: 25%;
+            margin: 0 0.25rem 0.25rem;
+
+            @media (min-width: $breakpoint_desktop)
+            {
+                margin: 0 0 0.25rem;
+                width: 100%;
+            }
         }
     }
 
@@ -206,21 +222,32 @@ $c-3: #2f8b5d;
 
     .view.tools-bar {
 
-        padding: 0 1rem;
+        padding: 1rem;
+        background-color: #eeeeee;
 
-        visibility: hidden;
-        &.opened {
-            visibility: visible;
-        }
+        // visibility: hidden;
+        // &.enabled {
+        //     visibility: visible;
+        // }
 
         .view.tile-options {
 
             .tile-option {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+
                 margin: 0 0 1rem;
                 
-                .option-inner {
+                .option-label {
                     padding: 0.5rem;
-                    border: 1px solid #333333;
+                    text-align: right;
+                    width: 50%;
+                }
+                .option-btn {
+                    width: 50%;
+                    padding: 0.5rem;
+                    background-color: #ececec;
                 }
             }
         }
@@ -244,14 +271,23 @@ $c-3: #2f8b5d;
 
         .edit-tools {
 
-            margin: 0 1rem 0 0;
-
-            @media (min-width: $breakpoint_desktop)
+            &:not(:last-child)
             {
-                margin: 0 0 1rem;
+                padding: 0 1rem 0 0;
+                margin: 0 1rem 0 0;
+                border-right: 2px solid #ececec;
+
+                @media (min-width: $breakpoint_desktop)
+                {
+                    padding: 0 0 1rem;
+                    margin: 0 0 1rem;
+                    border-right: none;
+                    // border-bottom: 2px solid #ececec;
+                }
             }
             
             .tools-label {
+                display: none;
                 margin: 0 0 0.5rem;
                 font-size: 1rem;
             }
