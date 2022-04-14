@@ -7,16 +7,23 @@ class View extends Component
     {
         super(props);
 
-        this._props = {};
-        this.state = {};
-
-        this._setProps(Utils.parseArgs(this.props, propsDefault));
-
         this.classname = this.constructor.name.toLowerCase();
+
+        this._props = {
+            id: this.classname + '-' + Utils.genRandomString(16),
+            view: this
+        };
+        this.state = {
+            build: 0
+        };
+
+        this._setProps(Utils.parseArgs(this.props, Utils.parseArgs(this._props, propsDefault)));
 
         this.subscribedEvents = Utils.parseArgs(subscribedEvents, {
             set_state: false
         });
+
+        // this.view = this;
 
         this.eventSetState = this.eventSetState.bind(this);
     }
@@ -64,10 +71,6 @@ class View extends Component
     _setState(state, syncProps=true)
     {
         this.setState(state);
-        // if(this.classname === 'tile')
-        // {
-        //     console.log(state, this.state.color);
-        // }
 
         let stateProps = {};
         Object.keys(state).forEach((s) => {
@@ -105,9 +108,11 @@ class View extends Component
         }
     }
 
-    getProps()
+    updateBuild()
     {
-        return this._props;
+        this.setState({
+            build: Date.now()
+        });
     }
 }
 

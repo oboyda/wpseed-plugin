@@ -8,7 +8,6 @@ class Tile extends View
     constructor(props)
     {
         super(props, {
-            id: null,
             type: null,
             rotation: 0,
             color: 'c-1',
@@ -19,13 +18,6 @@ class Tile extends View
             grid: null,
             app: null
         });
-
-        if(!this.id)
-        {
-            this._setProps({
-                id: 'tile-' + Utils.genRandomString(12)
-            });
-        }
 
         this.rotations = [0, 90, 180, 270];
         this.moves = ['left', 'right', 'up', 'down'];
@@ -50,11 +42,22 @@ class Tile extends View
         };
 
         this.state = {
+            rotation: this.rotation,
             rotationConfig: this.getTypeRotationConfig(),
-            color: this.color
+            cellSize: this.cellSize,
+            color: this.color,
+            gridX: this.gridX,
+            gridY: this.gridY
         };
 
+        this._id = Utils.genRandomString(16);
+
         this.handleOpenTileEdit = this.handleOpenTileEdit.bind(this);
+    }
+
+    componentDidMount()
+    {
+        Utils.dispatchEvent('tile__mounted', { tile: this });
     }
 
     handleOpenTileEdit()
@@ -64,12 +67,8 @@ class Tile extends View
             return;
         }
 
-        // this.app.modalOpen(
-        //     indexVars.translations.tileEdit.title,
-        //     <TileEdit app={this.app} tile={this} />
-        // );
         this.app.toolsBarOpen(
-            <TileEdit app={this.app} tile={this} />
+            <TileEdit app={this.app} grid={this.grid} tile={this} key={this.id} />
         );
     }
 
@@ -163,7 +162,7 @@ class Tile extends View
         let rAvail = 0;
         const rotations = Utils.cloneObject(this.rotations).reverse();
         rotations.every((r) => {
-            if(r > this.rotation && this.grid.isPlacementAvailable(this.gridX, this.gridY, this, r, this.id))
+            if(r > this.rotation && this.grid.isPlacementAvailable(this.gridX, this.gridY, this, r))
             {
                 rAvail = r;
                 return false;
@@ -186,7 +185,7 @@ class Tile extends View
         let rAvail = 0;
         const rotations = this.rotations;
         rotations.every((r) => {
-            if(r > this.rotation && this.grid.isPlacementAvailable(this.gridX, this.gridY, this, r, this.id))
+            if(r > this.rotation && this.grid.isPlacementAvailable(this.gridX, this.gridY, this, r))
             {
                 rAvail = r;
                 return false;
@@ -202,7 +201,6 @@ class Tile extends View
             rotation: r
         });
         this._setState({
-            // rotationConfig: this.getTypeRotationConfig(this.type, r),
             rotationConfig: this.getTypeRotationConfig()
         });
     }

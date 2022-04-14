@@ -1,6 +1,6 @@
 // import React, { Component } from 'react';
 import View from './View';
-// import Utils from '../Utils';
+import Utils from '../Utils';
 
 class TileEdit extends View 
 {
@@ -8,11 +8,39 @@ class TileEdit extends View
     {
         super(props, {
             app: null,
+            grid: null,
             tile: null
+        }, {
+            // set_state: true
         });
 
-        // this.state = {
-        // };
+        this.state = {
+            // tile: this.props.tile
+        };
+
+        this.eventUpdateTile = this.eventUpdateTile.bind(this);
+        this.handleToolRotate = this.handleToolRotate.bind(this);
+        this.handleToolMove = this.handleToolMove.bind(this);
+        this.handleToolSetColor = this.handleToolSetColor.bind(this);
+        this.handleToolRemove = this.handleToolRemove.bind(this);
+    }
+
+    componentDidMount()
+    {
+        Utils.subscribeToEvent('tile__mounted', this.eventUpdateTile);
+    }
+
+    componentWillUnmount()
+    {
+        Utils.unsubscribeFromEvent('tile__mounted', this.eventUpdateTile);
+    }
+
+    eventUpdateTile(e)
+    {
+        if(e.detail.tile.id === this.tile.id)
+        {
+            this.tile = e.detail.tile;
+        }
     }
 
     handleToolRotate(r)
@@ -20,11 +48,10 @@ class TileEdit extends View
         const tile = this.tile;
         const grid = tile.grid;
 
-        if(grid.isPlacementAvailable(tile.gridX, tile.gridY, tile, r, tile.id))
+        if(grid.isPlacementAvailable(tile.gridX, tile.gridY, tile, r))
         {
             tile.rotate(r);
             grid.placeTile(tile.gridX, tile.gridY, tile);
-            // this.app.modalClose();
         }
     }
 
@@ -33,42 +60,43 @@ class TileEdit extends View
         const tile = this.tile;
         const grid = tile.grid;
 
-        let gridX = tile.gridX;
-        let gridY = tile.gridY;
+        let _gridX = tile.gridX;
+        let _gridY = tile.gridY;
 
         switch(m)
         {
             case 'left':
-                gridX -= 1;
+                _gridX -= 1;
                 break;
             case 'right':
-                gridX += 1;
+                _gridX += 1;
                 break;
             case 'up':
-                gridY -= 1;
+                _gridY -= 1;
                 break;
             case 'down':
-                gridY += 1;
+                _gridY += 1;
                 break;
         }
 
-        if(grid.isPlacementAvailable(gridX, gridY, tile, tile.rotation, tile.id))
+        // console.log(tile.gridX, tile.gridY);
+        // console.log(_gridX, _gridY);
+        // console.log(grid.isPlacementAvailable(_gridX, _gridY, tile, tile.rotation));
+
+        if(grid.isPlacementAvailable(_gridX, _gridY, tile, tile.rotation))
         {
-            grid.placeTile(gridX, gridY, tile);
-            // this.app.modalClose();
+            grid.placeTile(_gridX, _gridY, tile);
         }
     }
 
     handleToolSetColor(c)
     {
         this.tile.setColor(c);
-        // this.app.modalClose();
     }
 
     handleToolRemove()
     {
         this.tile.grid.removeTile(this.tile.id);
-        // this.app.modalClose();
         this.app.toolsBarClose();
     }
 

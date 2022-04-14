@@ -52,6 +52,15 @@ $c-3: #2f8b5d;
             border-bottom: 1px solid #e3e3e3;
             position: relative;
 
+            .c {
+                display: block;
+                position: absolute;
+                top: 0.25em;
+                left: 0.25em;
+                font-size: 0.5em;
+                color: #666666;
+            }
+
             .h {
                 display: block;
                 position: relative;

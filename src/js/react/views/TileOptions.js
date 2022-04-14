@@ -34,14 +34,14 @@ class TileOptions extends View
         
         return (
             <div className={`view tile-options${classEnabled}`}>
-                {Object.keys(tileElem.types).map(typeKey => {
+                {Object.keys(tileElem.types).map((typeKey, i) => {
                     return (
                         <div className='tile-option' key={typeKey} onClick={() => { this.handlePlaceTile(typeKey); }}>
                             <div className='option-label'>
                                 <strong>{typeKey}</strong>
                             </div>
                             <div className='option-btn'>
-                                <Tile type={typeKey} />
+                                <Tile type={typeKey} key={'tile-' + typeKey} />
                             </div>
                         </div>
                     );                    

@@ -3,6 +3,7 @@ import Utils from '../Utils';
 import View from './View';
 import Tile from './Tile';
 import TileOptions from './TileOptions';
+import TileEdit from './TileEdit';
 
 class Grid extends View 
 {
@@ -11,7 +12,7 @@ class Grid extends View
         super(props, {
             app: null,
             gridSizeX: 25,
-            gridSizeY: 25,
+            gridSizeY: 25
         }, {
             // set_state: true
         });
@@ -24,29 +25,31 @@ class Grid extends View
 
         this.state = {
             gridConfig: [],
-            cellSize: 0
+            cellSize: 0,
+            gridSizeX: 0,
+            gridSizeY: 0
         };
 
         this.domRef = React.createRef();
 
-        this.eventPlaceTile = this.eventPlaceTile.bind(this);
+        this.eventAddTile = this.eventAddTile.bind(this);
         // this.handleOpenTileOptions = this.handleOpenTileOptions.bind(this);
     }
 
     _componentDidMount()
     {
-        this.setGridConfig(this.gridSizeX, this.gridSizeY);
+        this.setGridSize(this.gridSizeX, this.gridSizeY);
         this.setCellSize();
 
-        Utils.subscribeToEvent('grid__place_tile', this.eventPlaceTile);
+        Utils.subscribeToEvent('grid__add_tile', this.eventAddTile);
     }
 
     _componentWillUnmount()
     {
-        Utils.unsubscribeFromEvent('grid__place_tile', this.eventPlaceTile);
+        Utils.unsubscribeFromEvent('grid__add_tile', this.eventAddTile);
     }
 
-    eventPlaceTile(e)
+    eventAddTile(e)
     {
         const detail = e.detail;
         this.placeTile(detail.gridX, detail.gridY, detail.tileConfig);
@@ -54,16 +57,12 @@ class Grid extends View
 
     handleOpenTileOptions(gridX, gridY)
     {
-        // this.app.modalOpen(
-        //     indexVars.translations.tileOptions.title, 
-        //     <TileOptions app={this.app} gridX={gridX} gridY={gridY} />
-        // );
         this.app.toolsBarOpen(
             <TileOptions app={this.app} gridX={gridX} gridY={gridY} />
         );
     }
 
-    setGridConfig(sizeX, sizeY)
+    setGridSize(sizeX, sizeY)
     {
         let gridConfig = [];
 
@@ -75,7 +74,9 @@ class Grid extends View
         }
 
         this._setState({
-            gridConfig: gridConfig
+            gridConfig: gridConfig,
+            sizeX: sizeX,
+            sizeY: sizeY
         });
     }
 
@@ -89,7 +90,7 @@ class Grid extends View
 
     placeTile(gridX, gridY, tile)
     {
-        const tileElem = (tile instanceof Tile) ? tile : new Tile({
+        const tileView = (tile instanceof Tile) ? tile : new Tile({
             ...tile,
             gridTile: true,
             cellSize: this.state.cellSize,
@@ -98,24 +99,25 @@ class Grid extends View
         });
 
         // Set tile grid coordinates
-        tileElem._setProps({
+        tileView._setProps({
             gridX: gridX,
             gridY: gridY
         });
 
-        // Remove previous tile config from grid if exist
-        this.removeTile(tileElem.id);
+        // Update gridConfig
+        const rotationConfig = tileView.getTypeRotationConfig();
 
-        // Update grid config
-        const rotationConfig = tileElem.getTypeRotationConfig();
-
-        const avail = this.isPlacementAvailable(gridX, gridY, tileElem);
-        const gridConfig = Utils.cloneObject(this.state.gridConfig);
+        const avail = this.isPlacementAvailable(gridX, gridY, tileView);
+        const gridConfig = this.state.gridConfig;
 
         if(avail && rotationConfig)
         {
-            gridConfig[gridY][gridX].tileId = tileElem.id;
-            gridConfig[gridY][gridX].tile = tileElem.getProps();
+            // Remove previous tile config from grid if exist
+            this.removeTile(tileView.id);
+
+            // Save new tile data
+            gridConfig[gridY][gridX].tileId = tileView.id;
+            gridConfig[gridY][gridX].tile = tileView._props;
 
             rotationConfig.forEach((row, ri) => {
                 row.forEach((cell, ci) => {
@@ -124,14 +126,16 @@ class Grid extends View
 
                     if(cell)
                     {
-                        gridConfig[_ri][_ci].tileId = tileElem.id;
+                        gridConfig[_ri][_ci].tileId = tileView.id;
                         gridConfig[_ri][_ci].filled = true;
                     }
                 });
             });
-            
-            this._setState({
+
+            this.setState({
                 gridConfig: gridConfig
+            }, () => {
+                Utils.dispatchEvent('grid__updated', { tile: tileView });
             });
         }
     }
@@ -141,7 +145,7 @@ class Grid extends View
         let detachedTile = null;
         let removed = false;
 
-        const gridConfig = Utils.cloneObject(this.state.gridConfig);
+        const gridConfig = this.state.gridConfig;
 
         gridConfig.forEach((row, ri) => {
             row.forEach((cell, ci) => {
@@ -169,41 +173,40 @@ class Grid extends View
         return this.removeTile(tileId, true);
     }
 
-    isPlacementAvailable(gridX, gridY, tileType, tileRotation=0, skipTileId)
+    isPlacementAvailable(gridX, gridY, tile, tileRotation=0)
     {
-        const tileElem = (typeof tileType === 'string') ? new Tile({ type: tileType, rotation: tileRotation }) : tileType;
+        const tileView = (typeof tile === 'string') ? new Tile({ type: tile, rotation: tileRotation }) : tile;
 
-        const rotationConfig = tileElem.getTypeRotationConfig();
+        const rotationConfig = tileView.getTypeRotationConfig();
 
-        let avail = true;        
+        let avail = true;
 
         if(rotationConfig)
         {
             rotationConfig.forEach((row, ri) => {
-                row.forEach((cell, ci) => {
-                    const _ri = gridY+ri;
-                    const _ci = gridX+ci;
 
-                    if(!cell)
+                if(!avail)
+                {
+                    return;
+                }
+
+                row.forEach((cell, ci) => {
+
+                    if(!avail || !cell)
                     {
                         return;
                     }
 
-                    const gridCell = (typeof this.state.gridConfig[_ri] !== 'undefined' && typeof this.state.gridConfig[_ri][_ci]) ? this.state.gridConfig[_ri][_ci] : null;
+                    const _ri = gridY+ri;
+                    const _ci = gridX+ci;
 
-                    // if(!(
-                    //     typeof this.state.gridConfig[_ri] !== 'undefined' 
-                    //     && typeof this.state.gridConfig[_ri][_ci] !== 'undefined' 
-                    //     && !this.state.gridConfig[_ri][_ci].filled
-                    // )){
-                    if(gridCell && gridCell.filled)
-                    {
+                    const gridCell = (typeof this.state.gridConfig[_ri] !== 'undefined' && typeof this.state.gridConfig[_ri][_ci] !== 'undefined') ? this.state.gridConfig[_ri][_ci] : null;
+
+                    if(
+                        !gridCell
+                        || (gridCell.filled && gridCell.tileId !== tileView.id)
+                    ){
                         avail = false;
-
-                        if(typeof skipTileId !== 'undefined' && gridCell.tileId === skipTileId)
-                        {
-                            avail = true;
-                        }
                     }
                 });
             });
@@ -230,7 +233,10 @@ class Grid extends View
                                 }
                                 if(cell.tile)
                                 {
-                                    tileElem = React.createElement(Tile, cell.tile);
+                                    tileElem = React.createElement(Tile, {
+                                        ...cell.tile,
+                                        key: cell.tile.id
+                                    });
                                     cellClasses.push("tile-root");
                                 }
                                 if(cell.filled)
@@ -240,9 +246,10 @@ class Grid extends View
 
                                 return (
                                     <div 
-                                        key={`${y}-${x}`} 
+                                        key={`${x}-${y}`} 
                                         className={cellClasses.join(' ')} 
                                     >
+                                        <span className="c">{`${x}:${y}`}</span>
                                         {tileElem}
                                         <span className="h" onClick={() => { this.handleOpenTileOptions(x, y); }}></span>
                                     </div>

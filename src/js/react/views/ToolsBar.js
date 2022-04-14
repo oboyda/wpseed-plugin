@@ -1,5 +1,4 @@
 import View from './View';
-// import TileOptions from './TileOptions';
 
 class ToolsBar extends View 
 {

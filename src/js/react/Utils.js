@@ -60,19 +60,19 @@ class Utils {
         return Math.random().toString(16).substr(2, l);
     }
 
-    static subscribeToEvent(name, handler)
+    static subscribeToEvent(name, handler, elem=document.body)
     {
         const _name = (name.indexOf('tilec__') === 0) ? name : 'tilec__' + name;
-        document.body.addEventListener(_name, handler, false);
+        elem.addEventListener(_name, handler, false);
     }
 
-    static unsubscribeFromEvent(name, handler)
+    static unsubscribeFromEvent(name, handler, elem=document.body)
     {
         const _name = (name.indexOf('tilec__') === 0) ? name : 'tilec__' + name;
-        document.body.removeEventListener(_name, handler);
+        elem.removeEventListener(_name, handler);
     }
 
-    static dispatchEvent(name, data)
+    static dispatchEvent(name, data, elem=document.body)
     {
         let args = {};
 
@@ -84,9 +84,18 @@ class Utils {
         const _name = (name.indexOf('tilec__') === 0) ? name : 'tilec__' + name;
         const event = new CustomEvent(_name, args);
         
-        document.body.dispatchEvent(event);
+        elem.dispatchEvent(event);
+    }
+
+    static getReactElementName(elem)
+    {
+        return (typeof elem.type !== 'undefined' && elem.type.name !== 'name') ? elem.type.name : null;
+    }
+
+    static isReactElementObject(obj)
+    {
+        return (this.getReactElementName(obj) !== null);
     }
 }
-
 
 export default Utils;
