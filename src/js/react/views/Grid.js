@@ -3,7 +3,6 @@ import Utils from '../Utils';
 import View from './View';
 import Tile from './Tile';
 import TileOptions from './TileOptions';
-import TileEdit from './TileEdit';
 
 class Grid extends View 
 {
