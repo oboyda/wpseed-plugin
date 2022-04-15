@@ -1,5 +1,4 @@
 // import React, { Component } from 'react';
-import Utils from '../Utils';
 import View from './View';
 import Tile from './Tile';
 

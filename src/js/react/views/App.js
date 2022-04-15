@@ -16,20 +16,30 @@ class App extends View {
         // };
     }
 
-    modalOpen(headerTitle, bodyContent)
+    _componentDidMount()
     {
+
+    }
+
+    modalOpen(args)
+    {
+        args = Utils.parseArgs(args, {
+            headerTitle: null,
+            bodyContent: null
+        });
+
         Utils.dispatchEvent('modal__set_state', {
             opened: true,
-            headerTitle: headerTitle,
-            bodyContent: bodyContent
+            headerTitle: args.headerTitle,
+            bodyContent: args.bodyContent
         });
     }
     modalClose()
     {
         Utils.dispatchEvent('modal__set_state', {
             opened: false,
-            headerTitle: '',
-            bodyContent: ''
+            headerTitle: null,
+            bodyContent: null
         });
     }
 
@@ -48,21 +58,6 @@ class App extends View {
         });
     }
 
-    // tileOptionsEnable(gridX, gridY)
-    // {
-    //     Utils.dispatchEvent('tileoptions__set_state', {
-    //         enabled: true,
-    //         gridX: gridX,
-    //         gridY: gridY
-    //     });
-    // }
-    // tileOptionsDisable()
-    // {
-    //     Utils.dispatchEvent('tileoptions__set_state', {
-    //         enabled: false
-    //     });
-    // }
-
     gridPlaceTile(tileType, gridX, gridY)
     {
         Utils.dispatchEvent('grid__add_tile', {
@@ -80,12 +75,12 @@ class App extends View {
     render() {
         return (
             <div className='view tilec-app'>
+                <Modal app={this} />
                 <div className='app-editor'>
                     <ToolsBar app={this} />
-                    <Grid app={this} gridSizeX={20} gridSizeY={10} />
+                    <Grid app={this} />
                 </div>
                 {/* <FeaturesBar app={this} /> */}
-                <Modal app={this} />
             </div>
         );
     }

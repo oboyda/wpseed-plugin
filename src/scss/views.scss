@@ -7,6 +7,7 @@ $c-3: #2f8b5d;
 
 .tilec-app {
 
+    position: relative;
     padding: 3rem 0;
     font-size: 14px;
     line-height: 1.4em;
@@ -163,7 +164,7 @@ $c-3: #2f8b5d;
 
     .view.modal {
         display: none;
-        position: fixed;
+        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
@@ -359,4 +360,35 @@ $c-3: #2f8b5d;
         }
     }
 
+    /*
+    * .view.grid-setup
+    * ------------------------------
+    */
+    .view.grid-setup {
+        .controls-group {
+            
+            display: flex;
+            flex-direction: column;
+
+            label {
+                display: block;
+                padding: 0 0 0.5rem;
+            }
+
+            .control {
+                width: 100%;
+                padding: 0 0.25rem 1rem;
+
+                input {
+                    width: 100%;
+                }
+            }
+
+            @media (min-width: $breakpoint_desktop)
+            {
+                flex-direction: row;
+                flex-wrap: nowrap;
+            }
+        }
+    }
 }

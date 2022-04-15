@@ -55,7 +55,7 @@ class Tile extends View
         this.handleOpenTileEdit = this.handleOpenTileEdit.bind(this);
     }
 
-    componentDidMount()
+    _componentDidMount()
     {
         Utils.dispatchEvent('tile__mounted', { tile: this });
     }

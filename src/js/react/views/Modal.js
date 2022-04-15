@@ -1,6 +1,5 @@
 // import React, { Component } from 'react';
 import View from './View';
-import Utils from '../Utils';
 
 class Modal extends View 
 {
@@ -14,50 +13,20 @@ class Modal extends View
 
         this.state = {
             opened: false,
-            headerTitle: '',
-            bodyContent: ''
+            headerTitle: null,
+            bodyContent: null
         };
         
         // this.eventOpenModal = this.eventOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
     
-    // _componentDidMount()
-    // {
-    //     document.body.addEventListener('tilec__modal__open', this.eventOpenModal, false);
-    //     document.body.addEventListener('tilec__modal__close', this.closeModal, false);
-    // }
-
-    // _componentWillUnmount()
-    // {
-    //     document.body.removeEventListener('tilec__modal__open', this.eventOpenModal);
-    //     document.body.removeEventListener('tilec__modal__close', this.closeModal);
-    // }
-
-    // eventOpenModal(e)
-    // {
-    //     const detail = Utils.parseArgs(e.detail, {
-    //         headerTitle: '',
-    //         bodyContent: ''
-    //     });
-    //     this.modalOpen(detail.headerTitle, detail.bodyContent);
-    // }
-
-    // openModal(headerTitle, bodyContent)
-    // {
-    //     this._setState({
-    //         opened: true,
-    //         headerTitle: headerTitle,
-    //         bodyContent: bodyContent
-    //     });
-    // }
-
     handleCloseModal()
     {
         this._setState({
             opened: false,
-            headerTitle: '',
-            bodyContent: ''
+            headerTitle: null,
+            bodyContent: null
         });
     }
 

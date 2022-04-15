@@ -25,12 +25,12 @@ class TileEdit extends View
         this.handleToolRemove = this.handleToolRemove.bind(this);
     }
 
-    componentDidMount()
+    _componentDidMount()
     {
         Utils.subscribeToEvent('tile__mounted', this.eventUpdateTile);
     }
 
-    componentWillUnmount()
+    _componentWillUnmount()
     {
         Utils.unsubscribeFromEvent('tile__mounted', this.eventUpdateTile);
     }
@@ -110,24 +110,24 @@ class TileEdit extends View
                 <div><span>{this.tile.id}</span></div>
                 <div className='edit-tools rotation'>
                     <div className='tools-label'>
-                        <strong>{indexVars.translations.tileEdit.tools.rotateToolsLabel}</strong>
+                        <strong>{indexVars.strings.tileEdit.tools.rotateToolsLabel}</strong>
                     </div>
                     <div className='tools-controls'>
                         <button 
                             className={`tool-btn icon-btn rotate left rotate-${prevRotation}`}
                             onClick={() => { this.handleToolRotate(prevRotation); }}
-                            title={indexVars.translations.tileEdit.tools.rotateLeftLabel}
+                            title={indexVars.strings.tileEdit.tools.rotateLeftLabel}
                         ></button>
                         <button 
                             className={`tool-btn icon-btn rotate right rotate-${nextRotation}`}
                             onClick={() => { this.handleToolRotate(nextRotation); }}
-                            title={indexVars.translations.tileEdit.tools.rotateRightLabel}
+                            title={indexVars.strings.tileEdit.tools.rotateRightLabel}
                         ></button>
                     </div>
                 </div>
                 <div className='edit-tools move'>
                     <div className='tools-label'>
-                        <strong>{indexVars.translations.tileEdit.tools.moveToolsLabel}</strong>
+                        <strong>{indexVars.strings.tileEdit.tools.moveToolsLabel}</strong>
                     </div>
                     <div className='tools-controls'>
                         {this.tile.moves.map((m, i) => {
@@ -144,7 +144,7 @@ class TileEdit extends View
                 </div>
                 <div className='edit-tools colors'>
                     <div className='tools-label'>
-                        <strong>{indexVars.translations.tileEdit.tools.colorToolsLabel}</strong>
+                        <strong>{indexVars.strings.tileEdit.tools.colorToolsLabel}</strong>
                     </div>
                     <div className='tools-controls'>
                         {this.tile.colors.map((c, i) => {
@@ -161,13 +161,13 @@ class TileEdit extends View
                 </div>
                 <div className='edit-tools misc'>
                     <div className='tools-label'>
-                        <strong>{indexVars.translations.tileEdit.tools.miscToolsLabel}</strong>
+                        <strong>{indexVars.strings.tileEdit.tools.miscToolsLabel}</strong>
                     </div>
                     <div className='tools-controls'>
                         <button 
                             className='tool-btn icon-btn remove'
                             onClick={() => { this.handleToolRemove(); }}
-                            title={indexVars.translations.tileEdit.tools.removeLabel}
+                            title={indexVars.strings.tileEdit.tools.removeLabel}
                         ></button>
                     </div>
                 </div>

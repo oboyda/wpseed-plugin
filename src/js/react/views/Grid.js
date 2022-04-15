@@ -3,6 +3,7 @@ import Utils from '../Utils';
 import View from './View';
 import Tile from './Tile';
 import TileOptions from './TileOptions';
+import GridSetup from './GridSetup';
 
 class Grid extends View 
 {
@@ -10,10 +11,10 @@ class Grid extends View
     {
         super(props, {
             app: null,
-            gridSizeX: 25,
-            gridSizeY: 25
+            gridSizeX: 0,
+            gridSizeY: 0
         }, {
-            // set_state: true
+            set_state: true
         });
 
         this.cellInit = {
@@ -37,8 +38,7 @@ class Grid extends View
 
     _componentDidMount()
     {
-        this.setGridSize(this.gridSizeX, this.gridSizeY);
-        this.setCellSize();
+        this.initGridSize();
 
         Utils.subscribeToEvent('grid__add_tile', this.eventAddTile);
     }
@@ -61,6 +61,19 @@ class Grid extends View
         );
     }
 
+    initGridSize()
+    {
+        if(!(this.gridSizeX && this.gridSizeY))
+        {
+            this.app.modalOpen({
+                headerTitle: indexVars.strings.gridSetup.grid_size.group_title,
+                bodyContent: <GridSetup app={this.app} grid={this} />
+            });
+        }
+
+        this.setGridSize(25, 25);
+    }
+
     setGridSize(sizeX, sizeY)
     {
         let gridConfig = [];
@@ -77,6 +90,8 @@ class Grid extends View
             sizeX: sizeX,
             sizeY: sizeY
         });
+
+        this.setCellSize();
     }
 
     setCellSize()
@@ -214,6 +229,16 @@ class Grid extends View
         return avail;
     }
 
+    getSizeMaxX()
+    {
+        return indexVars.grid_size.tiles_max_x * indexVars.grid_size.tile_size;
+    }
+
+    getSizeMaxY()
+    {
+        return indexVars.grid_size.tiles_max_y * indexVars.grid_size.tile_size;
+    }
+
     render()
     {
         return (
@@ -248,7 +273,7 @@ class Grid extends View
                                         key={`${x}-${y}`} 
                                         className={cellClasses.join(' ')} 
                                     >
-                                        <span className="c">{`${x}:${y}`}</span>
+                                        {/* <span className="c">{`${x}:${y}`}</span> */}
                                         {tileElem}
                                         <span className="h" onClick={() => { this.handleOpenTileOptions(x, y); }}></span>
                                     </div>
