@@ -21,7 +21,7 @@ class ToolsBar extends View
         const openedClass = this.state.opened ? ' enabled' : '';
 
         return (
-            <div className={`view tools-bar${openedClass}`}>
+            <div className={this.getViewClass(openedClass)}>
                 {/* <TileOptions app={this.app} /> */}
                 {this.state.barContent}
             </div>

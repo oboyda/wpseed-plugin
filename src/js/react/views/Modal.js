@@ -35,7 +35,7 @@ class Modal extends View
         const openedClass = this.state.opened ? 'opened' : '';
 
         return (
-            <div className={`view modal ${openedClass}`}>
+            <div className={this.getViewClass(openedClass)}>
                 <div className='modal-window'>
                     <div className='modal-header'>
                         <h3 className='modal-title'>{this.state.headerTitle}</h3>

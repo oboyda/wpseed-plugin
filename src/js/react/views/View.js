@@ -25,7 +25,7 @@ class View extends Component
 
         // this.view = this;
 
-        this.eventSetState = this.eventSetState.bind(this);
+        this.handleSetState = this.handleSetState.bind(this);
     }
 
     componentDidMount()
@@ -39,7 +39,7 @@ class View extends Component
             if(this.subscribedEvents[e])
             {
                 const name = 'tilec__' + this.classname + '__' + e;
-                Utils.subscribeToEvent(name, this.eventSetState);
+                Utils.subscribeToEvent(name, this.handleSetState);
             }
         });
     }
@@ -55,12 +55,12 @@ class View extends Component
             if(this.subscribedEvents[e])
             {
                 const name = 'tilec__' + this.classname + '__' + e;
-                Utils.unsubscribeFromEvent(name, this.eventSetState);
+                Utils.unsubscribeFromEvent(name, this.handleSetState);
             }
         });
     }
 
-    eventSetState(e)
+    handleSetState(e)
     {
         if(typeof e.detail !== 'undefined')
         {
@@ -106,6 +106,11 @@ class View extends Component
         {
             this._setState(stateProps, false);
         }
+    }
+
+    getViewClass(c='')
+    {
+        return ['view', this.classname, c].join(' ');
     }
 
     updateBuild()

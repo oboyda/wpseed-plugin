@@ -18,7 +18,7 @@ class TileEdit extends View
             // tile: this.props.tile
         };
 
-        this.eventUpdateTile = this.eventUpdateTile.bind(this);
+        this.handleUpdateTile = this.handleUpdateTile.bind(this);
         this.handleToolRotate = this.handleToolRotate.bind(this);
         this.handleToolMove = this.handleToolMove.bind(this);
         this.handleToolSetColor = this.handleToolSetColor.bind(this);
@@ -27,15 +27,15 @@ class TileEdit extends View
 
     _componentDidMount()
     {
-        Utils.subscribeToEvent('tile__mounted', this.eventUpdateTile);
+        Utils.subscribeToEvent('tile__mounted', this.handleUpdateTile);
     }
 
     _componentWillUnmount()
     {
-        Utils.unsubscribeFromEvent('tile__mounted', this.eventUpdateTile);
+        Utils.unsubscribeFromEvent('tile__mounted', this.handleUpdateTile);
     }
 
-    eventUpdateTile(e)
+    handleUpdateTile(e)
     {
         if(e.detail.tile.id === this.tile.id)
         {
@@ -79,10 +79,6 @@ class TileEdit extends View
                 break;
         }
 
-        // console.log(tile.gridX, tile.gridY);
-        // console.log(_gridX, _gridY);
-        // console.log(grid.isPlacementAvailable(_gridX, _gridY, tile, tile.rotation));
-
         if(grid.isPlacementAvailable(_gridX, _gridY, tile, tile.rotation))
         {
             grid.placeTile(_gridX, _gridY, tile);
@@ -106,7 +102,7 @@ class TileEdit extends View
         const nextRotation = this.tile.getNextRotationAvail();
 
         return (
-            <div className='view tile-edit'>
+            <div className={this.getViewClass()}>
                 <div><span>{this.tile.id}</span></div>
                 <div className='edit-tools rotation'>
                     <div className='tools-label'>

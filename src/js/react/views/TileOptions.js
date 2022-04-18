@@ -19,28 +19,30 @@ class TileOptions extends View
             gridY: this.gridY,
             enabled: false
         };
+
+        this.tilesConfig = (typeof indexVars.tiles_config !== 'undefined') ? indexVars.tiles_config : [];
     }
 
-    handlePlaceTile(tileType)
+    handlePlaceTile(typeConfig)
     {
-        this.app.gridPlaceTile(tileType, this.gridX, this.gridY);
+        this.app.gridPlaceTile(typeConfig, this.gridX, this.gridY);
     }
 
     render()
     {
         const classEnabled = this.state.enabled ? ' enabled' : '';
-        const tileElem = new Tile();
         
         return (
-            <div className={`view tile-options${classEnabled}`}>
-                {Object.keys(tileElem.types).map((typeKey, i) => {
+            <div className={this.getViewClass(classEnabled)}>
+                {Object.keys(this.tilesConfig).map((key) => {
+                    const tileConfig = this.tilesConfig[key];
                     return (
-                        <div className='tile-option' key={typeKey} onClick={() => { this.handlePlaceTile(typeKey); }}>
+                        <div className='tile-option' onClick={() => { this.handlePlaceTile(tileConfig.tile_config); }}>
                             <div className='option-label'>
-                                <strong>{typeKey}</strong>
+                                <strong>{tileConfig.tile_size_formatted}</strong>
                             </div>
                             <div className='option-btn'>
-                                <Tile type={typeKey} key={'tile-' + typeKey} />
+                                <Tile typeConfig={tileConfig.tile_config} />
                             </div>
                         </div>
                     );                    

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Utils from '../Utils';
 import View from './View';
 import ToolsBar from './ToolsBar';
-// import ToolsBar from './ToolsBar';
+import NavBar from './NavBar';
 import Grid from './Grid';
 import Modal from './Modal';
 
@@ -58,11 +58,11 @@ class App extends View {
         });
     }
 
-    gridPlaceTile(tileType, gridX, gridY)
+    gridPlaceTile(typeConfig, gridX, gridY)
     {
         Utils.dispatchEvent('grid__add_tile', {
             tileConfig: {
-                type: tileType,
+                typeConfig: typeConfig,
                 rotation: 0
             },
             gridX: gridX,
@@ -74,13 +74,13 @@ class App extends View {
     
     render() {
         return (
-            <div className='view tilec-app'>
+            <div className={this.getViewClass('tilec-app')}>
                 <Modal app={this} />
                 <div className='app-editor'>
                     <ToolsBar app={this} />
                     <Grid app={this} />
                 </div>
-                {/* <FeaturesBar app={this} /> */}
+                <NavBar app={this} />
             </div>
         );
     }

@@ -8,7 +8,7 @@ class Tile extends View
     constructor(props)
     {
         super(props, {
-            type: null,
+            typeConfig: [],
             rotation: 0,
             color: 'c-1',
             cellSize: 0,
@@ -23,34 +23,16 @@ class Tile extends View
         this.moves = ['left', 'right', 'up', 'down'];
         this.colors = ['c-1', 'c-2', 'c-3'];
 
-        this.types = {
-            type1: {
-                rotations: this.generateTypeRotations([
-                    [1, 1, 1, 0, 0],
-                    [0, 1, 1, 1, 1]
-                ]),
-                rotaitable: true
-            },
-            type2: {
-                rotations: this.generateTypeRotations([
-                    [0, 1, 1, 1, 0],
-                    [1, 1, 1, 1, 1],
-                    [0, 1, 1, 1, 0]
-                ]),
-                rotaitable: true
-            }
-        };
+        this.rotationsConfig = this.generateRotationsConfig(this.typeConfig);
 
         this.state = {
             rotation: this.rotation,
-            rotationConfig: this.getTypeRotationConfig(),
+            rotationConfig: this.getRotationConfig(0),
             cellSize: this.cellSize,
             color: this.color,
             gridX: this.gridX,
             gridY: this.gridY
         };
-
-        this._id = Utils.genRandomString(16);
 
         this.handleOpenTileEdit = this.handleOpenTileEdit.bind(this);
     }
@@ -72,7 +54,7 @@ class Tile extends View
         );
     }
 
-    generateTypeRotations(origRotation)
+    generateRotationsConfig(origRotation)
     {
         let typeRotations = {};
 
@@ -88,7 +70,6 @@ class Tile extends View
             }
             else if(r === 90){
                 
-                // let _origRotation = Object.assign([], origRotation);
                 let _origRotation = Utils.cloneObject(origRotation);
                 _origRotation.reverse();
                 _origRotation.forEach((row, ri) => {
@@ -103,11 +84,9 @@ class Tile extends View
             }
             else if(r === 180){
     
-                // let _origRotation = Object.assign([], origRotation);
                 let _origRotation = Utils.cloneObject(origRotation);
                 _origRotation.reverse();
                 _origRotation.forEach((row, ri) => {
-                    // let _row = Object.assign([], row);
                     let _row = Utils.cloneObject(row);
                     _row.reverse();
                     typeRotations[rk][ri] = _row;
@@ -116,7 +95,6 @@ class Tile extends View
             else if(r === 270){
                 
                 origRotation.forEach((row, ri) => {
-                    // let _row = Object.assign([], row);
                     let _row = Utils.cloneObject(row);
                     _row.reverse();
                     _row.forEach((cell, ci) => {
@@ -133,20 +111,11 @@ class Tile extends View
         return typeRotations;
     }
 
-    getTypeConfig(type)
+    getRotationConfig(r)
     {
-        const _type = (typeof type !== 'undefined') ? type : this.type;
-        return (typeof this.types[_type] !== 'undefined') ? this.types[_type] : null;
-    }
-
-    getTypeRotationConfig(type, r)
-    {
-        const _type = (typeof type !== 'undefined') ? type : this.type;
         const _r = (typeof r !== 'undefined') ? r : this.rotation;
-
         const rk = 'rotation_' + _r;
-        const typeConfig = this.getTypeConfig(_type);
-        return (typeConfig && typeof typeConfig.rotations[rk] !== 'undefined') ? typeConfig.rotations[rk] : null;
+        return (typeof this.rotationsConfig[rk] !== 'undefined') ? this.rotationsConfig[rk] : null;
     }
 
     getPrevRotation(r)
@@ -201,7 +170,7 @@ class Tile extends View
             rotation: r
         });
         this._setState({
-            rotationConfig: this.getTypeRotationConfig()
+            rotationConfig: this.getRotationConfig(r)
         });
     }
 
@@ -223,7 +192,7 @@ class Tile extends View
 
         return (
             <div 
-                className={`view tile ${this.state.color} type-${this.type}`}
+                className={this.getViewClass(this.state.color + ' type-' + this.type)}
                 onClick={this.handleOpenTileEdit}
                 >
                 {rotationConfig.map((row, ri) => {

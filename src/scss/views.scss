@@ -22,7 +22,7 @@ $c-3: #2f8b5d;
         {
             flex-direction: row;
 
-            .view.tools-bar {
+            .view.toolsbar {
                 width: 25%;
             }
             .view.grid {
@@ -135,11 +135,11 @@ $c-3: #2f8b5d;
     }
 
     /*
-    * .view.tile-options
+    * .view.tileoptions
     * ------------------------------
     */
 
-    .view.tile-options {
+    .view.tileoptions {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -226,11 +226,11 @@ $c-3: #2f8b5d;
     }
 
     /*
-    * .view.tools-bar
+    * .view.toolsbar
     * ------------------------------
     */
 
-    .view.tools-bar {
+    .view.toolsbar {
 
         padding: 1rem;
         background-color: #eeeeee;
@@ -240,7 +240,7 @@ $c-3: #2f8b5d;
         //     visibility: visible;
         // }
 
-        .view.tile-options {
+        .view.tileoptions {
 
             .tile-option {
                 display: flex;
@@ -264,11 +264,11 @@ $c-3: #2f8b5d;
     }
 
     /*
-    * .view.tile-edit
+    * .view.tileedit
     * ------------------------------
     */
 
-    .view.tile-edit {
+    .view.tileedit {
 
         width: 100%;
         display: flex;
@@ -361,12 +361,12 @@ $c-3: #2f8b5d;
     }
 
     /*
-    * .view.grid-setup
+    * .view.gridsetup
     * ------------------------------
     */
-    .view.grid-setup {
+    .view.gridsetup {
         .controls-group {
-            
+
             display: flex;
             flex-direction: column;
 
@@ -388,6 +388,48 @@ $c-3: #2f8b5d;
             {
                 flex-direction: row;
                 flex-wrap: nowrap;
+            }
+        }
+    }
+
+    /*
+    * .view.navbar
+    * ------------------------------
+    */
+    .view.navbar {
+        padding: 2rem 0;
+
+        display: flex;
+        flex-direction: column;
+
+        @media (min-width: $breakpoint_desktop)
+        {
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+
+        .nav-cont {
+            width: 100%;
+
+            display: flex;
+            flex-direction: column;
+    
+            @media (min-width: $breakpoint_desktop)
+            {
+                flex-direction: row;
+                flex-wrap: nowrap;
+            }
+        
+            &.nav-1 {
+                .grid-size-label {
+                    display: inline-block;
+                }
+            }
+            &.nav-3 {
+                @media (min-width: $breakpoint_desktop)
+                {
+                    justify-content: end;
+                }
             }
         }
     }

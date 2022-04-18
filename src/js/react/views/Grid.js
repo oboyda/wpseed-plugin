@@ -32,23 +32,30 @@ class Grid extends View
 
         this.domRef = React.createRef();
 
-        this.eventAddTile = this.eventAddTile.bind(this);
-        // this.handleOpenTileOptions = this.handleOpenTileOptions.bind(this);
+        this.handleAddTile = this.handleAddTile.bind(this);
+        this.handleOpenGridSetup = this.handleOpenGridSetup.bind(this);
     }
 
     _componentDidMount()
     {
-        this.initGridSize();
+        this.initGridSetup();
 
-        Utils.subscribeToEvent('grid__add_tile', this.eventAddTile);
+        Utils.subscribeToEvent('grid__add_tile', this.handleAddTile);
+        Utils.subscribeToEvent('grid__open_grid_setup', this.handleOpenGridSetup);
     }
 
     _componentWillUnmount()
     {
-        Utils.unsubscribeFromEvent('grid__add_tile', this.eventAddTile);
+        Utils.unsubscribeFromEvent('grid__add_tile', this.handleAddTile);
+        Utils.unsubscribeFromEvent('grid__open_grid_setup', this.handleOpenGridSetup);
     }
 
-    eventAddTile(e)
+    /*
+    * Event handlers
+    * ------------------------------
+    */
+
+    handleAddTile(e)
     {
         const detail = e.detail;
         this.placeTile(detail.gridX, detail.gridY, detail.tileConfig);
@@ -61,17 +68,24 @@ class Grid extends View
         );
     }
 
-    initGridSize()
+    handleOpenGridSetup()
+    {
+        this.openGridSetup();
+    }
+
+    /*
+    * Setters
+    * ------------------------------
+    */
+
+    initGridSetup()
     {
         if(!(this.gridSizeX && this.gridSizeY))
         {
-            this.app.modalOpen({
-                headerTitle: indexVars.strings.gridSetup.grid_size.group_title,
-                bodyContent: <GridSetup app={this.app} grid={this} />
-            });
+            this.openGridSetup();
         }
 
-        this.setGridSize(25, 25);
+        this.setGridSize(this.getSizeMinX(), this.getSizeMinY());
     }
 
     setGridSize(sizeX, sizeY)
@@ -87,8 +101,8 @@ class Grid extends View
 
         this._setState({
             gridConfig: gridConfig,
-            sizeX: sizeX,
-            sizeY: sizeY
+            gridSizeX: sizeX,
+            gridSizeY: sizeY
         });
 
         this.setCellSize();
@@ -119,7 +133,7 @@ class Grid extends View
         });
 
         // Update gridConfig
-        const rotationConfig = tileView.getTypeRotationConfig();
+        const rotationConfig = tileView.getRotationConfig();
 
         const avail = this.isPlacementAvailable(gridX, gridY, tileView);
         const gridConfig = this.state.gridConfig;
@@ -187,11 +201,24 @@ class Grid extends View
         return this.removeTile(tileId, true);
     }
 
+    /*
+    * Getters and helpers
+    * ------------------------------
+    */
+
+    openGridSetup()
+    {
+        this.app.modalOpen({
+            headerTitle: indexVars.strings.gridSetup.grid_size.group_title,
+            bodyContent: <GridSetup app={this.app} grid={this} />
+        });
+    }
+
     isPlacementAvailable(gridX, gridY, tile, tileRotation=0)
     {
         const tileView = (typeof tile === 'string') ? new Tile({ type: tile, rotation: tileRotation }) : tile;
 
-        const rotationConfig = tileView.getTypeRotationConfig();
+        const rotationConfig = tileView.getRotationConfig();
 
         let avail = true;
 
@@ -229,20 +256,45 @@ class Grid extends View
         return avail;
     }
 
-    getSizeMaxX()
+    getTileSize()
     {
-        return indexVars.grid_size.tiles_max_x * indexVars.grid_size.tile_size;
+        return indexVars.grid_size.tile_size;
     }
 
-    getSizeMaxY()
+    getSizeMinX(tiles=true)
     {
-        return indexVars.grid_size.tiles_max_y * indexVars.grid_size.tile_size;
+        return tiles ? indexVars.grid_size.tiles_min_x: (indexVars.grid_size.tiles_min_x * this.getTileSize());
+    }
+
+    getSizeMinY(tiles=true)
+    {
+        return tiles ? indexVars.grid_size.tiles_min_y : (indexVars.grid_size.tiles_min_y * this.getTileSize());
+    }
+
+    getSizeMaxX(tiles=true)
+    {
+        return tiles ? indexVars.grid_size.tiles_max_x : (indexVars.grid_size.tiles_max_x * this.getTileSize());
+    }
+
+    getSizeMaxY(tiles=true)
+    {
+        return tiles ? indexVars.grid_size.tiles_max_y : (indexVars.grid_size.tiles_max_y * this.getTileSize());
+    }
+
+    getSizeX(tiles=true)
+    {
+        return tiles ? this.state.gridSizeX : (this.state.gridSizeX * this.getTileSize());
+    }
+
+    getSizeY(tiles=true)
+    {
+        return tiles ? this.state.gridSizeY : (this.state.gridSizeY * this.getTileSize());
     }
 
     render()
     {
         return (
-            <div className='view grid' ref={this.domRef}>
+            <div className={this.getViewClass()} ref={this.domRef}>
                 {this.state.gridConfig.map((row, y) => {
                     return (
                         <div className={`grid-row row-${y}`} key={`${y}`}>
