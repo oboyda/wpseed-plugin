@@ -38,7 +38,7 @@ class Settings
     {
         $js_vars['strings'] = [
             'tileOptions' => [
-                'title' => __('Select tile', 'tilec')
+                'title' => __('Tile options', 'tilec')
             ],
             'tileEdit' => [
                 'title' => __('Edit tile', 'tilec'),

@@ -12,7 +12,8 @@ class Grid extends View
         super(props, {
             app: null,
             gridSizeX: 0,
-            gridSizeY: 0
+            gridSizeY: 0,
+            cellActive: null
         }, {
             set_state: true
         });
@@ -61,11 +62,15 @@ class Grid extends View
         this.placeTile(detail.gridX, detail.gridY, detail.tileConfig);
     }
 
-    handleOpenTileOptions(gridX, gridY)
+    handleOpenTileOptions(gridX, gridY, activeCell)
     {
         this.app.toolsBarOpen(
-            <TileOptions app={this.app} gridX={gridX} gridY={gridY} />
+            <TileOptions app={this.app} gridX={gridX} gridY={gridY} key={activeCell} />
         );
+
+        this.setState({
+            activeCell: activeCell
+        });
     }
 
     handleOpenGridSetup()
@@ -161,7 +166,8 @@ class Grid extends View
             });
 
             this.setState({
-                gridConfig: gridConfig
+                gridConfig: gridConfig,
+                activeCell: null
             }, () => {
                 Utils.dispatchEvent('grid__updated', { tile: tileView });
             });
@@ -300,9 +306,15 @@ class Grid extends View
                         <div className={`grid-row row-${y}`} key={`${y}`}>
                             {row.map((cell, x) => {
 
-                                let cellClasses = ['grid-cell', 'cell-' + y + '-' + x];
+                                const cellKey = y + '-' + x;
+
+                                let cellClasses = ['grid-cell', 'cell-' + cellKey];
                                 let tileElem = null;
 
+                                if(cellKey === this.state.activeCell)
+                                {
+                                    cellClasses.push("active");
+                                }
                                 if(cell.tileId)
                                 {
                                     cellClasses.push(cell.tileId);
@@ -322,12 +334,12 @@ class Grid extends View
 
                                 return (
                                     <div 
-                                        key={`${x}-${y}`} 
+                                        key={cellKey} 
                                         className={cellClasses.join(' ')} 
                                     >
                                         {/* <span className="c">{`${x}:${y}`}</span> */}
                                         {tileElem}
-                                        <span className="h" onClick={() => { this.handleOpenTileOptions(x, y); }}></span>
+                                        <span className="h" onClick={() => { this.handleOpenTileOptions(x, y, cellKey); }}></span>
                                     </div>
                                 );
                             })}

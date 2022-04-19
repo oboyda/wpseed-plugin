@@ -52,6 +52,10 @@ class Tile extends View
         this.app.toolsBarOpen(
             <TileEdit app={this.app} grid={this.grid} tile={this} key={this.id} />
         );
+
+        this.grid.setState({
+            activeCell: null
+        });
     }
 
     generateRotationsConfig(origRotation)

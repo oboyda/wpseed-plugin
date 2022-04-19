@@ -1,4 +1,5 @@
 import View from './View';
+import TileOptions from './TileOptions';
 
 class ToolsBar extends View 
 {
@@ -11,19 +12,26 @@ class ToolsBar extends View
         });
 
         this.state = {
-            opened: false,
+            enabled: false,
             barContent: null
         };
     }
 
+    getDefaultContent()
+    {
+        return <TileOptions app={this.app} />;
+    }
+
     render()
     {
-        const openedClass = this.state.opened ? ' enabled' : '';
+        const enabledClass = this.state.enabled ? ' enabled' : '';
 
         return (
-            <div className={this.getViewClass(openedClass)}>
-                {/* <TileOptions app={this.app} /> */}
-                {this.state.barContent}
+            <div className={this.getViewClass(enabledClass)}>
+                {this.state.barContent ? this.state.barContent : this.getDefaultContent()}
+                {!this.state.enabled ? (
+                    <div className='disabler-overlay'></div>
+                ) : null}
             </div>
         );
     }

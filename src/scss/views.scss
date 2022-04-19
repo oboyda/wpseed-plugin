@@ -8,10 +8,11 @@ $c-3: #2f8b5d;
 .tilec-app {
 
     position: relative;
-    padding: 3rem 0;
+    padding: 1rem;
     font-size: 14px;
     line-height: 1.4em;
     color: #333333;
+    background-color: #dbdbdb;
     
     .app-editor {
         width: 100%;
@@ -42,6 +43,7 @@ $c-3: #2f8b5d;
         flex-direction: column;
         border-top: 2px solid #666666;
         border-left: 2px solid #666666;
+        background-color: #ffffff;
 
         .grid-row {
             display: flex;
@@ -69,11 +71,13 @@ $c-3: #2f8b5d;
                 padding-bottom: 100%;
                 cursor: pointer;
                 z-index: 40;
-
-                &:hover {
-                    background-color: #e3e3e3;
-                }
             }
+
+            &.active .h, 
+            .h:hover {
+                background-color: #e3e3e3;
+            }
+
             &.filled .h {
                 z-index: 20;
             }
@@ -140,19 +144,50 @@ $c-3: #2f8b5d;
     */
 
     .view.tileoptions {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+
+        .block-title {
+            margin: 0;
+            padding: 0 0 2rem;
+        }
+
+        .options-cols {
+            display: flex;
+            flex-direction: row;
+
+            .options-col {
+                width: 100%;
+            }
+        }
 
         .tile-option {
-            cursor: pointer;
-            width: 25%;
-            margin: 0 0.25rem 0.25rem;
+
+            display: flex;
+            flex-direction: row;
+            width: 50%;
+            padding: 0 0.25rem 0.25rem;
 
             @media (min-width: $breakpoint_desktop)
             {
-                margin: 0 0 0.25rem;
+                padding: 0 0 0.25rem;
                 width: 100%;
+            }
+
+            .option-label {
+                padding: 0.25rem;
+                font-size: 0.6rem;
+                line-height: 1em;
+                text-align: right;
+                width: 50%;
+            }
+
+            .option-btn {
+                width: 50%;
+                padding: 0.25rem;
+                background-color: #ececec;
+            }
+    
+            .tile-cell {
+                width: 1rem;
             }
         }
     }
@@ -232,34 +267,18 @@ $c-3: #2f8b5d;
 
     .view.toolsbar {
 
+        position: relative;
         padding: 1rem;
         background-color: #eeeeee;
 
-        // visibility: hidden;
-        // &.enabled {
-        //     visibility: visible;
-        // }
-
-        .view.tileoptions {
-
-            .tile-option {
-                display: flex;
-                flex-direction: row;
-                width: 100%;
-
-                margin: 0 0 1rem;
-                
-                .option-label {
-                    padding: 0.5rem;
-                    text-align: right;
-                    width: 50%;
-                }
-                .option-btn {
-                    width: 50%;
-                    padding: 0.5rem;
-                    background-color: #ececec;
-                }
-            }
+        .disabler-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255,255,255, 0.5);
+            z-index: 50;
         }
     }
 

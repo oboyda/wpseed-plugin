@@ -16,10 +16,9 @@ class App extends View {
         // };
     }
 
-    _componentDidMount()
-    {
-
-    }
+    // _componentDidMount()
+    // {
+    // }
 
     modalOpen(args)
     {
@@ -43,18 +42,31 @@ class App extends View {
         });
     }
 
-    toolsBarOpen(barContent)
+    toolsBarOpen(barContent, enabled=true)
     {
         Utils.dispatchEvent('toolsbar__set_state', {
-            opened: true,
+            enabled: enabled,
             barContent: barContent
         });
     }
     toolsBarClose()
     {
         Utils.dispatchEvent('toolsbar__set_state', {
-            opened: false,
+            enabled: false,
             barContent: null
+        });
+    }
+
+    toolsBarEnable()
+    {
+        Utils.dispatchEvent('toolsbar__set_state', {
+            enabled: true
+        });
+    }
+    toolsBarDisable()
+    {
+        Utils.dispatchEvent('toolsbar__set_state', {
+            enabled: false
         });
     }
 
@@ -68,8 +80,6 @@ class App extends View {
             gridX: gridX,
             gridY: gridY
         });
-        // this.modalClose();
-        this.toolsBarClose();
     }
     
     render() {

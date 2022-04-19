@@ -59,7 +59,7 @@ class Utils_Product
             $tile_config = $product->getTileConfig();
             if($tile_config)
             {
-                $tiles_config['product-' . $product->get_id()] = [
+                $tiles_config['product_' . $product->get_id()] = [
                     'product_id' => $product->get_id(),
                     'tile_width' => $product->getTileWidth(),
                     'tile_height' => $product->getTileHeight(),

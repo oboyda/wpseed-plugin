@@ -103,7 +103,7 @@ class TileEdit extends View
 
         return (
             <div className={this.getViewClass()}>
-                <div><span>{this.tile.id}</span></div>
+                {/* <div><span>{this.tile.id}</span></div> */}
                 <div className='edit-tools rotation'>
                     <div className='tools-label'>
                         <strong>{indexVars.strings.tileEdit.tools.rotateToolsLabel}</strong>

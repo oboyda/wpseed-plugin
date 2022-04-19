@@ -9,7 +9,8 @@ class TileOptions extends View
         super(props, {
             app: null,
             gridX: 0,
-            gridY: 0
+            gridY: 0,
+            realLayout: true
         }, {
             set_state: true
         });
@@ -26,27 +27,84 @@ class TileOptions extends View
     handlePlaceTile(typeConfig)
     {
         this.app.gridPlaceTile(typeConfig, this.gridX, this.gridY);
+        this.app.toolsBarDisable();
+    }
+
+    groupTilesConfig(tilesConfig)
+    {
+        let groupedConfigs = {};
+
+        Object.keys(tilesConfig).forEach((key) => {
+
+            const tileConfig = tilesConfig[key];
+            const g = 'w_' + tileConfig.tile_width;
+
+            if(typeof groupedConfigs[g] === 'undefined')
+            {
+                groupedConfigs[g] = [];
+            }
+            groupedConfigs[g].push(tileConfig);
+        });
+
+        let groupedConfigsCols = [];
+
+        const colsNum = 2;
+        let colsCount = 0;
+
+        Object.keys(groupedConfigs).forEach((key, i) => {
+
+            if(typeof groupedConfigsCols[colsCount] === 'undefined')
+            {
+                groupedConfigsCols[colsCount] = {};
+            }
+
+            groupedConfigsCols[colsCount][key] = groupedConfigs[key];
+
+            colsCount++;
+            if(colsCount >= colsNum)
+            {
+                colsCount = 0;
+            }
+        });
+
+        return groupedConfigsCols;
     }
 
     render()
     {
         const classEnabled = this.state.enabled ? ' enabled' : '';
+        const tilesConfigCols = this.groupTilesConfig(this.tilesConfig);
         
         return (
             <div className={this.getViewClass(classEnabled)}>
-                {Object.keys(this.tilesConfig).map((key) => {
-                    const tileConfig = this.tilesConfig[key];
-                    return (
-                        <div className='tile-option' onClick={() => { this.handlePlaceTile(tileConfig.tile_config); }}>
-                            <div className='option-label'>
-                                <strong>{tileConfig.tile_size_formatted}</strong>
+                <h3 className='block-title'>{indexVars.strings.tileOptions.title}</h3>
+                <div className='options-cols'>
+                    {tilesConfigCols.map((tilesConfigCol, i) => {
+                        return (
+                            <div class={`options-col options-col-${i}`}>
+                                {Object.keys(tilesConfigCol).map((key) => {
+                                    const tilesConfig = tilesConfigCol[key];
+                                    return (
+                                        <div className={`w-group ${key}`}>
+                                            {tilesConfig.map((tileConfig) => {
+                                                return (
+                                                    <div className='tile-option' onClick={() => { this.handlePlaceTile(tileConfig.tile_config); }}>
+                                                        <div className='option-label'>
+                                                            <span>{tileConfig.tile_size_formatted}</span>
+                                                        </div>
+                                                        <div className='option-btn'>
+                                                            <Tile typeConfig={tileConfig.tile_config} />
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    );
+                                })}
                             </div>
-                            <div className='option-btn'>
-                                <Tile typeConfig={tileConfig.tile_config} />
-                            </div>
-                        </div>
-                    );                    
-                })}
+                        );                    
+                    })}
+                </div>
             </div>
         );
     }
