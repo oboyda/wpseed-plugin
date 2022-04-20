@@ -70,11 +70,11 @@ class App extends View {
         });
     }
 
-    gridPlaceTile(typeConfig, gridX, gridY)
+    gridPlaceTile(rotationConfig, gridX, gridY)
     {
         Utils.dispatchEvent('grid__add_tile', {
             tileConfig: {
-                typeConfig: typeConfig,
+                rotationConfig: rotationConfig,
                 rotation: 0
             },
             gridX: gridX,

@@ -9,8 +9,7 @@ class TileOptions extends View
         super(props, {
             app: null,
             gridX: 0,
-            gridY: 0,
-            realLayout: true
+            gridY: 0
         }, {
             set_state: true
         });
@@ -24,9 +23,9 @@ class TileOptions extends View
         this.tilesConfig = (typeof indexVars.tiles_config !== 'undefined') ? indexVars.tiles_config : [];
     }
 
-    handlePlaceTile(typeConfig)
+    handlePlaceTile(rotationConfig)
     {
-        this.app.gridPlaceTile(typeConfig, this.gridX, this.gridY);
+        this.app.gridPlaceTile(rotationConfig, this.gridX, this.gridY);
         this.app.toolsBarDisable();
     }
 
@@ -93,7 +92,8 @@ class TileOptions extends View
                                                             <span>{tileConfig.tile_size_formatted}</span>
                                                         </div>
                                                         <div className='option-btn'>
-                                                            <Tile typeConfig={tileConfig.tile_config} />
+                                                            <Tile rotationConfig={tileConfig.tile_config} />
+                                                            <div className='tile-tap'></div>
                                                         </div>
                                                     </div>
                                                 );

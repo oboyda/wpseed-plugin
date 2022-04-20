@@ -46,7 +46,7 @@ class NavBar extends View
                     
                 </div>
                 <div className='nav-cont nav-3'>
-                    <button className='app-btn btn-2' onClick={this.handleOpenGridSetup}>{indexVars.strings.navBar.btn_continue_label}</button> 
+                    <button className='app-btn btn-2' onClick={this.handleOpenGridSetup} disabled>{indexVars.strings.navBar.btn_continue_label}</button> 
                 </div>
             </div>
         );

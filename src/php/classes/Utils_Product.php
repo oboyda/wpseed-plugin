@@ -71,4 +71,44 @@ class Utils_Product
 
         return $tiles_config;
     }
+
+    static function getAttributeOptions($empty_option=false)
+    {
+        $options = [];
+
+        if($empty_option)
+        {
+            $options[0] = __('Select --', 'tilec');
+        }
+
+        $att_taxonomies = wc_get_attribute_taxonomies();
+        foreach((array)$att_taxonomies as $att_taxonomy)
+        {
+            $options[$att_taxonomy->attribute_id] = $att_taxonomy->attribute_label;
+        }
+
+        return $options;
+    }
+
+    static function getAttributeTaxonomyById($att_id)
+    {
+        $att_taxonomies = wc_get_attribute_taxonomies();
+
+        $key = 'id:' . $att_id;
+
+        $taxonomy = isset($att_taxonomies[$key]) ? $att_taxonomies[$key]->attribute_name : false;
+
+        if($taxonomy)
+        {
+            $taxonomy = 'pa_' . $taxonomy;
+        }
+
+        return $taxonomy;
+    }
+
+    static function getColorTaxonomy()
+    {
+        $att_id = (int)tilec_get_option('color_attribute_tax');
+        return self::getAttributeTaxonomyById($att_id);
+    }
 }

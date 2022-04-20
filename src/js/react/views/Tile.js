@@ -8,7 +8,7 @@ class Tile extends View
     constructor(props)
     {
         super(props, {
-            typeConfig: [],
+            rotationConfig: [],
             rotation: 0,
             color: 'c-1',
             cellSize: 0,
@@ -19,11 +19,12 @@ class Tile extends View
             app: null
         });
 
-        this.rotations = [0, 90, 180, 270];
+        // this.rotations = [0, 90, 180, 270];
+        this.rotations = [0, 90];
         this.moves = ['left', 'right', 'up', 'down'];
-        this.colors = ['c-1', 'c-2', 'c-3'];
+        this.colors = ['c-1', 'c-2', 'c-3', 'c-4', 'c-5'];
 
-        this.rotationsConfig = this.generateRotationsConfig(this.typeConfig);
+        this.rotationsConfig = this.generateRotationsConfig(this.rotationConfig);
 
         this.state = {
             rotation: this.rotation,
@@ -170,10 +171,8 @@ class Tile extends View
 
     rotate(r=0)
     {
-        this._setProps({
-            rotation: r
-        });
         this._setState({
+            rotation: r,
             rotationConfig: this.getRotationConfig(r)
         });
     }
@@ -196,7 +195,7 @@ class Tile extends View
 
         return (
             <div 
-                className={this.getViewClass(this.state.color + ' type-' + this.type)}
+                className={this.getViewClass(this.state.color + ' r-' + this.rotation)}
                 onClick={this.handleOpenTileEdit}
                 >
                 {rotationConfig.map((row, ri) => {
@@ -210,7 +209,7 @@ class Tile extends View
                                     style.width = this.cellSize;
                                 }
                                 return (
-                                    <div className={`tile-cell${filledClass}`} key={ci } style={style}></div>
+                                    <div className={`tile-cell${filledClass}`} key={ci} style={style}></div>
                                 );
                             })}
                         </div>

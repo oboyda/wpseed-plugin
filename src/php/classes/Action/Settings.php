@@ -2,6 +2,8 @@
 
 namespace TILEC\Action;
 
+use TILEC\Utils_Product;
+
 class Settings 
 {
     public function __construct()
@@ -42,6 +44,11 @@ class Settings
                     'tiles_max_y' => [
                         'title' => __('Grid max height', 'tilec'),
                         'type' => 'text'
+                    ],
+                    'color_attribute_tax' => [
+                        'title' => __('Color attribute', 'tilec'),
+                        'type' => 'select',
+                        'options' => Utils_Product::getAttributeOptions(true)
                     ]
                 ]
             ]

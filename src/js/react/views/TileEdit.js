@@ -19,7 +19,9 @@ class TileEdit extends View
         };
 
         this.handleUpdateTile = this.handleUpdateTile.bind(this);
-        this.handleToolRotate = this.handleToolRotate.bind(this);
+        // this.handleToolRotate = this.handleToolRotate.bind(this);
+        this.handleToolRotateLeft = this.handleToolRotateLeft.bind(this);
+        this.handleToolRotateRight = this.handleToolRotateRight.bind(this);
         this.handleToolMove = this.handleToolMove.bind(this);
         this.handleToolSetColor = this.handleToolSetColor.bind(this);
         this.handleToolRemove = this.handleToolRemove.bind(this);
@@ -43,14 +45,42 @@ class TileEdit extends View
         }
     }
 
-    handleToolRotate(r)
+    // handleToolRotate(r)
+    // {
+    //     const tile = this.tile;
+    //     const grid = tile.grid;
+
+    //     if(grid.isPlacementAvailable(tile.gridX, tile.gridY, tile, r))
+    //     {
+    //         tile.rotate(r);
+    //         grid.placeTile(tile.gridX, tile.gridY, tile);
+    //     }
+    // }
+
+    handleToolRotateLeft()
     {
         const tile = this.tile;
         const grid = tile.grid;
 
-        if(grid.isPlacementAvailable(tile.gridX, tile.gridY, tile, r))
+        const rn = tile.getPrevRotation();
+
+        if(grid.isPlacementAvailable(tile.gridX, tile.gridY, tile, rn))
         {
-            tile.rotate(r);
+            tile.rotate(rn);
+            grid.placeTile(tile.gridX, tile.gridY, tile);
+        }
+    }
+
+    handleToolRotateRight()
+    {
+        const tile = this.tile;
+        const grid = tile.grid;
+
+        const rn = tile.getNextRotation();
+
+        if(grid.isPlacementAvailable(tile.gridX, tile.gridY, tile, rn))
+        {
+            tile.rotate(rn);
             grid.placeTile(tile.gridX, tile.gridY, tile);
         }
     }
@@ -98,8 +128,8 @@ class TileEdit extends View
 
     render()
     {
-        const prevRotation = this.tile.getPrevRotationAvail();
-        const nextRotation = this.tile.getNextRotationAvail();
+        // const prevRotation = this.tile.getPrevRotationAvail();
+        // const nextRotation = this.tile.getNextRotationAvail();
 
         return (
             <div className={this.getViewClass()}>
@@ -110,13 +140,13 @@ class TileEdit extends View
                     </div>
                     <div className='tools-controls'>
                         <button 
-                            className={`tool-btn icon-btn rotate left rotate-${prevRotation}`}
-                            onClick={() => { this.handleToolRotate(prevRotation); }}
+                            className='tool-btn icon-btn rotate left rotate-left'
+                            onClick={() => { this.handleToolRotateLeft(); }}
                             title={indexVars.strings.tileEdit.tools.rotateLeftLabel}
                         ></button>
                         <button 
-                            className={`tool-btn icon-btn rotate right rotate-${nextRotation}`}
-                            onClick={() => { this.handleToolRotate(nextRotation); }}
+                            className='tool-btn icon-btn rotate right rotate-right'
+                            onClick={() => { this.handleToolRotateRight(); }}
                             title={indexVars.strings.tileEdit.tools.rotateRightLabel}
                         ></button>
                     </div>

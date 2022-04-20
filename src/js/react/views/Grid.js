@@ -324,6 +324,7 @@ class Grid extends View
                                     tileElem = React.createElement(Tile, {
                                         ...cell.tile,
                                         key: cell.tile.id
+                                        // key: `${cell.tile.id}-${y}-${x}`
                                     });
                                     cellClasses.push("tile-root");
                                 }

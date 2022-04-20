@@ -4,6 +4,8 @@ $breakpoint_desktop: 992px;
 $c-1: #333333;
 $c-2: #a53c3c;
 $c-3: #2f8b5d;
+$c-4: #465def;
+$c-5: #efde46;
 
 .tilec-app {
 
@@ -13,6 +15,20 @@ $c-3: #2f8b5d;
     line-height: 1.4em;
     color: #333333;
     background-color: #dbdbdb;
+
+    .app-btn {
+        font-size: 0.8rem;
+        line-height: 1.4em;
+        padding: 0.5rem 1rem;
+        background-color: #eeeeee;
+        border: none;
+        border-radius: 0;
+        color: #333333;
+
+        &:hover, &:disabled {
+            opacity: 0.8;
+        }
+    }
     
     .app-editor {
         width: 100%;
@@ -131,6 +147,12 @@ $c-3: #2f8b5d;
         &.c-3 .tile-cell.filled {
             background-color: $c-3;
         }
+        &.c-4 .tile-cell.filled {
+            background-color: $c-4;
+        }
+        &.c-5 .tile-cell.filled {
+            background-color: $c-5;
+        }
 
         &:hover .tile-cell.filled {
             // background-color: #888888;
@@ -184,6 +206,28 @@ $c-3: #2f8b5d;
                 width: 50%;
                 padding: 0.25rem;
                 background-color: #ececec;
+
+                .view.tile {
+                    display: none;
+                }
+
+                .tile-tap {
+                    display: block;
+                    width: 2rem;
+                    height: 1rem;
+                    background-color: #333333;
+                    cursor: pointer;
+                }
+
+                @media (min-width: $breakpoint_desktop)
+                {
+                    .view.tile {
+                        display: block;
+                    }
+                    .tile-tap {
+                        display: none;
+                    }
+                }
             }
     
             .tile-cell {
@@ -373,6 +417,12 @@ $c-3: #2f8b5d;
                     }
                     &.color.c-3 {
                         background-color: $c-3;
+                    }
+                    &.color.c-4 {
+                        background-color: $c-4;
+                    }
+                    &.color.c-5 {
+                        background-color: $c-5;
                     }
                 }
             }
