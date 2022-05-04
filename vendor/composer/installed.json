@@ -1,0 +1,40 @@
+{
+    "packages": [
+        {
+            "name": "oboyda/wp-seed",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oboyda/wp-seed.git",
+                "reference": "a5fbacc06a40e5898cb8ad34dc5fbcb2e8b05920"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oboyda/wp-seed/zipball/a5fbacc06a40e5898cb8ad34dc5fbcb2e8b05920",
+                "reference": "a5fbacc06a40e5898cb8ad34dc5fbcb2e8b05920",
+                "shasum": ""
+            },
+            "time": "2022-04-18T11:17:20+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "WPSEED\\": "src/classes"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "description": "Better entity classes for agile Wordpress development",
+            "support": {
+                "source": "https://github.com/oboyda/wp-seed/tree/main",
+                "issues": "https://github.com/oboyda/wp-seed/issues"
+            },
+            "install-path": "../oboyda/wp-seed"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

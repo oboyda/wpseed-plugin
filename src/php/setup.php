@@ -4,9 +4,9 @@
  * Register plugin textdomain
  * ----------------------------------------
  */
-add_action('init', 'tilec_load_textdomain');
+add_action('init', 'wpboot_load_textdomain');
 
-function tilec_load_textdomain()
+function wpboot_load_textdomain()
 {
-    load_plugin_textdomain('tilec', false, TILEC_DIR . '/langs');
+    load_plugin_textdomain('wpboot', false, WPBOOT_DIR . '/langs');
 }

@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "autoload": {
         "psr-4": {
-            "TILEC\\": "src/php/classes"
+            "WPBOOT\\": "src/php/classes"
         }
     },
     "repositories" : [

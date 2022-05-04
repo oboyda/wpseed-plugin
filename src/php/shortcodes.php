@@ -1,26 +1,13 @@
 <?php
 
 /*
- * Add tiles-configurator shortcode
+ * Add mywidget shortcode
  * ----------------------------------------
  */
 
-add_shortcode('tiles-configurator', 'tilec_shortcode_tiles_configurator');
+// add_shortcode('myshortcode', 'wpboot_add_shortcode_mywidget');
 
-function tilec_shortcode_tiles_configurator($atts)
+function wpboot_add_shortcode_mywidget($atts)
 {
-    return '<div id="tilec-root"></div>';
-}
-
-// add_action('wp_enqueue_scripts', 'tilec_shortcode_tiles_configurator_scripts');
-
-function tilec_shortcode_tiles_configurator_scripts()
-{
-    global $post;
-    
-    if(isset($post) && has_shortcode($post->post_content, 'tiles-configurator'))
-    {
-        wp_enqueue_script('tilec-react-app-main');
-        wp_enqueue_style('tilec-react-app-main');
-    }
+    return '<div></div>';
 }

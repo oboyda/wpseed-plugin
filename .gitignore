@@ -1,7 +1,7 @@
 **/.DS_Store
-vendor
+# vendor
 nbproject
 node_modules
-build
+# build
 package-lock.json
 composer.lock

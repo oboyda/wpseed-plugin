@@ -1,2 +1,2 @@
 
-import './js/react/index.js';
+// import './js/react/index.js';

@@ -38,7 +38,7 @@ class View extends Component
         Object.keys(this.subscribedEvents).forEach((e) => {
             if(this.subscribedEvents[e])
             {
-                const name = 'tilec__' + this.classname + '__' + e;
+                const name = 'wpboot__' + this.classname + '__' + e;
                 Utils.subscribeToEvent(name, this.handleSetState);
             }
         });
@@ -54,7 +54,7 @@ class View extends Component
         Object.keys(this.subscribedEvents).forEach((e) => {
             if(this.subscribedEvents[e])
             {
-                const name = 'tilec__' + this.classname + '__' + e;
+                const name = 'wpboot__' + this.classname + '__' + e;
                 Utils.unsubscribeFromEvent(name, this.handleSetState);
             }
         });
