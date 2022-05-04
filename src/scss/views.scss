@@ -2,10 +2,11 @@
 $breakpoint_desktop: 992px;
 
 /*
-* .view.first
-* ------------------------------
+* .view
+* ------------------------- 
 */
 
-// .view.first {
-
-// }
+.view {
+    position: relative;
+    padding: 2rem 0;
+}

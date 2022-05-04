@@ -76,8 +76,7 @@ function wpboot_enqueue_styles_admin()
  * Enqueue scripts on FRONT
  * ----------------------------------------
  */
-
-add_action('wp_enqueue_scripts', 'wpboot_enqueue_scripts');
+// add_action('wp_enqueue_scripts', 'wpboot_enqueue_scripts');
 
 function wpboot_enqueue_scripts()
 {
@@ -92,8 +91,7 @@ function wpboot_enqueue_scripts()
  * Enqueue styles on FRONT
  * ----------------------------------------
  */
-
-add_action('wp_enqueue_scripts', 'wpboot_enqueue_styles');
+// add_action('wp_enqueue_scripts', 'wpboot_enqueue_styles');
 
 function wpboot_enqueue_styles()
 {

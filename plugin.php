@@ -29,7 +29,6 @@ add_action('plugins_loaded', function()
         require WPBOOT_DIR . '/src/php/debug.php';
         require WPBOOT_DIR . '/src/php/scripts.php';
         require WPBOOT_DIR . '/src/php/shortcodes.php';
-        require WPBOOT_DIR . '/src/php/inc/inc.php';
     }
     
 }, 100);
