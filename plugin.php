@@ -1,15 +1,15 @@
 <?php
 /**
- * Plugin Name: Tiles Configurator
- * Description: Tiles Configurator Plugin
- * Version: 1.0.0
+ * Plugin Name: WPBOOT
+ * Description: WPBOOT Plugin
+ * Version: 1.0
  * Author: Alexis Boyda
  * Author URI: https://aleapp.com
  * Text Domain: wpboot
  */
 
-define('WPBOOT_NAME', 'Tiles Configurator');
-define('WPBOOT_VERSION', '1.0.0');
+define('WPBOOT_NAME', 'WPBOOT Plugin');
+define('WPBOOT_VERSION', '1.0');
 define('WPBOOT_DIR', dirname(__FILE__));
 define('WPBOOT_INDEX', plugins_url('', __FILE__));
 

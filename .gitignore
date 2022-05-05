@@ -1,5 +1,5 @@
 **/.DS_Store
-# vendor
+vendor
 nbproject
 node_modules
 # build
