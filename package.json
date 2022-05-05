@@ -1,6 +1,5 @@
 {
     "name": "wp-plugin-bootstrap",
-    "version": "1.0",
     "private": true,
     "main": "build/index.js",
     "module": "src/index.js",
