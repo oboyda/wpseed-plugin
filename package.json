@@ -8,6 +8,6 @@
         "build": "wp-scripts build"
     },
     "devDependencies": {
-        "@wordpress/scripts": "^23.0.0"
+        "@wordpress/scripts": "^23.2.0"
     }
 }
