@@ -1,34 +1,34 @@
 <?php
 /**
- * Plugin Name: WPBOOT
- * Description: WPBOOT Plugin
+ * Plugin Name: WPPB
+ * Description: WPPB Plugin
  * Version: 1.0
  * Author: Alexis Boyda
  * Author URI: https://aleapp.com
- * Text Domain: wpboot
+ * Text Domain: wppb
  */
 
-define('WPBOOT_NAME', 'WPBOOT Plugin');
-define('WPBOOT_VERSION', '1.0');
-define('WPBOOT_DIR', dirname(__FILE__));
-define('WPBOOT_INDEX', plugins_url('', __FILE__));
+define('WPPB_NAME', 'WPPB Plugin');
+define('WPPB_VERSION', '1.0');
+define('WPPB_DIR', dirname(__FILE__));
+define('WPPB_INDEX', plugins_url('', __FILE__));
 
 add_action('plugins_loaded', function()
 {
-    require WPBOOT_DIR . '/src/php/setup.php';
-    require WPBOOT_DIR . '/vendor/autoload.php';
+    require WPPB_DIR . '/src/php/setup.php';
+    require WPPB_DIR . '/vendor/autoload.php';
     
-    $deps = new \WPBOOT\Deps([
+    $deps = new \WPPB\Deps([
        'woocommerce/woocommerce.php'
     ]);
     
     if($deps->check())
     {
-        require WPBOOT_DIR . '/src/php/utils.php';
-        require WPBOOT_DIR . '/src/php/classes/load.php';
-        require WPBOOT_DIR . '/src/php/debug.php';
-        require WPBOOT_DIR . '/src/php/scripts.php';
-        require WPBOOT_DIR . '/src/php/shortcodes.php';
+        require WPPB_DIR . '/src/php/utils.php';
+        require WPPB_DIR . '/src/php/classes/load.php';
+        require WPPB_DIR . '/src/php/debug.php';
+        require WPPB_DIR . '/src/php/scripts.php';
+        require WPPB_DIR . '/src/php/shortcodes.php';
     }
     
 }, 100);

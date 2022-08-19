@@ -1,8 +1,8 @@
 <?php 
 
-namespace WPBOOT\Action;
+namespace WPPB\Action;
 
-use WPBOOT\Utils_Product;
+use WPPB\Utils_Product;
 
 class Settings 
 {
@@ -13,20 +13,20 @@ class Settings
 
     static function initSettings()
     {
-        global $wpboot_settings;
-        $wpboot_settings = new \WPSEED\Settings([
-            'prefix' => 'wpboot_',
+        global $wppb_settings;
+        $wppb_settings = new \WPSEED\Settings([
+            'prefix' => 'wppb_',
             'menu_page' => 'options-general.php', // https://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters
-            'menu_title' => __('WPBOOT Options', 'wpboot'),
-            'page_title' => __('WPBOOT Options', 'wpboot'),
-            'btn_title' => __('Update', 'wpboot')
+            'menu_title' => __('WPPB Options', 'wppb'),
+            'page_title' => __('WPPB Options', 'wppb'),
+            'btn_title' => __('Update', 'wppb')
         ], 
         [
             'general' => [
-                'title' => __('General', 'wpboot'),
+                'title' => __('General', 'wppb'),
                 'fields' => [
                     'option_name' => [
-                        'title' => __('Option name', 'wpboot'),
+                        'title' => __('Option name', 'wppb'),
                         'type' => 'text'
                     ]
                 ]

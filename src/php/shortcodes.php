@@ -5,9 +5,9 @@
  * ----------------------------------------
  */
 
-// add_shortcode('myshortcode', 'wpboot_add_shortcode_mywidget');
+// add_shortcode('myshortcode', 'wppb_add_shortcode_mywidget');
 
-function wpboot_add_shortcode_mywidget($atts)
+function wppb_add_shortcode_mywidget($atts)
 {
     return '<div></div>';
 }
