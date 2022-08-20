@@ -29,6 +29,7 @@ add_action('plugins_loaded', function()
         require WPPBOOT_DIR . '/src/php/debug.php';
         require WPPBOOT_DIR . '/src/php/scripts.php';
         require WPPBOOT_DIR . '/src/php/shortcodes.php';
+        require WPPBOOT_DIR . '/src/php/acf-fields.php';
     }
     
 }, 100);
