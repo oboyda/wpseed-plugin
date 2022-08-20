@@ -62,13 +62,13 @@ class Utils {
 
     static subscribeToEvent(name, handler, elem=document.body)
     {
-        const _name = (name.indexOf('wppb__') === 0) ? name : 'wppb__' + name;
+        const _name = (name.indexOf('wppboot__') === 0) ? name : 'wppboot__' + name;
         elem.addEventListener(_name, handler, false);
     }
 
     static unsubscribeFromEvent(name, handler, elem=document.body)
     {
-        const _name = (name.indexOf('wppb__') === 0) ? name : 'wppb__' + name;
+        const _name = (name.indexOf('wppboot__') === 0) ? name : 'wppboot__' + name;
         elem.removeEventListener(_name, handler);
     }
 
@@ -81,7 +81,7 @@ class Utils {
             args.detail = data;
         }
         
-        const _name = (name.indexOf('wppb__') === 0) ? name : 'wppb__' + name;
+        const _name = (name.indexOf('wppboot__') === 0) ? name : 'wppboot__' + name;
         const event = new CustomEvent(_name, args);
         
         elem.dispatchEvent(event);

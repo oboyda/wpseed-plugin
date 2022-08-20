@@ -5,9 +5,9 @@
  * ----------------------------------------
  */
 
-// add_shortcode('myshortcode', 'wppb_add_shortcode_mywidget');
+// add_shortcode('myshortcode', 'wppboot_add_shortcode_mywidget');
 
-function wppb_add_shortcode_mywidget($atts)
+function wppboot_add_shortcode_mywidget($atts)
 {
     return '<div></div>';
 }
