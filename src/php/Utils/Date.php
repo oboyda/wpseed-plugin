@@ -1,8 +1,8 @@
 <?php 
 
-namespace WPPBOOT;
+namespace WPPBOOT\Utils;
 
-class Utils_Date 
+class Date 
 {
     const DATE_FORMAT_SYS = 'Y-m-d';
     const TIME_FORMAT_SYS = 'H:i:s';

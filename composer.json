@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "autoload": {
         "psr-4": {
-            "WPPBOOT\\": "src/php/classes"
+            "WPPBOOT\\": "src/php",
+            "WPPBOOT\\Mod\\": "mods"
         }
     },
     "repositories" : [

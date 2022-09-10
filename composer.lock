@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/oboyda/wp-seed.git",
-                "reference": "59d173485989c374336888cc6402349abd1bdd7b"
+                "reference": "c06d966b56a359c0d68dacc816547258894ce6bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/oboyda/wp-seed/zipball/59d173485989c374336888cc6402349abd1bdd7b",
-                "reference": "59d173485989c374336888cc6402349abd1bdd7b",
+                "url": "https://api.github.com/repos/oboyda/wp-seed/zipball/c06d966b56a359c0d68dacc816547258894ce6bf",
+                "reference": "c06d966b56a359c0d68dacc816547258894ce6bf",
                 "shasum": ""
             },
             "default-branch": true,
@@ -35,7 +35,7 @@
                 "source": "https://github.com/oboyda/wp-seed/tree/main",
                 "issues": "https://github.com/oboyda/wp-seed/issues"
             },
-            "time": "2022-08-19T18:12:01+00:00"
+            "time": "2022-09-09T10:39:39+00:00"
         }
     ],
     "packages-dev": [],

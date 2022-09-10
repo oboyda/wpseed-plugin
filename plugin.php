@@ -18,18 +18,20 @@ add_action('plugins_loaded', function()
     require WPPBOOT_DIR . '/src/php/setup.php';
     require WPPBOOT_DIR . '/vendor/autoload.php';
     
-    $deps = new \WPPBOOT\Deps([
-       'woocommerce/woocommerce.php'
+    $deps = new \WPSEED\Deps([
+    //    'woocommerce/woocommerce.php'
+    ], [
+        'plugin_name' => WPPBOOT_NAME
     ]);
     
     if($deps->check())
     {
         require WPPBOOT_DIR . '/src/php/utils.php';
-        require WPPBOOT_DIR . '/src/php/classes/load.php';
-        require WPPBOOT_DIR . '/src/php/debug.php';
+        require WPPBOOT_DIR . '/src/php/class-load.php';
+        require WPPBOOT_DIR . '/src/php/mods.php';
         require WPPBOOT_DIR . '/src/php/scripts.php';
-        require WPPBOOT_DIR . '/src/php/shortcodes.php';
         require WPPBOOT_DIR . '/src/php/acf-fields.php';
+        // require WPPBOOT_DIR . '/src/php/debug.php';
     }
     
 }, 100);

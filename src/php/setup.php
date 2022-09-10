@@ -1,9 +1,9 @@
 <?php
 
 /*
- * Register plugin textdomain
- * ----------------------------------------
- */
+* Register plugin textdomain
+* ----------------------------------------
+*/
 add_action('init', 'wppboot_load_textdomain');
 
 function wppboot_load_textdomain()

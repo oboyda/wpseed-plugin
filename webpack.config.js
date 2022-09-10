@@ -7,8 +7,9 @@ module.exports = {
     ...defaultConfig,
 
     // mode: 'production',
-    // entry: {
-    //     ...defaultConfig.entry,
-    //     style: path.resolve(process.cwd(), 'src/scss', 'index.scss')
-    // }
+    entry: {
+        ...defaultConfig.entry,
+        admin: path.resolve(process.cwd(), 'src/index-admin.js'),
+        front: path.resolve(process.cwd(), 'src/index-front.js')
+    }
 };

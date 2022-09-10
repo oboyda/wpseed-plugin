@@ -1,8 +1,8 @@
 <?php
 
-namespace WPPBOOT;
+namespace WPPBOOT\Utils;
 
-class Utils
+class Base
 {
     static function getOption($name, $default=null)
     {
