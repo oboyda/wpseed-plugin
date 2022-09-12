@@ -17,6 +17,7 @@ add_action('plugins_loaded', function()
 {
     require WPPBOOT_DIR . '/src/php/setup.php';
     require WPPBOOT_DIR . '/vendor/autoload.php';
+    require WPPBOOT_DIR . '/src/php/utils.php';
     
     $deps = new \WPSEED\Deps([
     //    'woocommerce/woocommerce.php'
@@ -26,7 +27,6 @@ add_action('plugins_loaded', function()
     
     if($deps->check())
     {
-        require WPPBOOT_DIR . '/src/php/utils.php';
         require WPPBOOT_DIR . '/src/php/class-load.php';
         require WPPBOOT_DIR . '/src/php/mods.php';
         require WPPBOOT_DIR . '/src/php/scripts.php';
