@@ -4,9 +4,9 @@
 * Register plugin textdomain
 * ----------------------------------------
 */
-add_action('init', 'wppboot_load_textdomain');
+add_action('init', 'pboot_load_textdomain');
 
-function wppboot_load_textdomain()
+function pboot_load_textdomain()
 {
-    load_plugin_textdomain('wppboot', false, WPPBOOT_DIR . '/langs');
+    load_plugin_textdomain('pboot', false, PBOOT_DIR . '/langs');
 }

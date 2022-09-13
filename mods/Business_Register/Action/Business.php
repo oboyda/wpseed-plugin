@@ -1,8 +1,8 @@
 <?php 
 
-namespace WPPBOOT\Mod\Business_Register\Action;
+namespace PBOOT\Mod\Business_Register\Action;
 
-// use WPPBOOT\Mod\Business_Register\Utils\Business as Utils_Business;
+// use PBOOT\Mod\Business_Register\Utils\Business as Utils_Business;
 
 class Business extends \WPSEED\Action
 {

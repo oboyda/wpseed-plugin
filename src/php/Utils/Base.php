@@ -1,12 +1,12 @@
 <?php
 
-namespace WPPBOOT\Utils;
+namespace PBOOT\Utils;
 
 class Base
 {
     static function getOption($name, $default=null)
     {
-        return wppboot_get_option($name, $default);
+        return pboot_get_option($name, $default);
     }
 
     /* ------------------------------ */

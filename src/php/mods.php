@@ -5,7 +5,7 @@
 * ----------------------------------------
 */
 
-foreach(wpseed_get_dir_files(WPPBOOT_DIR . '/mods', true, false) as $dir)
+foreach(wpseed_get_dir_files(PBOOT_DIR . '/mods', true, false) as $dir)
 {
     $mod_index_file = $dir . '/index.php';
     if(file_exists($mod_index_file))

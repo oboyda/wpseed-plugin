@@ -1,6 +1,6 @@
 <?php 
 
-namespace WPPBOOT\Mod\Business_Register\Utils;
+namespace PBOOT\Mod\Business_Register\Utils;
 
 class Business 
 {

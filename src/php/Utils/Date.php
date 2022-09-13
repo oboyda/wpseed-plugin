@@ -1,6 +1,6 @@
 <?php 
 
-namespace WPPBOOT\Utils;
+namespace PBOOT\Utils;
 
 class Date 
 {

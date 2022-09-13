@@ -1,6 +1,6 @@
 <?php 
 
-namespace WPPBOOT\Type;
+namespace PBOOT\Type;
 
 class Post extends \WPSEED\Post
 {
