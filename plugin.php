@@ -18,6 +18,11 @@ add_action('plugins_loaded', function()
     require PBOOT_DIR . '/src/php/setup.php';
     require PBOOT_DIR . '/vendor/autoload.php';
     require PBOOT_DIR . '/src/php/utils.php';
+
+    if(!class_exists('\WPSEED\Deps'))
+    {
+        return;
+    }
     
     $deps = new \WPSEED\Deps([
     //    'woocommerce/woocommerce.php'
