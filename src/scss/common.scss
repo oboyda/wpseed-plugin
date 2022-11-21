@@ -37,7 +37,8 @@ Color vars
 $color_white: #ffffff;
 $color_black: #000000;
 
-$color_grey1: #555555;
+$color_grey1: #333333;
+$color_grey2: #555555;
 
 /*
 Background colors
@@ -51,8 +52,8 @@ Background colors
     background-color: $color_black !important;
 }
 
-.bc-grey1 {
-    background-color: $color_grey1 !important;
+.bc-grey2 {
+    background-color: $color_grey2 !important;
 }
 
 /*
@@ -67,8 +68,8 @@ Text colors
     color: $color_black !important;
 }
 
-.c-grey1 {
-    color: $color_grey1 !important;
+.c-grey2 {
+    color: $color_grey2 !important;
 }
 
 /*
@@ -290,7 +291,7 @@ form {
         font-size: 1rem;
         line-height: 1.4em;
         margin: 0;
-        border: 2px solid $color_grey1;
+        border: 2px solid $color_grey2;
         border-radius: 0.2143rem;
     }
 
@@ -301,7 +302,7 @@ form {
     .view.form-nice-dropdown {
         font-size: inherit;
         .selected-label {
-            border: 2px solid $color_grey1;
+            border: 2px solid $color_grey2;
             border-radius: 0.2143rem;
             box-shadow: none;
         }
@@ -332,7 +333,7 @@ form {
         padding-bottom: 0;
         border-radius: 0;
         border-top: none;
-        border-right: 1px solid $color_grey1;
+        border-right: 1px solid $color_grey2;
         border-bottom: none;
         border-left: 0;
         background-color: transparent;
@@ -363,7 +364,7 @@ form {
     .input-desc {
         font-size: 0.8rem;
         line-height: 1.4em;
-        color: $color_grey1;
+        color: $color_grey2;
         padding: 0 0 1rem;
     }
 
@@ -379,7 +380,7 @@ form {
         font-size: 0.857rem;
         line-height: 1.4em;
         padding: 0.7143em 1.2857em 0.7143em 2.83em;
-        color: $color_grey1;
+        color: $color_grey2;
 
         &::before {
             position: absolute;
@@ -427,12 +428,12 @@ form {
             height: 1.4em;
 
             background-color: #ffffff;
-            border: 2px solid $color_grey1;
+            border: 2px solid $color_grey2;
         }
     }
     input:checked + label:before {
-        background-color: $color_grey1;
-        border-color: $color_grey1;
+        background-color: $color_grey2;
+        border-color: $color_grey2;
     }
 
     &.size-large {
@@ -464,7 +465,7 @@ form {
     font-family: $font_regular;
     border: none;
     border-radius: 0.1875em;
-    background-color: $color_grey1;
+    background-color: $color_grey2;
     color: $color_white;
     text-decoration: none;
     text-align: center;

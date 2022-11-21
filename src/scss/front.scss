@@ -14,7 +14,7 @@ html, body {
     font-size: 12px;
     line-height: 1.4em;
     font-weight: 400;
-    color: $color_grey8;
+    color: $color_grey1;
 
     @media (min-width: $breakpoint_desktop)
     {
@@ -34,14 +34,14 @@ Links
 a:not(.s-btn)
 {
     text-decoration: none;
-    color: $color_grey1;
+    color: $color_grey2;
 
     transition-property: color;
     transition-duration: 0.3s;
 
     &:hover, &:visited {
         text-decoration: none;
-        color: $color_grey1;
+        color: $color_grey2;
     }
 }
 
