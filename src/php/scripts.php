@@ -1,9 +1,9 @@
 <?php
 
 /*
- * Register scripts
- * ----------------------------------------
- */
+Register scripts
+----------------------------------------
+*/
 add_action('wp_enqueue_scripts', 'pboot_register_scripts');
 add_action('admin_enqueue_scripts', 'pboot_register_styles');
 
@@ -17,7 +17,9 @@ function pboot_register_scripts()
         wp_register_script(
             'pboot-front',
             PBOOT_INDEX . '/build/front.js',
-            $asset['dependencies'],
+            array_merge($asset['dependencies'], [
+                // 'jquery-ui-datepicker'
+            ]),
             $asset['version'],
             true
         );
@@ -39,9 +41,9 @@ function pboot_register_scripts()
 }
 
 /*
- * Register styles
- * ----------------------------------------
- */
+Register styles
+----------------------------------------
+*/
 add_action('wp_enqueue_scripts', 'pboot_register_styles');
 add_action('admin_enqueue_scripts', 'pboot_register_styles');
 
@@ -65,6 +67,12 @@ function pboot_register_styles()
         [],
         PBOOT_VERSION
     );
+    // wp_register_style(
+    //     'jquery-ui-style',
+    //     PBOOT_INDEX . '/assets/jquery-ui/css/jquery-ui.min.css',
+    //     [],
+    //     PBOOT_VERSION
+    // );
 
     $asset_file = PBOOT_DIR . '/build/front.asset.php';
     if(file_exists($asset_file))
@@ -77,7 +85,8 @@ function pboot_register_styles()
             // $asset['dependencies'],
             [
                 // 'bootstrap',
-                'dashicons'
+                'dashicons',
+                // 'jquery-ui-style'
             ],
             $asset['version']
         );
@@ -94,7 +103,8 @@ function pboot_register_styles()
             // $asset['dependencies'],
             [
                 // 'bootstrap-grid',
-                'dashicons'
+                'dashicons',
+                // 'jquery-ui-style'
             ],
             $asset['version']
         );
@@ -102,9 +112,9 @@ function pboot_register_styles()
 }
 
 /*
- * Enqueue scripts on FRONT
- * ----------------------------------------
- */
+Enqueue scripts on FRONT
+----------------------------------------
+*/
 add_action('wp_enqueue_scripts', 'pboot_enqueue_scripts_front');
 
 function pboot_enqueue_scripts_front()
@@ -116,9 +126,9 @@ function pboot_enqueue_scripts_front()
 }
 
 /*
- * Enqueue scripts on ADMIN
- * ----------------------------------------
- */
+Enqueue scripts on ADMIN
+----------------------------------------
+*/
 add_action('admin_enqueue_scripts', 'pboot_enqueue_scripts_admin');
 
 function pboot_enqueue_scripts_admin()
@@ -130,9 +140,9 @@ function pboot_enqueue_scripts_admin()
 }
 
 /*
- * Enqueue styles on FRONT
- * ----------------------------------------
- */
+Enqueue styles on FRONT
+----------------------------------------
+*/
 add_action('wp_enqueue_scripts', 'pboot_enqueue_styles_front');
 
 function pboot_enqueue_styles_front()
@@ -142,9 +152,9 @@ function pboot_enqueue_styles_front()
 }
 
 /*
- * Enqueue styles on ADMIN
- * ----------------------------------------
- */
+Enqueue styles on ADMIN
+----------------------------------------
+*/
 add_action('admin_enqueue_scripts', 'pboot_enqueue_styles_admin');
 
 function pboot_enqueue_styles_admin()
