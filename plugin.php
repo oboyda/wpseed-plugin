@@ -30,6 +30,7 @@ add_action('plugins_loaded', function()
         require PBOOT_DIR . '/src/php/class-load.php';
         require PBOOT_DIR . '/src/php/mods.php';
         require PBOOT_DIR . '/src/php/scripts.php';
+        require PBOOT_DIR . '/src/php/acf-blocks.php';
         require PBOOT_DIR . '/src/php/acf-fields.php';
         // require PBOOT_DIR . '/src/php/debug.php';
     }
