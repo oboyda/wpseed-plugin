@@ -1,2 +1,55 @@
+@import 'bootstrap/dist/css/bootstrap-grid.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 @import "./common.scss";
 @import "./views.scss";
+
+/*
+.wp-block
+----------------------------------------
+*/
+
+body.wp-admin {
+    
+    &.post-type-page,
+    &.post-type-wp_block {
+        .wp-block {
+            max-width: none;
+        }
+    }
+
+    .wp-block .view {
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .block-edit-handle {
+            padding: 0 0 2rem;
+            margin: 0 0 3rem;
+            border-bottom: 1px solid #e1e1e1;
+
+            .edit-handle {
+                position: relative;
+                display: inline-block;
+                padding: 1rem 3rem;
+                color: inherit;
+                background-color: #e1e1e1;
+                cursor: pointer;
+                font-size: 1rem;
+                line-height: 1.2em;
+
+                &:before {
+                    display: block;
+                    padding: 1rem;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    font-family: "dashicons";
+                    content: "\f464";
+                    font-size: 1rem;
+                    line-height: 1em;
+                    line-height: 1.2em;
+                }
+            }
+        }
+    }
+}

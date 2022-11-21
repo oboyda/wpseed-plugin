@@ -2,8 +2,6 @@
 
 namespace PBOOT\Action;
 
-use PBOOT\Utils_Product;
-
 class Settings 
 {
     public function __construct()
@@ -11,10 +9,14 @@ class Settings
         $this->initSettings();
     }
 
-    static function initSettings()
+    public function initSettings()
     {
-        global $pboot_settings;
-        $pboot_settings = new \WPSEED\Settings([
+        if(!is_admin())
+        {
+            return false;
+        }
+
+        $settings = new \WPSEED\Settings([
             'prefix' => 'pboot_',
             'menu_page' => 'options-general.php', // https://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters
             'menu_title' => __('PBOOT Options', 'pboot'),
@@ -23,10 +25,10 @@ class Settings
         ], 
         [
             'general' => [
-                'title' => __('General', 'pboot'),
+                'title' => __('Goolge Maps', 'pboot'),
                 'fields' => [
-                    'option_name' => [
-                        'title' => __('Option name', 'pboot'),
+                    'googlemaps_api_key' => [
+                        'title' => __('API key', 'pboot'),
                         'type' => 'text'
                     ]
                 ]

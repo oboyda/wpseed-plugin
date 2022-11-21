@@ -8,6 +8,10 @@
         "build": "wp-scripts build"
     },
     "devDependencies": {
-        "@wordpress/scripts": "^23.7.x"
+        "@wordpress/scripts": "^23.7.*"
+    },
+    "dependencies": {
+        "bootstrap": "^5.2.*",
+        "bootstrap-icons": "^1.10.*"
     }
 }

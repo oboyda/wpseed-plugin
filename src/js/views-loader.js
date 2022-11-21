@@ -7,14 +7,11 @@ jQuery.fn.extend({
             if(typeof viewName !== 'undefined' && viewName)
             {
                 jQuery(document.body).triggerHandler("view_loaded_" + viewName, [_view]);
-                if(triggerChildren)
-                {
-                    _view.find(".view").viewTriggerLoaded();
-                }
             }
-            // _view.on("unload", function(){
-            //     jQuery(this).triggerHandler("view_unloaded_" + viewName, [_view]);
-            // });
+            if(triggerChildren)
+            {
+                _view.find(".view").viewTriggerLoaded();
+            }
         });
     },
     viewReplace: function(html, triggerLoadedEvent=true, triggerChildren=false)

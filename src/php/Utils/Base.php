@@ -125,6 +125,43 @@ class Base
         return $_arr;
     }
 
+    static function castVal($val, $cast)
+    {
+        switch($cast)
+        {
+            case 'int':
+            case 'integer':
+                $val = intval($val);
+            break;
+            case 'float':
+            case 'floatval':
+                $val = floatval($val);
+            break;
+            case 'bool':
+            case 'boolean';
+                $val = boolval($val);
+            break;
+            case 'str':
+            case 'string';
+                $val = strval($val);
+            break;
+        }
+
+        return $val;
+    }
+
+    static function castVals($vals, $casts=[])
+    {
+        foreach($vals as $key => $val)
+        {
+            if(isset($casts[$key]))
+            {
+                $vals[$key] = self::castVal($val, $casts[$key]);
+            }
+        }
+        return $vals;
+    }
+
     /* ------------------------------ */
     
     static function getTermData($field, $term, $taxonomy)
@@ -252,6 +289,26 @@ class Base
                 }
             }
         }
+    }
+
+    static function getTermBySysValue($sys_value, $taxonomy, $fields='all')
+    {
+        $q_args = [
+            'taxonomy' => $taxonomy,
+            'hide_empty' => false,
+            'number' => 1,
+            'meta_query' => [
+                [
+                    'key' => 'sys_value',
+                    'value' => $sys_value,
+                    'compare' => '='
+                ]
+            ],
+            'fields' => $fields
+        ];
+        $terms = get_terms($q_args);
+
+        return isset($terms[0]) ? $terms[0] : false;
     }
 
     /* ------------------------------ */
@@ -406,7 +463,8 @@ class Base
             'meta_value' => '',
             'meta_parent_term_id' => 0,
             'orderby' => 'name',
-            'order' => 'ASC'
+            'order' => 'ASC',
+            'hide_empty' => false
         ]);
         if($_args['meta_parent_term_id'])
         {
@@ -415,7 +473,7 @@ class Base
         }
         $q_args = [
             'taxonomy' => $taxonomy,
-            'hide_empty' => true,
+            'hide_empty' => $args['hide_empty'],
             'meta_key' => $args['meta_key'],
             'meta_value' => $args['meta_value']
         ];
@@ -431,5 +489,42 @@ class Base
         }
         
         return $options;
+    }
+
+    /* ------------------------------ */
+
+    static function slugToCamelCase($slug)
+    {
+        $slug = trim($slug);
+
+        if(empty($slug))
+        {
+            return $slug;
+        }
+
+        $slug_parts = explode('-', $slug);
+
+        array_walk($slug_parts, function(&$part){
+            $part = ucfirst($part);
+        });
+
+        return implode('', $slug_parts);
+    }
+
+    /* ------------------------------ */
+
+    static function getWeekdays($slugs=false)
+    {
+        $weekdays = [
+            'mon' => __('Monday', 'pboot'),
+            'tue' => __('Tuesday', 'pboot'),
+            'wed' => __('Wednesday', 'pboot'),
+            'thu' => __('Thursday', 'pboot'),
+            'fri' => __('Friday', 'pboot'),
+            'sat' => __('Saturday', 'pboot'),
+            'sun' => __('Sunday', 'pboot')
+        ];
+
+        return $slugs ? array_keys($weekdays) : $weekdays;
     }
 }

@@ -63,4 +63,17 @@ class Date
     {
         return gmdate(self::DATE_FORMAT_SYS, $timestamp);
     }
+
+    static function parseAcfDateMeta($meta)
+    {
+        $date = [];
+        $meta = strval($meta);
+        if(strlen($meta) === 8)
+        {
+            $date[] = substr($meta, 0, 4);
+            $date[] = substr($meta, 4, 2);
+            $date[] = substr($meta, 6, 2);
+        }
+        return implode('-', $date);
+    }
 }

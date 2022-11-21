@@ -47,6 +47,25 @@ add_action('admin_enqueue_scripts', 'pboot_register_styles');
 
 function pboot_register_styles()
 {
+    // wp_register_style(
+    //     'bootstrap-grid',
+    //     PBOOT_INDEX . '/assets/bootstrap/css/bootstrap-grid.min.css',
+    //     [],
+    //     PBOOT_VERSION
+    // );
+    // wp_register_style(
+    //     'bootstrap',
+    //     PBOOT_INDEX . '/assets/bootstrap/css/bootstrap.min.css',
+    //     [],
+    //     PBOOT_VERSION
+    // );
+    wp_register_style(
+        'pboot-fonts',
+        PBOOT_INDEX . '/assets/fonts/fonts.css',
+        [],
+        PBOOT_VERSION
+    );
+
     $asset_file = PBOOT_DIR . '/build/front.asset.php';
     if(file_exists($asset_file))
     {
@@ -56,7 +75,10 @@ function pboot_register_styles()
             'pboot-front',
             PBOOT_INDEX . '/build/front.css',
             // $asset['dependencies'],
-            [],
+            [
+                // 'bootstrap',
+                'dashicons'
+            ],
             $asset['version']
         );
     }
@@ -70,7 +92,10 @@ function pboot_register_styles()
             'pboot-admin',
             PBOOT_INDEX . '/build/admin.css',
             // $asset['dependencies'],
-            [],
+            [
+                // 'bootstrap-grid',
+                'dashicons'
+            ],
             $asset['version']
         );
     }
@@ -80,12 +105,12 @@ function pboot_register_styles()
  * Enqueue scripts on FRONT
  * ----------------------------------------
  */
-// add_action('wp_enqueue_scripts', 'pboot_enqueue_scripts_front');
+add_action('wp_enqueue_scripts', 'pboot_enqueue_scripts_front');
 
 function pboot_enqueue_scripts_front()
 {
     wp_enqueue_script('pboot-front');
-    wp_localize_script('pboot-front', 'pbootFrontVars', apply_filters('pboot_js_front_vars', [
+    wp_localize_script('pboot-front', 'pbootIndexVars', apply_filters('pboot_js_index_vars', [
         'ajaxurl' => admin_url('admin-ajax.php')
     ]));
 }
@@ -94,22 +119,25 @@ function pboot_enqueue_scripts_front()
  * Enqueue scripts on ADMIN
  * ----------------------------------------
  */
-// add_action('admin_enqueue_scripts', 'pboot_enqueue_scripts_admin');
+add_action('admin_enqueue_scripts', 'pboot_enqueue_scripts_admin');
 
 function pboot_enqueue_scripts_admin()
 {
     wp_enqueue_script('pboot-admin');
-    wp_localize_script('pboot-admin', 'pbootAdminVars', apply_filters('pboot_js_admin_vars', []));
+    wp_localize_script('pboot-admin', 'pbootIndexVars', apply_filters('pboot_js_index_vars', [
+        'ajaxurl' => admin_url('admin-ajax.php')
+    ]));
 }
 
 /*
  * Enqueue styles on FRONT
  * ----------------------------------------
  */
-// add_action('wp_enqueue_scripts', 'pboot_enqueue_styles_front');
+add_action('wp_enqueue_scripts', 'pboot_enqueue_styles_front');
 
 function pboot_enqueue_styles_front()
 {
+    wp_enqueue_style('pboot-fonts');
     wp_enqueue_style('pboot-front');
 }
 
@@ -117,7 +145,7 @@ function pboot_enqueue_styles_front()
  * Enqueue styles on ADMIN
  * ----------------------------------------
  */
-// add_action('admin_enqueue_scripts', 'pboot_enqueue_styles_admin');
+add_action('admin_enqueue_scripts', 'pboot_enqueue_styles_admin');
 
 function pboot_enqueue_styles_admin()
 {
