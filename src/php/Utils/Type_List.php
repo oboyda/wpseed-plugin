@@ -16,7 +16,7 @@ class Type_List
 
         // Return results
         return [
-            'items' => Type::getTypes($wp_query->posts, $type_class),
+            'items' => ($_q_args['fields'] == 'ids') ? $wp_query->posts : Type::getTypes($wp_query->posts, $type_class),
             'items_total' => $wp_query->found_posts
         ];
     }
@@ -36,7 +36,8 @@ class Type_List
             'meta_key' => '',
             'meta_type' => '',
             'orderby' => 'menu_order',
-            'order' => 'ASC'
+            'order' => 'ASC',
+            'fields' => 'all'
         ];
 
         $post_type = isset($q_args['post_type']) ? $q_args['post_type'] : $q_args_legal['post_type'];

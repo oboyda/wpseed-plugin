@@ -2,6 +2,8 @@
 
 namespace PBOOT\Type;
 
+use PBOOT\Utils\Base as Utils_Base;
+
 class Post extends \WPSEED\Post
 {
     public function __construct($post=null, $props_config=[])
@@ -17,10 +19,10 @@ class Post extends \WPSEED\Post
 
         if(isset($data_key))
         {
-            return isset($prop_config[$data_key]) ? $prop_config[$data_key] : (isset($default) ? $default : null);
+            return isset($prop_config[$data_key]) ? $prop_config[$data_key] : $default;
         }
 
-        return isset($prop_config) ? $prop_config : (isset($default) ? $default : $prop_config);
+        return isset($prop_config) ? $prop_config : $default;
     }
 
     static function getPropOptionLabel($key, $option_value)
@@ -79,6 +81,11 @@ class Post extends \WPSEED\Post
         return $this->get_permalink();
     }
 
+    public function getAuthor()
+    {
+        return $this->get_data('post_author');
+    }
+
     /*
     Images
     -------------------------
@@ -88,18 +95,18 @@ class Post extends \WPSEED\Post
     {
         return get_post_thumbnail_id($this->get_id());
     }
-
-    public function getFeaturedImageSrc($size='thumbnail')
+    public function getFeaturedImageSrc($size='thumbnail', $placeholder=false)
     {
         $image_id = $this->getFeaturedImageId();
-        $image_src = $image_id ? wp_get_attachment_image_src($image_id, $size) : [];
-        return ($image_src && isset($image_src[0])) ? $image_src[0] : '';
+        $att_image_src = $image_id ? wp_get_attachment_image_src($image_id, $size) : [];
+        $image_src = ($att_image_src && isset($att_image_src[0])) ? $att_image_src[0] : '';
+
+        return (empty($image_src) && $placeholder) ? (function_exists('wc_placeholder_img_src') ? wc_placeholder_img_src($size) : $image_src) : $image_src;
     }
-
-    public function getFeaturedImage($size='thumbnail', $rel_class='rect-150-100')
+    public function hasFeaturedImage()
     {
         $image_id = $this->getFeaturedImageId();
-        return $image_id ? $this->getAttachmentImageHtml($image_id, $size, $rel_class) : '';
+        return !empty($image_id);
     }
 
     /*
@@ -115,11 +122,10 @@ class Post extends \WPSEED\Post
 
     public function getProp($key, $default=null)
     {
-        $conf = isset($this->props_config[$key]) ? $this->props_config[$key] : [];
-
-        $sys_key = isset($conf['sys_key']) ? $conf['sys_key'] : $key;
-        $type = isset($conf['type']) ? $conf['type'] : 'meta';
-        $cast = isset($conf['cast']) ? $conf['cast'] : false;
+        $sys_key = $this->getPropConfigData($key, 'sys_key', $key);
+        $type = $this->getPropConfigData($key, 'type', 'meta');
+        $cast = $this->getPropConfigData($key, 'cast', false);
+        $term_single = $this->getPropConfigData($key, 'term_single', false);
 
         $prop = null;
 
@@ -139,7 +145,10 @@ class Post extends \WPSEED\Post
                 $prop = $this->get_meta($sys_key, true);
                 $cast = 'integer';
                 break;
-        }
+            case 'taxonomy':
+                $prop = $this->getTerms($sys_key, 'ids', $term_single);
+                break;
+            }
 
         if($cast)
         {
@@ -158,18 +167,7 @@ class Post extends \WPSEED\Post
 
     protected function castPropVal(&$prop, $key, $cast)
     {
-        switch($cast)
-        {
-            case 'integer':
-                $prop = intval($prop);
-                break;
-            case 'floatval':
-                $prop = floatval($prop);
-                break;
-            case 'boolean':
-                $prop = boolval($prop);
-                break;
-        }
+        $prop = Utils_Base::castVal($prop, $cast);
     }
 
     public function getTerms($taxonomy, $fields='ids', $single=true)
