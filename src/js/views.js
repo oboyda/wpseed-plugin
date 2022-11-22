@@ -44,10 +44,10 @@ jQuery(function($)
 
     function loadView(parentView, viewName, viewArgs={}, viewArgsCast={}, cbk)
     {
-        if(typeof ofrpIndexVars.ajaxurl !== 'undefined')
+        if(typeof pbootIndexVars.ajaxurl !== 'undefined')
         {
-            $.post(ofrpIndexVars.ajaxurl, {
-                action: "ofrp_load_view",
+            $.post(pbootIndexVars.ajaxurl, {
+                action: "pboot_load_view",
                 view_name: viewName,
                 view_args: viewArgs,
                 view_args_cast: viewArgsCast
@@ -67,6 +67,54 @@ jQuery(function($)
         }
     }
 
+    function initEntityListView(view)
+    {
+        const listFiltersElem = view.find(".list-filters");
+        const listItemsElem = view.find(".list-items");
+        const listPaginationElem = view.find(".list-pagination");
+
+        const filtersForm = listFiltersElem.find("form.filters-form");
+        const pagedInput = filtersForm.find("input[name='paged']");
+
+        filtersForm.on("pboot_submit_ajax_form_std_before", function(e, data){
+            view.addClass("loading");
+
+            // const reqArgs = filtersForm.serialize();
+            // const reqUri = window.location.pathname + "?" + reqArgs;
+
+            // window.history.pushState({
+            //     additionalInformation: 'Updated the URL with JS'
+            // }, document.title, reqUri);
+        });
+
+        filtersForm.on("pboot_submit_ajax_form_std_after", function(e, resp, data){
+            
+            if(resp.status && typeof resp.values !== 'undefined')
+            {
+                if(typeof resp.values.filters_html !== "undefined")
+                {
+                    listFiltersElem.html(resp.values.filters_html);
+                }
+                if(typeof resp.values.list_html !== "undefined")
+                {
+                    listItemsElem.html(resp.values.list_html);
+                }
+                if(typeof resp.values.pager_html !== "undefined")
+                {
+                    listPaginationElem.html(resp.values.pager_html);
+                }
+            }
+            view.removeClass("loading");
+        });
+
+        listPaginationElem.on("click", ".view.list-pager.ajax-pager li.page a", function(e){
+            e.preventDefault();
+
+            pagedInput.val(parseInt($(this).data("page")));
+            pagedInput.change();
+        });
+    };
+
     /*
     .ajax-form-std
     --------------------------------------------------
@@ -84,10 +132,10 @@ jQuery(function($)
 
             const data = new FormData(form.get(0));
 
-            form.triggerHandler("ofrp_submit_ajax_form_std_before", [data]);
+            form.triggerHandler("pboot_submit_ajax_form_std_before", [data]);
 
             $.ajax({
-                url: form.attr("action") ? form.attr("action") : ofrpIndexVars.ajaxurl,
+                url: form.attr("action") ? form.attr("action") : pbootIndexVars.ajaxurl,
                 type: "POST",
                 enctype: form.attr("enctype") ? form.attr("enctype") : "application/x-www-form-urlencoded",
                 data: data,
@@ -115,7 +163,7 @@ jQuery(function($)
 
                 showFormStatus(form, resp);
 
-                form.triggerHandler("ofrp_submit_ajax_form_std_success", [resp, data]);
+                form.triggerHandler("pboot_submit_ajax_form_std_success", [resp, data]);
             })
             .fail(function(error)
             {
@@ -123,7 +171,7 @@ jQuery(function($)
             })
             .always(function(resp)
             {
-                form.triggerHandler("ofrp_submit_ajax_form_std_after", [resp, data]);
+                form.triggerHandler("pboot_submit_ajax_form_std_after", [resp, data]);
             })
         });
 
@@ -314,7 +362,7 @@ jQuery(function($)
     $(".open-login").on("click", function(e){
         e.preventDefault();
 
-        $(document.body).triggerHandler("ofrp_open_site_modal_load", {
+        $(document.body).triggerHandler("pboot_open_site_modal_load", {
             viewName: "login-form"
         });
     });
@@ -530,7 +578,7 @@ jQuery(function($)
 
         const btModal = new Modal(modalElem.get(0));
 
-        $(document.body).on("ofrp_open_site_modal", function(e, _args={}){
+        $(document.body).on("pboot_open_site_modal", function(e, _args={}){
 
             const args = {
                 modalTitle: "",
@@ -552,7 +600,7 @@ jQuery(function($)
             btModal.show();
         });
 
-        $(document.body).on("ofrp_open_site_modal_load", function(e, _args={}){
+        $(document.body).on("pboot_open_site_modal_load", function(e, _args={}){
 
             const args = {
                 modalTitle: "",
