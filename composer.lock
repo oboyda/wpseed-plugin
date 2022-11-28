@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fca3a1805eed78b3dc84ebb4864b4e5b",
+    "content-hash": "74ad67e015f9f2eefe8af226a5979884",
     "packages": [
         {
             "name": "oboyda/wp-seed",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/oboyda/wp-seed.git",
-                "reference": "6987cb70eca33a84063e67e56879c0ce9d403bfc"
+                "reference": "932200b08e560ae77ca10a2631b9684b94a74f1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/oboyda/wp-seed/zipball/6987cb70eca33a84063e67e56879c0ce9d403bfc",
-                "reference": "6987cb70eca33a84063e67e56879c0ce9d403bfc",
+                "url": "https://api.github.com/repos/oboyda/wp-seed/zipball/932200b08e560ae77ca10a2631b9684b94a74f1f",
+                "reference": "932200b08e560ae77ca10a2631b9684b94a74f1f",
                 "shasum": ""
             },
             "default-branch": true,
@@ -35,14 +35,46 @@
                 "source": "https://github.com/oboyda/wp-seed/tree/main",
                 "issues": "https://github.com/oboyda/wp-seed/issues"
             },
-            "time": "2022-09-12T10:17:36+00:00"
+            "time": "2022-11-23T10:19:50+00:00"
+        },
+        {
+            "name": "oboyda/wp-seed-e",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oboyda/wp-seed-e.git",
+                "reference": "72f4d2c474058357ece743d9cd9fbd539c54f408"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oboyda/wp-seed-e/zipball/72f4d2c474058357ece743d9cd9fbd539c54f408",
+                "reference": "72f4d2c474058357ece743d9cd9fbd539c54f408",
+                "shasum": ""
+            },
+            "require": {
+                "oboyda/wp-seed": "dev-main"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WPSEEDE\\": "src/classes"
+                }
+            },
+            "description": "Base components for a faster Wordpress development",
+            "support": {
+                "source": "https://github.com/oboyda/wp-seed-e/tree/master",
+                "issues": "https://github.com/oboyda/wp-seed-e/issues"
+            },
+            "time": "2022-11-25T23:39:13+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "oboyda/wp-seed": 20
+        "oboyda/wp-seed": 20,
+        "oboyda/wp-seed-e": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

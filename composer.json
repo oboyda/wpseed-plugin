@@ -8,9 +8,11 @@
         }
     },
     "repositories" : [
-        { "type": "vcs", "url": "https://github.com/oboyda/wp-seed" }
+        { "type": "vcs", "url": "https://github.com/oboyda/wp-seed" },
+        { "type": "vcs", "url": "https://github.com/oboyda/wp-seed-e" }
     ],
     "require": {
-        "oboyda/wp-seed": "dev-main"
+        "oboyda/wp-seed": "dev-main",
+        "oboyda/wp-seed-e": "dev-master"
     }
 }
