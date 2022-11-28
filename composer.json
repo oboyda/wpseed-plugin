@@ -1,5 +1,5 @@
 {
-    "name": "oboyda/wp-plugin-bootstrap",
+    "name": "oboyda/wpseed-plugin",
     "version": "1.0.0",
     "autoload": {
         "psr-4": {
