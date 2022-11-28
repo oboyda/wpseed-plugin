@@ -8,8 +8,8 @@
  * Text Domain: pboot
  */
 
-define('PBOOT_NAME', 'PBOOT Plugin');
-define('PBOOT_VERSION', '1.0');
+define('PBOOT_NAME', 'WPSEED Plugin Bootstrap');
+define('PBOOT_VERSION', '1.0.0');
 define('PBOOT_DIR', dirname(__FILE__));
 define('PBOOT_INDEX', plugins_url('', __FILE__));
 
