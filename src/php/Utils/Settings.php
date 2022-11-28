@@ -7,13 +7,13 @@ class Settings
     static function getOption($name, $default=null)
     {
         global $pboot_setup;
-        return $pboot_setup->settings->getOption($name, $default);
+        return isset($pboot_setup->settings) ? $pboot_setup->settings->getOption($name, $default) : $default;
     }
 
     static function getThemeOption($name, $default=null, $set_lang=true)
     {
         global $pboot_setup;
-        return $pboot_setup->settings->getThemeOption($name, $default, $set_lang);
+        return isset($pboot_setup->settings) ? $pboot_setup->settings->getThemeOption($name, $default, $set_lang) : $default;
     }
 
     static function getLogoUrl()
