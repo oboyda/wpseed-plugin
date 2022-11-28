@@ -3,7 +3,7 @@
 namespace PBOOT\View;
 
 use PBOOT\Utils\Settings as Utils_Settings;
-use PBOOT\Utils\Date as Utils_Date;
+use WPSEEDE\Utils\Date as Utils_Date;
 
 class Footer extends View 
 {

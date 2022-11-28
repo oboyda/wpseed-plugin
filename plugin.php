@@ -28,7 +28,7 @@ $pboot_setup = new \WPSEEDE\Setup([
         // 'woocommerce/woocommerce.php'
     ],
 
-    // 'settings_config' => require PBOOT_DIR . '/config/settings.php',
+    'settings_config' => require PBOOT_DIR . '/config/settings.php',
 
     'include_files' => [
         'src/php/utils.php',
@@ -36,7 +36,11 @@ $pboot_setup = new \WPSEEDE\Setup([
         'config/acf-fields.php'
     ]
 ]);
-$pboot_setup->initScripts();
+$pboot_setup->initScripts([
+    'style_regs' => [
+        'fonts' => PBOOT_INDEX . '/assets/fonts/fonts.css'
+    ]
+]);
 $pboot_setup->initTheme([
     'theme_menus' => [
         'top' => __('Top menu', 'pboot'),
