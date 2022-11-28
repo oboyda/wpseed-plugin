@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: WPSEED Plugin Bootstrap
- * Description: WPSEED Plugin
+ * Plugin Name: WPSEED Plugin
+ * Description: WPSEED Plugin Bootstrap
  * Version: 1.0
  * Author: Alexis Boyda
  * Author URI: https://aleapp.com
