@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: PBOOT
- * Description: PBOOT Plugin
+ * Plugin Name: WPSEED Plugin Bootstrap
+ * Description: WPSEED Plugin
  * Version: 1.0
  * Author: Alexis Boyda
  * Author URI: https://aleapp.com
