@@ -31,6 +31,7 @@ $pboot_setup = new \WPSEEDE\Setup([
     'settings_config' => require PBOOT_DIR . '/config/settings.php',
 
     'include_files' => [
+        'src/php/class-load.php',
         'src/php/utils.php',
         'config/acf-blocks.php',
         'config/acf-fields.php'
