@@ -2,7 +2,7 @@
 
 namespace PBOOT\Utils;
 
-class Base extends \WPSEEDE\Base 
+class Base extends \WPSEEDE\Utils\Base 
 {
     static function getOption($name, $default=null)
     {
