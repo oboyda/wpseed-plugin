@@ -2,7 +2,7 @@
 
 namespace PBOOT\Mod\User_Login\View;
 
-class User_Login extends View 
+class User_Login extends \WPSEEDE\View 
 {
     function __construct($args)
     {

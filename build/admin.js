@@ -3485,14 +3485,14 @@ jQuery(function ($) {
     const listPaginationElem = view.find(".list-pagination");
     const filtersForm = listFiltersElem.find("form.filters-form");
     const pagedInput = filtersForm.find("input[name='paged']");
-    filtersForm.on("ofrp_submit_ajax_form_std_before", function (e, data) {
+    filtersForm.on("pboot_submit_ajax_form_std_before", function (e, data) {
       view.addClass("loading"); // const reqArgs = filtersForm.serialize();
       // const reqUri = window.location.pathname + "?" + reqArgs;
       // window.history.pushState({
       //     additionalInformation: 'Updated the URL with JS'
       // }, document.title, reqUri);
     });
-    filtersForm.on("ofrp_submit_ajax_form_std_after", function (e, resp, data) {
+    filtersForm.on("pboot_submit_ajax_form_std_after", function (e, resp, data) {
       if (resp.status && typeof resp.values !== 'undefined') {
         if (typeof resp.values.title_html !== "undefined") {
           listTitleElem.html(resp.values.title_html);
