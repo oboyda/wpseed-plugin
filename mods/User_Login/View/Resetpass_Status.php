@@ -2,7 +2,7 @@
 
 namespace PBOOT\Mod\User_Login\View;
 
-class Resetpass_Status extends \WPSEEDE\View 
+class Resetpass_Status extends \PBOOT\View\View 
 {
     public function __construct($args)
     {

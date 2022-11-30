@@ -35,6 +35,13 @@ $pboot_setup = new \WPSEEDE\Setup([
         'src/php/utils.php',
         'config/acf-blocks.php',
         'config/acf-fields.php'
+    ],
+
+    'load_modules' => [
+        // 'Action_Email',
+        // 'Site_Modal',
+        // 'Status_Message',
+        // 'User_Login'
     ]
 ]);
 $pboot_setup->initScripts([

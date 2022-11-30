@@ -2,7 +2,7 @@
 
 namespace PBOOT\Mod\Status_Message\View;
 
-class Status_Message extends \WPSEEDE\View 
+class Status_Message extends \PBOOT\View\View 
 {
     public function __construct($args)
     {
