@@ -7,7 +7,7 @@ jQuery(function($){
         e.preventDefault();
 
         $(document.body).triggerHandler("pboot_open_site_modal_load", {
-            viewName: "login-form"
+            viewName: "User_Login/login-form"
         });
     });
 
