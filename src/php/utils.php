@@ -1,21 +1,19 @@
 <?php 
 
-function pboot_get_view($view_name, $args=[], $echo=false)
+function pboot_get_view_object($view_name, $args=[])
 {
-    return wpseed_get_view($view_name, $args, $echo, PBOOT_DIR . '/src/php/View/html', '\PBOOT\View');
+    global $pboot_setup;
+    return $pboot_setup->view_loader->getViewObject($view_name, $args);
+}
+
+function pboot_get_view($view_name, $args=[])
+{
+    global $pboot_setup;
+    return $pboot_setup->view_loader->getView($view_name, $args);
 }
 
 function pboot_print_view($view_name, $args=[])
 {
-    pboot_get_view($view_name, $args, true);
-}
-
-function pboot_get_mod_view($mod, $view_name, $args=[], $echo=false)
-{
-    return wpseed_get_view($view_name, $args, $echo, PBOOT_DIR . '/mods/' . $mod . '/View/html', '\PBOOT\\Mod\\' . $mod . '\View');
-}
-
-function pboot_print_mod_view($mod, $view_name, $args=[])
-{
-    pboot_get_mod_view($mod, $view_name, $args, true);
+    global $pboot_setup;
+    $pboot_setup->view_loader->printView($view_name, $args);
 }

@@ -5,6 +5,11 @@ jQuery.fn.extend({
         this.each(function(){
 
             const form = jQuery(this);
+
+            if(form.hasClass("ajax-form-init"))
+            {
+                return;
+            }
     
             form.on("submit", function(e){
                 e.preventDefault();
@@ -17,7 +22,7 @@ jQuery.fn.extend({
                 form.triggerHandler("pboot_submit_ajax_form_std_before", [data]);
     
                 jQuery.ajax({
-                    url: form.attr("action") ? form.attr("action") : _this.ajaxurl,
+                    url: form.attr("action") ? form.attr("action") : pbootIndexVars.ajaxurl,
                     type: "POST",
                     enctype: form.attr("enctype") ? form.attr("enctype") : "application/x-www-form-urlencoded",
                     data: data,
@@ -221,6 +226,8 @@ jQuery.fn.extend({
                 });
     
             });
+
+            form.addClass("ajax-form-init");
         });
     },
 
@@ -258,7 +265,7 @@ jQuery(function($)
     .view.form-nice-dropdown
     --------------------------------------------------
     */
-    $(document.body).on("view_loaded_form-nice-dropdown", function(e, view){
+    $(document.body).viewAddLoadedListener("view_loaded_form-nice-dropdown", function(e, view){
 
         const selectedLabel = view.find(".selected-label");
         const labelText = selectedLabel.find(".label-text");
@@ -405,7 +412,7 @@ jQuery(function($)
     .view.form-time-picker
     --------------------------------------------------
     */
-    $(document.body).on("view_loaded_form-time-picker", function(e, view){
+    $(document.body).viewAddLoadedListener("view_loaded_form-time-picker", function(e, view){
 
         const optElems = view.find(".t-opts .t-opt");
         const optBtns = view.find(".t-opts .t-opt button.opt-btn");
@@ -591,7 +598,7 @@ jQuery(function($)
     .view.form-input-location
     --------------------------------------------------
     */
-    $(document.body).on("view_loaded_form-input-location", function(e, view)
+    $(document.body).viewAddLoadedListener("view_loaded_form-input-location", function(e, view)
     {
         function initFormInputLocation(){
 

@@ -5,12 +5,12 @@
     <div class="container">
         <?php 
         if($view->has_status()): 
-            pboot_print_mod_view('Status_Message', 'status-message', [
+            pboot_print_view('Status_Message/status-message', [
                 'type' => 'success',
                 'message' => $view->get_success_message()
             ]);
         else:
-            pboot_print_mod_view('Status_Message', 'status-message', [
+            pboot_print_view('Status_Message/status-message', [
                 'type' => 'error',
                 'message' => $view->get_error_message()
             ]);

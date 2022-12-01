@@ -19,6 +19,7 @@ $pboot_setup = new \WPSEEDE\Setup([
 
     'plugin_name' => PBOOT_NAME,
     'context_name' => 'pboot',
+    'namespace' => 'PBOOT',
     'textdom' => 'pboot',
     'base_dir' => PBOOT_DIR,
     'base_dir_url' => PBOOT_INDEX,
@@ -37,12 +38,13 @@ $pboot_setup = new \WPSEEDE\Setup([
         'config/acf-fields.php'
     ],
 
-    'load_modules' => [
-        // 'Action_Email',
-        // 'Site_Modal',
-        // 'Status_Message',
-        // 'User_Login'
-    ]
+    // 'load_modules' => [
+    //     'Action_Email',
+    //     'Site_Modal',
+    //     'Status_Message',
+    //     'User_Login'
+    // ]
+    'load_modules' => 'all'
 ]);
 $pboot_setup->initScripts([
     'style_regs' => [

@@ -6,7 +6,7 @@ jQuery(function($){
     .view.site-modal
     --------------------------------------------------
     */
-    $(document.body).on("view_loaded_site-modal", function(e, view){
+    $(document.body).viewAddLoadedListener("view_loaded_site-modal", function(e, view){
 
         const modalElem = view.find(".modal");
         const modalTitleElem = modalElem.find(".modal-header .modal-title");

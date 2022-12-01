@@ -4,7 +4,7 @@ jQuery(function($){
     .view.header
     --------------------------------------------------
     */
-    $(document.body).on("view_loaded_header", function(e, view) 
+    $(document.body).viewAddLoadedListener("view_loaded_header", function(e, view) 
     {
         function setSticky()
         {

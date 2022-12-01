@@ -13,6 +13,6 @@ class Site_Modal extends \WPSEED\Action
 
     public function printModalView()
     {
-        pboot_print_mod_view('Site_Modal', 'site-modal');
+        pboot_print_view('Site_Modal/site-modal');
     }
 }
