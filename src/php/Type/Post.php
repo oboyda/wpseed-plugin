@@ -6,16 +6,14 @@ use PBOOT\Utils\Base as Utils_Base;
 
 class Post extends \WPSEED\Post
 {
-    public function __construct($post=null, $props_config=[])
+    public function __construct($post=null)
     {
-        parent::__construct($post, $props_config);
+        parent::__construct($post, static::_get_props_config());
     }
 
-    static function getPropConfigData($key, $data_key=null, $default=null)
+    public function getPropConfigData($key, $data_key=null, $default=null)
     {
-        $props_config = static::_get_props_config();
-
-        $prop_config = isset($props_config[$key]) ? $props_config[$key] : null;
+        $prop_config = $this->get_props_config($key);
 
         if(isset($data_key))
         {
@@ -25,9 +23,9 @@ class Post extends \WPSEED\Post
         return isset($prop_config) ? $prop_config : $default;
     }
 
-    static function getPropOptionLabel($key, $option_value)
+    public function getPropOptionLabel($key, $option_value)
     {
-        $options = self::getPropConfigData($key, 'options', []);
+        $options = $this->getPropConfigData($key, 'options', []);
 
         return isset($options[$option_value]) ? $options[$option_value] : false;
     }
@@ -116,63 +114,17 @@ class Post extends \WPSEED\Post
 
     public function hasProp($key)
     {
-        $prop = $this->getProp($key);
-        return !empty($prop);
+        return $this->has_prop($key);
     }
 
-    public function getProp($key, $default=null)
+    public function getProp($key, $default=null, $single=true)
     {
-        $sys_key = $this->getPropConfigData($key, 'sys_key', $key);
-        $type = $this->getPropConfigData($key, 'type', 'meta');
-        $cast = $this->getPropConfigData($key, 'cast', false);
-        $term_single = $this->getPropConfigData($key, 'term_single', false);
-
-        $prop = null;
-
-        switch($type)
-        {
-            case 'meta':
-                $prop = $this->get_meta($sys_key, true);
-                break;
-            case 'data':
-                $prop = $this->get_data($sys_key);
-                break;
-            case 'attachment':
-                $prop = $this->get_meta($sys_key, true);
-                $cast = 'integer';
-                break;
-            case 'attachment_list':
-                $prop = $this->get_meta($sys_key, true);
-                $cast = 'integer';
-                break;
-            case 'taxonomy':
-                $prop = $this->getTerms($sys_key, 'ids', $term_single);
-                break;
-            }
-
-        if($cast)
-        {
-            if(is_array($prop))
-            {
-                array_walk($prop, [$this, 'castPropVal'], $cast);
-            }
-            else
-            {
-                $this->castPropVal($prop, null, $cast);
-            }
-        }
-
-        return (empty($prop) && isset($default)) ? $default : $prop;
-    }
-
-    protected function castPropVal(&$prop, $key, $cast)
-    {
-        $prop = Utils_Base::castVal($prop, $cast);
+        return $this->get_prop($key, $default, $single);
     }
 
     public function getTerms($taxonomy, $fields='ids', $single=true)
     {
-        $term_ids = $this->get_terms($taxonomy);
+        $term_ids = $this->get_prop($taxonomy);
 
         if($fields === 'ids')
         {

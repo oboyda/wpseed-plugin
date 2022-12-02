@@ -1,8 +1,8 @@
 <?php
 
-namespace PBOOT\View;
+namespace PBOOT\Mod\Site_Loader\View;
 
-class Site_Loader extends View 
+class Site_Loader extends \PBOOT\View\View 
 {
     public function __construct($args)
     {

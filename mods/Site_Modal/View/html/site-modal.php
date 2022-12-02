@@ -13,7 +13,7 @@
                     <div class="body-content">
                         <?php echo $view->get_body_content(); ?>
                     </div>
-                    <?php pboot_print_view('site-loader'); ?>
+                    <?php pboot_print_view('Site_Loader/site-loader'); ?>
                 </div>
                 <?php endif; ?>
             </div>
