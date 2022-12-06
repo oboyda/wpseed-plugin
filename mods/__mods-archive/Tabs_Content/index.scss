@@ -1,0 +1,37 @@
+@import "../../src/scss/vars.scss";
+
+/*
+view.tabs-content
+----------------------------------------
+*/
+
+.view.tabs-content {
+
+    font-size: 1rem;
+    line-height: 1.4em;
+
+    .tab-titles {
+        padding: 0 0 1rem;
+
+        .tab-title {
+            cursor: pointer;
+            padding: 0.5em 1em;
+            margin: 0 0 0.5em;
+            border-left: 0.2857rem solid #555658;
+            font-family: $font_semibold;
+
+            &.active {
+                border-left-color: #ff1e0f;
+                color: #ff1e0f !important;
+            }
+        }
+    }
+    .tab-contents {
+        padding: 0 0 1rem;
+        
+        .tab-content:not(.active) {
+            display: none;
+        }
+    }
+}
+

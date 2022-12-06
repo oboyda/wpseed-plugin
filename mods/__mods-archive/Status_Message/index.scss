@@ -1,0 +1,19 @@
+/*
+* .view.status-message
+* ----------------------------------------
+*/
+
+.view.status-message {
+    padding: 0 0 2rem;
+    .message {
+        padding: 2rem 3rem;
+        &.message-success {
+            border-top: 3px solid #95b392;
+            background-color: #c5ebc1;
+        }
+        &.message-error {
+            border-top: 3px solid #ee9696;
+            background-color: #f5bcbc;
+        }
+    }
+}

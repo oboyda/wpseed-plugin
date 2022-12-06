@@ -1,0 +1,22 @@
+/*
+.view.site-modal
+----------------------------------------
+*/
+
+.view.site-modal {
+    .modal-title {
+        padding: 0;
+        margin: 0;
+    }
+    .modal-body {
+        // padding: 2rem 2rem;
+        .view.site-loader {
+            display: none;
+        }
+    }
+    .modal.loading {
+        .modal-body .view.site-loader {
+            display: block;
+        }
+    }
+}
