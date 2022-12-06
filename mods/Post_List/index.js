@@ -4,10 +4,7 @@ jQuery.fn.extend({
     {
         const view = this;
 
-        const listFiltersElem = view.find(".list-filters");
-        const listPaginationElem = view.find(".list-pagination");
-
-        const filtersForm = listFiltersElem.find("form.filters-form");
+        const filtersForm = view.find("form");
         const pagedInput = filtersForm.find("input[name='paged']");
 
         filtersForm.on("pboot_submit_ajax_form_std_before", function(e, data){
@@ -32,7 +29,7 @@ jQuery.fn.extend({
             view.removeClass("loading");
         });
 
-        listPaginationElem.on("click", ".view.list-pager.ajax-pager li.page a", function(e){
+        view.on("click", ".view.list-pager.ajax-pager li.page a", function(e){
             e.preventDefault();
 
             const a = jQuery(this);
