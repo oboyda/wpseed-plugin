@@ -42,7 +42,7 @@ function pboot_render_block_view($block, $content, $is_preview, $post_id, $wp_bl
 
     // $view_args['block_id'] = isset($block['id']) ? $block['id'] : '';
     $view_args['block_id'] = \WPSEEDE\Utils\Base::getBlockId($wp_block);
-    $view_args['block_data'] = isset($block['data']) ? $block['data'] : '';
+    $view_args['data'] = isset($block['data']) ? $block['data'] : '';
 
     $view_args['html_class'] = isset($block['className']) ? $block['className'] : '';
 
