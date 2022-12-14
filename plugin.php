@@ -51,9 +51,9 @@ $pboot_setup = new \WPSEEDE\Setup([
     'load_modules' => 'all'
 ]);
 $pboot_setup->initScripts([
-    'style_regs' => [
-        'fonts' => PBOOT_INDEX . '/assets/fonts/fonts.css'
-    ]
+    // 'style_regs' => [
+    //     'fonts' => PBOOT_INDEX . '/assets/fonts/fonts.css'
+    // ]
 ]);
 $pboot_setup->initTheme([
     'theme_menus' => [

@@ -16,7 +16,7 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
             'selected' => '',
             'options' => [],
             'inline' => false,
-            'checkbox_pos' => 'right',
+            'checkbox_pos' => 'left',
             'size' => 'normal', #normal, large,
             'required' => false,
 
