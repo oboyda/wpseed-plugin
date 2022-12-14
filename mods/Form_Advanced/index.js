@@ -19,7 +19,7 @@ jQuery.fn.extend({
     
                 const data = new FormData(form.get(0));
     
-                form.triggerHandler("pboot_submit_ajax_form_std_before", [data]);
+                form.triggerHandler("pboot_submit_ajax_form_before", [data]);
     
                 jQuery.ajax({
                     url: form.attr("action") ? form.attr("action") : pbootIndexVars.ajaxurl,
@@ -50,7 +50,7 @@ jQuery.fn.extend({
     
                     form.ajaxFormShowStatus(resp);
     
-                    form.triggerHandler("pboot_submit_ajax_form_std_success", [resp, data]);
+                    form.triggerHandler("pboot_submit_ajax_form_success", [resp, data]);
                 })
                 .fail(function(error)
                 {
@@ -58,7 +58,7 @@ jQuery.fn.extend({
                 })
                 .always(function(resp)
                 {
-                    form.triggerHandler("pboot_submit_ajax_form_std_after", [resp, data]);
+                    form.triggerHandler("pboot_submit_ajax_form_after", [resp, data]);
                 })
             });
     
@@ -259,7 +259,11 @@ jQuery(function($)
     .ajax-form
     --------------------------------------------------
     */
-    $("form.ajax-form, form.ajax-form-std").ajaxFormInit();
+    $("form.ajax-form").ajaxFormInit();
+    $(document.body).on("view_loaded", function(e, view, viewName){
+
+        view.find("form.ajax-form").ajaxFormInit();
+    });
 
     /*
     .view.form-nice-dropdown

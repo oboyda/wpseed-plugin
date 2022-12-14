@@ -30,7 +30,7 @@ jQuery(function($){
 
         $.post(pbootIndexVars.ajaxurl, {
 
-            action: "resend_verif_email",
+            action: "pboot_resend_verif_email",
             user: btn.data("user_email")
         }, function(resp){
 

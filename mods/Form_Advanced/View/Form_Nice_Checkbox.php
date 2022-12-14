@@ -16,6 +16,7 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
             'selected' => '',
             'options' => [],
             'inline' => false,
+            'checkbox_pos' => 'right',
             'size' => 'normal', #normal, large,
             'required' => false,
 
@@ -68,10 +69,14 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
         {
             $_option = is_array($option) ? wp_parse_args($option, [
                 'name' => '',
-                'value' => ''
+                'value' => '',
+                'icon_html' => '',
+                'icon_class' => ''
             ]) : [
                 'name' => $option,
-                'value' => $key
+                'value' => $key,
+                'icon_html' => '',
+                'icon_class' => ''
             ];
 
             $_options[] = $_option;

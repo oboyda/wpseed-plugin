@@ -7,7 +7,7 @@ jQuery.fn.extend({
         const filtersForm = view.find("form");
         const pagedInput = filtersForm.find("input[name='paged']");
 
-        filtersForm.on("pboot_submit_ajax_form_std_before", function(e, data){
+        filtersForm.on("pboot_submit_ajax_form_before", function(e, data){
             view.addClass("loading");
 
             // const reqArgs = filtersForm.serialize();
@@ -18,7 +18,7 @@ jQuery.fn.extend({
             // }, document.title, reqUri);
         });
 
-        filtersForm.on("pboot_submit_ajax_form_std_after", function(e, resp, data){
+        filtersForm.on("pboot_submit_ajax_form_after", function(e, resp, data){
             if(
                 resp.status && 
                 typeof resp.values !== 'undefined' && 

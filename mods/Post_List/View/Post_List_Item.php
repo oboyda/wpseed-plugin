@@ -6,13 +6,13 @@ class Post_List_Item extends \PBOOT\View\View
 {
     public $item;
 
-    public function __construct($args)
+    public function __construct($args, $default_args=[])
     {
-        parent::__construct($args, [
+        parent::__construct($args, wp_parse_args($default_args, [
 
             'item' => null,
             'type_class' => '\PBOOT\Type\Post'
-        ]);
+        ]));
 
         $type_class = $this->args['type_class'];
         $this->item = (is_int($this->args['item']) && class_exists($type_class)) ? new $type_class($this->args['item']) : $this->args['item'];

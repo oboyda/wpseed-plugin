@@ -1,0 +1,49 @@
+/*
+Fonts
+-------------------------
+*/
+
+$font_regular: "Open Sans Regular", sans-serif;
+$font_extrabold: "Open Sans Extrabold", sans-serif;
+$font_bold: "Open Sans Bold", sans-serif;
+$font_semibold: "Open Sans Semibold", sans-serif;
+$font_light: "Open Sans Light", sans-serif;
+
+/*
+Breakpoints
+------------------------- 
+*/
+
+$breakpoint_mobile_max: 991px;
+$breakpoint_desktop: 992px;
+$breakpoint_desktop_lg: 1200px;
+$breakpoint_desktop_xl: 1600px;
+$breakpoint_desktop_xxl: 2000px;
+
+/*
+Colors
+------------------------- 
+*/
+
+$color_white: #ffffff;
+$color_black: #000000;
+
+$color_grey1: #333333;
+$color_grey2: #555555;
+
+/*
+Misc
+------------------------- 
+*/
+
+$body_font_size: 14;
+
+/*
+Functions
+------------------------- 
+*/
+
+// @function toRem($value) {
+//     $remValue: calc(round(calc($value / $body_font_size) * 1000) / 1000) + rem; 
+//     @return $remValue;
+// }

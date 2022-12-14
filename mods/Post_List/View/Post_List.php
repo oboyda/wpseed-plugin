@@ -25,6 +25,8 @@ class Post_List extends \PBOOT\View\View
             'cols_num' => 2,
 
             'list_view' => 'Post_List/post-list',
+            'list_nofound_view' => 'Post_List/post-list-nofound',
+            'list_nofound_text' => __('No items found', 'pboot'),
 
             'item_view' => 'Post_List/post-list-item',
             'item_args' => [],
@@ -45,14 +47,6 @@ class Post_List extends \PBOOT\View\View
         {
             $this->setItems();
         }
-
-        // if($this->args['post_type'] == 'product')
-        // {
-        //     file_put_contents(ABSPATH . '/__debug.txt', print_r([
-        //         time(),
-        //         $this->args
-        //     ], true));
-        // }
     }
 
     protected function setItems()
@@ -86,14 +80,23 @@ class Post_List extends \PBOOT\View\View
         $this->setChildPart('filters_html', pboot_get_view($this->args['filters_view'], $this->args['filters_args']));
 
         $items_html = [];
-        foreach($this->get_items() as $item)
+        if(!empty($this->args['items']))
         {
-            $items_html[] = pboot_get_view($this->args['item_view'], wp_parse_args($this->args['item_args'], [
-                'type_class' => $this->args['type_class'],
-                'item' => $item
+            foreach($this->get_items() as $item)
+            {
+                $items_html[] = pboot_get_view($this->args['item_view'], wp_parse_args($this->args['item_args'], [
+                    // 'type_class' => $this->args['type_class'],
+                    'item' => $item
+                ]));
+            } 
+            $this->setChildPart('items_html', $this->renderItemsCols($items_html, $this->args['cols_num'], 'lg'));
+        }
+        elseif($this->args['list_nofound_view'] && $this->args['q_args']['paged'] === 1)
+        {
+            $this->setChildPart('items_html', pboot_get_view($this->args['list_nofound_view'], [
+                'nofound_text' => $this->args['list_nofound_text']
             ]));
-        } 
-        $this->setChildPart('items_html', $this->renderItemsCols($items_html, $this->args['cols_num'], 'lg'));
+        }
 
         if($this->args['show_pager'])
         {

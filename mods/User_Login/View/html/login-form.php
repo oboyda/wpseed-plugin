@@ -8,17 +8,17 @@
 
                 <h3 class="form-title"><?php _e('Log in', 'pboot'); ?></h3>
 
-                <form class="ajax-form-std login--form" method="POST">
+                <form class="ajax-form login--form" method="POST">
                     <div class="form-block">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-input">
-                                    <input type="text" name="login" placeholder="<?php _e('Email', 'pboot'); ?>" required />
+                                    <input type="text" name="user_login" placeholder="<?php _e('Email', 'pboot'); ?>" required />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-input">
-                                    <input type="password" name="password" placeholder="<?php _e('Password', 'pboot'); ?>" required autocomplete="off" />
+                                    <input type="password" name="user_pass" placeholder="<?php _e('Password', 'pboot'); ?>" required autocomplete="off" />
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="action" value="user_login" />
+                    <input type="hidden" name="action" value="pboot_user_login" />
 
                     <div class="messages-cont"></div>
                 </form>
@@ -50,7 +50,7 @@
 
                 <h3 class="form-title"><?php _e('Reset password', 'pboot'); ?></h3>
 
-                <form class="ajax-form-std resetpass-form" method="POST">
+                <form class="ajax-form resetpass-form" method="POST">
                     <div class="form-block">
                         <div class="row">
                             <div class="col-md-6">
@@ -69,7 +69,7 @@
                         <a href="#" class="switch-content-btn" data-content_name="content-login-form"><?php _e('Back to login', 'pboot'); ?></a>
                     </div>
 
-                    <input type="hidden" name="action" value="resetpass" />
+                    <input type="hidden" name="action" value="pboot_resetpass" />
 
                     <div class="messages-cont"></div>
                 </form>

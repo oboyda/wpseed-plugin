@@ -13,32 +13,40 @@ class User extends \WPSEED\Action
     {
         parent::__construct();
 
-        add_action('wp_ajax_nopriv_user_login', [$this, 'login']);
-        add_action('wp_ajax_nopriv_resetpass', [$this, 'resetPass']);
+        add_action('wp_ajax_nopriv_pboot_user_login', [$this, 'login']);
 
-        // add_filter('login_url', [$this, 'filterLoginUrl']);
-        // add_action('admin_init', [$this, 'restrictWpAdminAccess']);
+        add_action('wp_ajax_nopriv_pboot_resetpass', [$this, 'resetPass']);
+
+        add_filter('login_url', [$this, 'filterLoginUrl']);
+        add_action('admin_init', [$this, 'restrictWpAdminAccess']);
 
         add_action('user_register', [$this, 'sendUserVerificationEmailUserRegister'], 20, 2);
-        add_action('wp_ajax_nopriv_resend_verif_email', [$this, 'sendUserVerificationEmail']);
+
+        add_action('wp_ajax_pboot_resend_verif_email', [$this, 'sendUserVerificationEmail']);
+        add_action('wp_ajax_nopriv_pboot_resend_verif_email', [$this, 'sendUserVerificationEmail']);
     }
 
     public function login()
     {
         $inputs = [
-            'login' => $this->getReq('login'),
-            'password' => $this->getReq('password'),
+            'user_login' => $this->getReq('user_login'),
+            'user_pass' => $this->getReq('user_pass'),
             'remember' => (bool)$this->getReq('remember', false),
         ];
 
         $this->checkErrorFields($inputs, [
-            'login',
-            'password'
+            'user_login',
+            'user_pass'
         ], true);
 
+        if(is_user_logged_in())
+        {
+            wp_logout();
+        }
+
         $signon_user = wp_signon([
-            'user_login' => $inputs['login'],
-            'user_password' => $inputs['password'],
+            'user_login' => $inputs['user_login'],
+            'user_password' => $inputs['user_pass'],
             'remember' => $inputs['remember']
         ]);
 
@@ -49,7 +57,7 @@ class User extends \WPSEED\Action
         }
         elseif(is_a($signon_user, 'WP_User'))
         {
-            $this->checkUserExistsAndVerified($inputs['user_login'], $resp);
+            $this->checkUserExistsAndVerified($inputs['user_login']);
     
             $this->setStatus(true);
             $this->setRedirect(admin_url());
@@ -63,7 +71,7 @@ class User extends \WPSEED\Action
         $this->respond();
     }
 
-    static function resetPass()
+    public function resetPass()
     {
         $inputs = [
             'user_login' => $this->getReq('user_login'),
@@ -75,7 +83,7 @@ class User extends \WPSEED\Action
             'user_login'
         ], true);
 
-        $this->checkUserExistsAndVerified($inputs['user_login'], $resp);
+        $this->checkUserExistsAndVerified($inputs['user_login']);
 
         if($inputs['resetpasshash'])
         {
@@ -92,7 +100,7 @@ class User extends \WPSEED\Action
             if($hash_validated)
             {
                 $user_updated = wp_update_user([
-                    'ID' => $type_user->getId(),
+                    'ID' => $type_user->get_id(),
                     'user_pass' => $inputs['user_password']
                 ]);
 
@@ -213,14 +221,19 @@ class User extends \WPSEED\Action
         }
     }
 
-    public function checkUserExistsAndVerified($user, $resp)
+    protected function checkUserExistsAndVerified($user)
     {
         if(!is_a($user, '\PBOOT\Type\User'))
         {
             $user = new Type_User($user);
         }
+        file_put_contents(ABSPATH . '/__debug.txt', print_r([
+            time(),
+            print_r($user, true)
+        ], true));
+        return;
 
-        if(!$user->getId())
+        if(!$user->get_id())
         {
             $this->setStatus(false);
             $this->addErrorMessage(__('User not valid.', 'pboot'));
