@@ -4,12 +4,13 @@ namespace PBOOT\Mod\Form_Advanced\View;
 
 class Form_Nice_Checkbox extends \PBOOT\View\View 
 {
-    public function __construct($args)
+    public function __construct($args, $args_default=[])
     {
-        parent::__construct($args, [
+        parent::__construct($args, wp_parse_args($args_default, [
 
             'title' => '',
             'enabled' => true,
+            'input_id_pref' => '',
             'input_name' => '',
             'multiple' => false,
             'update_label' => true,
@@ -25,11 +26,14 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
             'parent_enabled' => [],
             'data_atts' => [],
             'change_submit' => false
-        ]);
+        ]));
 
-        $this->setArgs();
-        $this->setOptions();
-        $this->_setHtmlClass();
+        if(empty($args_default))
+        {
+            $this->setArgs();
+            $this->setOptions();
+            $this->_setHtmlClass();
+        }
     }
 
     protected function setArgs()
@@ -121,8 +125,13 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
         return $this->implodeAtts($this->args['input_data_atts']);
     }
 
+    public function getOptionsNum()
+    {
+        return is_array($this->args['options']) ? count($this->args['options']) : 0;
+    }
+
     public function getInputType()
     {
-        return $this->has_multiple() ? 'checkbox' : 'radio';
+        return $this->has_multiple() ? 'checkbox' : (($this->getOptionsNum() > 1) ? 'radio' : 'checkbox');
     }
 }

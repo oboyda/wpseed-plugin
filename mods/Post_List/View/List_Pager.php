@@ -16,7 +16,8 @@ class List_Pager extends \PBOOT\View\View
             'items_total' => 0,
             'items_per_page' => 10,
             'pages_visible' => 10,
-            'ajax_pager' => false
+            'ajax_pager' => false,
+            'align' => 'center'
         ]);
 
         $this->setArgs();
@@ -56,5 +57,6 @@ class List_Pager extends \PBOOT\View\View
         {
             $this->addHtmlClass('ajax-pager');
         }
+        $this->addHtmlClass('align-' . $this->args['align']);
     }
 }

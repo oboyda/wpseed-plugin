@@ -10,14 +10,16 @@ view.tabs-content
     font-size: 1rem;
     line-height: 1.4em;
 
+    &.size-large {
+        font-size: 1.2rem;
+        line-height: 1.4em;
+    }
+
     .tab-titles {
         padding: 0 0 1rem;
 
         .tab-title {
             cursor: pointer;
-            padding: 0.5em 1em;
-            margin: 0 0 0.5em;
-            border-left: 0.2857rem solid #555658;
             font-family: $font_semibold;
 
             &.active {
@@ -26,6 +28,41 @@ view.tabs-content
             }
         }
     }
+    &.pos-top .tab-titles {
+
+        @media (min-width: $breakpoint_desktop)
+        {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        .tab-title {
+            cursor: pointer;
+            padding: 0.5em 2em;
+            margin: 0 0.5em 0 0;
+            border-bottom: 0.2857rem solid #555658;
+
+            &.active {
+                border-bottom-color: #ff1e0f;
+                background-color: #efefef;
+            }
+        }
+    }
+    &.pos-left .tab-titles {
+        .tab-title {
+            cursor: pointer;
+            padding: 0.5em 1em;
+            margin: 0 0 0.5em;
+            border-left: 0.2857rem solid #555658;
+
+            &.active {
+                border-left-color: #ff1e0f;
+                background-color: #efefef;
+            }
+        }
+    }
+
     .tab-contents {
         padding: 0 0 1rem;
         

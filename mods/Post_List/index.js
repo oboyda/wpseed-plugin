@@ -4,7 +4,8 @@ jQuery.fn.extend({
     {
         const view = this;
 
-        const filtersForm = view.find("form");
+        const filtersFormSelector = view.data("filters_form");
+        const filtersForm = (typeof filtersFormSelector !== "undefined") ? jQuery(filtersFormSelector) : view.find("form.filters-form");
         const pagedInput = filtersForm.find("input[name='paged']");
 
         filtersForm.on("pboot_submit_ajax_form_before", function(e, data){

@@ -59,7 +59,7 @@
 
                 <?php 
                 else: 
-                    $option_id = $input_name . '_' . $option['value'];
+                    $option_id = $view->get_input_id_pref() . $input_name . '_' . $option['value'];
                     $selected = $view->get_selected();
                     $checked = ($option['value'] && ((is_array($selected) && in_array($option['value'], $selected)) || ($option['value'] == $selected))) ? ' checked' : '';
                     ?>

@@ -1,5 +1,6 @@
 @import "./assets/fonts/fonts.css";
 @import "./vars.scss";
+@import "./layout.scss";
 
 /*
 Background colors
@@ -237,7 +238,8 @@ form
 ----------------------------------------
 */
 
-form {
+body.wp-admin .edit-post-visual-editor form,
+body:not(.wp-admin) form {
 
     input[type='text'], 
     input[type='email'], 

@@ -9,6 +9,7 @@ class Tabs_Content extends \PBOOT\View\View
         parent::__construct($args, [
 
             'tabs_pos' => 'left',
+            'size' => 'normal',
             'items' => []
         ]);
 
@@ -29,5 +30,7 @@ class Tabs_Content extends \PBOOT\View\View
 
     protected function _setHtmlClass()
     {
+        $this->addHtmlClass('pos-' . $this->args['tabs_pos']);
+        $this->addHtmlClass('size-' . $this->args['size']);
     }
 }

@@ -5,31 +5,50 @@
 --------------------------------------------------
 */
 .view.form-files-drop {
-    padding: 0 0 2rem;
-    border-radius: 0.2143rem;
+
+    font-size: 1rem;
+    line-height: 1.4em;
+
+    padding: 0 0 2em;
+    border-radius: 0.2143em;
 
     .drop-area {
+
         text-align: center;
-        padding: 3rem 2rem;
-        margin: 0 0 1rem;
+        padding: 3em 2em 2em;
+        margin: 0 0 1em;
         // background-color: #efefef;
         border: 2px dashed #999999;
 
         &.file-over {
             background-color: #cccccc;
         }
+    }
 
-        .drop-label {
-            display: block;
-            font-size: 1rem;
-            line-height: 1.4em;
-            margin: 0 0 1rem;
+    .drop-label {
+        display: block;
+        padding: 0 0 1em;
+    }
+    .drop-summary {
+        display: block;
+        font-size: 0.8em;
+        line-height: 1.4em;
+        padding: 0 0 1rem;
+    }
+    .input-file {
+        padding: 0 0 1em;
+    }
+    .clear-file {
+        display: none;
+        font-size: 0.8em;
+        line-height: 1.4em;
+        .clear-btn {
+            cursor: pointer;
+            // text-decoration: underline;
         }
-        .drop-summary {
-            display: block;
-            font-size: 0.8em;
-            line-height: 1.4em;
-        }
+    }
+    &.has-files .clear-file {
+        display: block;
     }
 }
 
@@ -38,33 +57,98 @@
 --------------------------------------------------
 */
 .view.form-files-preview {
-    padding: 0 0 1rem;
+
+    font-size: 1rem;
+    line-height: 1.4em;
+    
+    // padding: 0 0 1em;
+
+    .file-items {
+        padding: 0.25em;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 
     .file-item {
-        padding: 0 0 1rem;
-        position: relative;
+        width: 100%;
+        // padding: 0.5em;
+        margin: 0.75em;
+        border: 2px solid #555555;
+        border-radius: 0.2143rem;
+        overflow: hidden;
 
-        input[type="checkbox"] {
-            display: none;
+        .item-inner {
+            position: relative;
         }
 
-        .file-del {
-            font-size: 1.5rem;
-            display: block;
+        .action-inputs {
+            padding: 0.25em;
             position: absolute;
             top: 0;
             right: 0;
-            padding: 0.5em;
-            color: #ffffff;
-            cursor: pointer;
-
-            &::before {
-                display: block;
-                content: '\F5DD';
-            }
         }
-        input[type="checkbox"]:checked + .file-del {
-            color: #ff1e0f;
+            
+        .action-input {
+            display: inline-block;
+            vertical-align: middle;
+
+            input {
+                display: none;
+            }
+
+            label {
+                font-size: 1.5em;
+                line-height: 1em;
+                display: block;
+                padding: 0.5em 0.25em;
+                color: #ffffff;
+                cursor: pointer;
+
+                // &::before {
+                //     display: block;
+                // }
+            }
+
+            &.feat-input {
+                // label::before {
+                //     content: '\F5DD';
+                // }
+                input:checked + label {
+                    color: #53af21;
+                }
+            }
+            &.del-input {
+                // label::before {
+                //     content: '\F5DD';
+                // }
+                input:checked + label {
+                    color: #ff1e0f;
+                }
+            }
+        } 
+    }
+    &.is-sortable .file-item {
+        cursor: pointer;
+        &.ui-sortable-helper {
+            cursor: grab;
+            border-style: dashed;
+        }
+    }
+
+    @media (min-width: $breakpoint_desktop)
+    {
+        &.cols-num-2 .file-item {
+            width: calc((100% / 2) - (0.75em * 2));
+        }
+        &.cols-num-3 .file-item {
+            width: calc((100% / 3) - (0.75em * 2));
+        }
+        &.cols-num-4 .file-item {
+            width: calc((100% / 4) - (0.75em * 2));
+        }
+        &.cols-num-6 .file-item {
+            width: calc((100% / 6) - (0.75em * 2));
         }
     }
 }
@@ -116,7 +200,7 @@
 
     .nice-checkbox {
         display: block;
-        padding: 0 0.75rem 0.75rem 0;
+        padding: 0 0 0.75rem;
 
         label {
             font-size: 0.857rem;
@@ -125,6 +209,7 @@
     }
     &.opts-inline .nice-checkbox {
         display: inline-block;
+        padding: 0 0.75rem 0.75rem 0;
     }
 }
 

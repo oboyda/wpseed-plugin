@@ -9,7 +9,12 @@ class Form_Files_Drop extends \PBOOT\View\View
         parent::__construct($args, [
             'input_name' => '',
             'drop_label' => __('Drop files here or choose files below', 'pboot'),
-            'max_files' => 3
+            'multiple' => false
         ]);
+    }
+
+    public function getInputName()
+    {
+        return $this->args['multiple'] ? $this->args['input_name'] . '[]' : $this->args['input_name'];
     }
 }

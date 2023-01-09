@@ -43,7 +43,10 @@ jQuery.fn.extend({
                             location.reload();
                         }
         
-                        form.get(0).reset();
+                        if(form.hasClass("submit-reset"))
+                        {
+                            form.get(0).reset();
+                        }
                     }
     
                     btnSubmit.prop("disabled", false);
@@ -75,7 +78,8 @@ jQuery.fn.extend({
             -------------------------
             */
     
-            const getFileSummary = function(files){
+            function getFileSummary(files)
+            {
                 let summ = [];
                 const filesArr = Array.isArray(files) ? files : Array.from(files);
                 filesArr.forEach((file) => {
@@ -86,7 +90,14 @@ jQuery.fn.extend({
                 });
                 return summ.join(', ');
             }
-    
+
+            function resetFileInput(fileInput)
+            {
+                // fileInput.get(0).files = new FileList;
+                fileInput.val("");
+                fileInput.trigger("change");
+            }
+
             form.find(".view.form-files-drop").each(function(){
     
                 const filesDropView = jQuery(this);
@@ -95,9 +106,10 @@ jQuery.fn.extend({
                 const dropSummary = filesDropView.find(".drop-summary");
                 const fileInput = filesDropView.find("input[type='file']");
                 const fileInputElem = fileInput.get(0);
+                const fileClear = filesDropView.find(".clear-file .clear-btn");
     
-                if(dropArea.length && fileInput.length)
-                {
+                // if(dropArea.length && fileInput.length)
+                // {
                     dropArea.on("dragenter", function(e){
                         dropArea.addClass("file-over");
                     });
@@ -117,7 +129,7 @@ jQuery.fn.extend({
                         if((fileInputElem.multiple && filesArr.length > 0) || (!fileInputElem.multiple && filesArr.length === 1))
                         {
                             fileInputElem.files = _e.dataTransfer.files;
-                            fileInput.triggerHandler("change");
+                            fileInput.trigger("change");
                         }
                     });
     
@@ -129,7 +141,11 @@ jQuery.fn.extend({
                         }
                         dropSummary.html(getFileSummary(fileInputElem.files));
                     });
-                }
+
+                    fileClear.on("click", function(){
+                        resetFileInput(fileInput);
+                    });
+                // }
             });
     
             /*
@@ -148,82 +164,85 @@ jQuery.fn.extend({
                 const dateTillFieldDisplay = datesRangeView.find(".date-till input.date-till-display");
                 const dateTillFieldAlt = datesRangeView.find(".date-till input.date-till");
                 const datepickerTillElem = datesRangeView.find(".date-till .datepicker");
-    
+  
+                function openDatepicker(datepickerElem){
+                    datepickerElem.removeClass("d-none");
+                }
+                function closeDatepicker(datepickerElem, timeout=false){
+                    if(timeout)
+                    {
+                        setTimeout(function(){
+                            datepickerElem.addClass("d-none");
+                        }, 500);
+                    }
+                    else{
+                        datepickerElem.addClass("d-none");
+                    }
+                }
+                
                 if(
                     datepickerFromElem.length && 
                     !datepickerFromElem.hasClass("hasDatepicker") && 
-                    // dateFromFieldDisplay.length && 
-                    // !dateFromFieldDisplay.hasClass("hasDatepicker") && 
                     typeof jQuery.fn.datepicker !== "undefined"
                 ){
                     datepickerFromElem.datepicker({
-                    // dateFromFieldDisplay.datepicker({
                         dateFormat: "dd/mm/yy",
                         altField: dateFromFieldAlt,
                         altFormat: "yy-mm-dd",
                         minDate: new Date(),
-                        // defaultDate: dateFromFieldDisplay.val() ? dateFromFieldDisplay.val() : null,
                         onSelect: function(dateText, datePicker){
                             dateFromFieldDisplay.val(dateText);
                             dateFromFieldAlt.change();
+
+                            closeDatepicker(datepickerFromElem, false);
                         }
                     });
                     if(datepickerTillElem.length)
-                    // if(dateTillFieldDisplay.length)
                     {
                         dateFromFieldAlt.on("change", function(){
                             const minDate = new Date(this.value);
                             datepickerTillElem.datepicker("option", "minDate", minDate);
-                            // dateTillFieldDisplay.datepicker("option", "minDate", minDate);
                         });
                     }
                 }
                 dateFromFieldDisplay.on("focus", function(){
-                    datepickerFromElem.removeClass("d-none");
+                    openDatepicker(datepickerFromElem);
                 });
-                dateFromFieldDisplay.on("blur", function(){
-                    setTimeout(function(){
-                        datepickerFromElem.addClass("d-none");
-                    }, 1000);
-                });
+                // dateFromFieldDisplay.on("blur", function(){
+                //     closeDatepicker(datepickerFromElem, true);
+                // });
     
                 if(
                     datepickerTillElem.length && 
                     !datepickerTillElem.hasClass("hasDatepicker") && 
-                    // dateTillFieldDisplay.length && 
-                    // !dateTillFieldDisplay.hasClass("hasDatepicker") && 
                     typeof jQuery.fn.datepicker !== "undefined"
                 ){
                     datepickerTillElem.datepicker({
-                    // dateTillFieldDisplay.datepicker({
                         dateFormat: "dd/mm/yy",
                         altField: dateTillFieldAlt,
                         altFormat: "yy-mm-dd",
                         minDate: new Date(),
-                        // defaultDate: dateTillFieldDisplay.val() ? dateTillFieldDisplay.val() : null,
                         onSelect: function(dateText, datePicker){
                             dateTillFieldDisplay.val(dateText);
                             dateTillFieldAlt.change();
+
+                            closeDatepicker(datepickerTillElem, false);
                         }
                     });
                     if(datepickerFromElem.length)
-                    // if(dateFromFieldDisplay.length)
                     {
                         dateTillFieldAlt.on("change", function(){
                             const maxDate = new Date(this.value);
                             datepickerFromElem.datepicker("option", "maxDate", maxDate);
-                            // dateFromFieldDisplay.datepicker("option", "maxDate", maxDate);
                         });
                     }
                 }
                 dateTillFieldDisplay.on("focus", function(){
-                    datepickerTillElem.removeClass("d-none");
+                    openDatepicker(datepickerTillElem);
                 });
-                dateTillFieldDisplay.on("blur", function(){
-                    setTimeout(function(){
-                        datepickerTillElem.addClass("d-none");
-                    }, 500);
-                });
+                // dateTillFieldDisplay.on("blur", function(){
+                //     closeDatepicker(datepickerTillElem, true);
+                // });
     
             });
 
@@ -245,7 +264,7 @@ jQuery.fn.extend({
                 });
             });
         }
-        const messagesCont = form.find(".messages-cont");
+        const messagesCont = form.find(".messages, .messages-cont");
         if(typeof resp.messages !== "undefined" && messagesCont.length)
         {
             messagesCont.html(resp.messages);
@@ -259,10 +278,10 @@ jQuery(function($)
     .ajax-form
     --------------------------------------------------
     */
-    $("form.ajax-form").ajaxFormInit();
+    $("form.ajax-form, form.ajax-form-std").ajaxFormInit();
     $(document.body).on("view_loaded", function(e, view, viewName){
 
-        view.find("form.ajax-form").ajaxFormInit();
+        view.find("form.ajax-form, form.ajax-form-std").ajaxFormInit();
     });
 
     /*
@@ -339,7 +358,7 @@ jQuery(function($)
             inputs.filter(".user-input:checked").prop("checked", false);
             updateLabelText();
             // dropdownOptions.find("input.user-input").first().triggerHandler("change");
-            inputs.filter(".user-input").first().triggerHandler("change");
+            inputs.filter(".user-input").first().trigger("change");
         }
 
         function toggle()
@@ -650,4 +669,42 @@ jQuery(function($)
             });
         }
     });
+
+    /*
+    .view.form-files-preview
+    --------------------------------------------------
+    */
+    $(document.body).viewAddLoadedListener("view_loaded_form-files-preview", function(e, view){
+
+        const itemsOrderIput = view.find(".order-input");
+        const isSortable = view.hasClass("is-sortable");
+
+        function setItemsOrder()
+        {
+            if(!isSortable)
+            {
+                return;
+            }
+
+            let orderIds = [];
+            const fileItems = view.find(".file-item");
+            fileItems.each(function(){
+                orderIds.push($(this).data("id"));
+            });
+
+            itemsOrderIput.val(orderIds.join(","));
+            itemsOrderIput.trigger("change");
+        }
+
+        if(view.hasClass("is-sortable") && typeof $.fn.sortable !== "undefined")
+        {
+            view.find(".file-items").sortable({
+                // containment: "parent"
+                stop: function(e, ui){
+                    setItemsOrder();
+                }
+            });
+        }
+    });
+
 });

@@ -1,19 +1,67 @@
 /*
-* .view.status-message
-* ----------------------------------------
+.view.status-message
+----------------------------------------
 */
 
 .view.status-message {
-    padding: 0 0 2rem;
+    font-size: 1rem;
+    line-height: 1.4em;
+
+    margin: 0 0 1em;
+
+    &.size-small {
+        font-size: 0.75em;
+        line-height: 1.4em;
+    }
+    &.size-large {
+        font-size: 1.25em;
+        line-height: 1.4em;
+    }
+
     .message {
-        padding: 2rem 3rem;
-        &.message-success {
-            border-top: 3px solid #95b392;
-            background-color: #c5ebc1;
+        padding: 0.857em 1em;
+        border-left: 3px solid #333;
+        min-height: 3em;
+    }
+
+    &.type-success {
+        .status-icon {
+            color: #96c991;
         }
-        &.message-error {
-            border-top: 3px solid #ee9696;
-            background-color: #f5bcbc;
+        .message {
+            border-left-color: #96c991;
+        }
+    }
+    &.type-error {
+        .status-icon {
+            color: #cb4e4e;
+        }
+        .message {
+            border-left-color: #cb4e4e;
+        }
+    }
+    &.type-warning {
+        .status-icon {
+            color: #fad289;
+        }
+        .message {
+            border-left-color: #fad289;
+        }
+    }
+
+    &.has-icon {
+        padding-left: 3em;
+
+        .status-icon {
+
+            padding: 0.5em 1em 0.5em 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            i {
+                font-size: 2em;
+            }
         }
     }
 }

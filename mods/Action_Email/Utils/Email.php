@@ -10,16 +10,16 @@ class Email
     {
         return apply_filters('pboot_action_email_actions', [
             'resetpass' => __('Reset password', 'pboot'),
-            'email_verification' => __('Verification emil', 'pboot'),
+            'email_verification' => __('Verification email', 'pboot'),
         ]);
     }
 
     static function getGlobalPlaceholders()
     {
-        return [
+        return apply_filters('pboot_action_email_global_placeholders', [
             '%sitename%' => get_bloginfo('name'),
             '%siteurl%' => get_site_url()
-        ];
+        ]);
     }
 
     static function getFromName()
@@ -57,7 +57,7 @@ class Email
     {
         $email_post = self::getEmailByAction($action);
 
-        if(!is_a($email_post, '\PBOOT\Type\Email'))
+        if(!is_a($email_post, '\PBOOT\Mod\Action_Email\Type\Email'))
         {
             return false;
         }

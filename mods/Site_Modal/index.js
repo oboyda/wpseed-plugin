@@ -14,7 +14,7 @@ jQuery(function($){
 
         const btModal = new Modal(modalElem.get(0));
 
-        $(document.body).on("ofrp_open_site_modal", function(e, _args={}){
+        $(document.body).on("pboot_open_site_modal", function(e, _args={}){
 
             const args = {
                 modalTitle: "",
@@ -36,16 +36,16 @@ jQuery(function($){
             // Show modal
             btModal.show();
 
-            // Close modal on ofrp_submit_ajax_form_success event
+            // Close modal on pboot_submit_ajax_form_success event
             if(args.closeOnAjaxFormSuccess)
             {
-                modalBodyElem.find("form.ajax-form").on("ofrp_submit_ajax_form_success", function(){
+                modalBodyElem.find("form.ajax-form").on("pboot_submit_ajax_form_success", function(){
                     btModal.hide();
                 });
             }
         });
 
-        $(document.body).on("ofrp_open_site_modal_load", function(e, _args={}){
+        $(document.body).on("pboot_open_site_modal_load", function(e, _args={}){
 
             const args = {
                 modalTitle: "",
@@ -53,6 +53,7 @@ jQuery(function($){
                 viewName: "",
                 viewArgs: {},
                 viewArgsCast: {},
+                viewArgsS: {},
                 loadedCallback: null,
                 closeOnAjaxFormSuccess: false,
                 ..._args
@@ -72,13 +73,17 @@ jQuery(function($){
             btModal.show();
 
             // Load view in modal body
-            modalBodyElem.viewAjaxLoad("ofrp_load_view", args.viewName, args.viewArgs, args.viewArgsCast, function(resp){
+            modalBodyElem.viewAjaxLoad("pboot_load_view", args.viewName, {
+                viewArgs: args.viewArgs,
+                viewArgsCast: args.viewArgsCast,
+                viewArgsS: args.viewArgsS
+            }, function(resp){
                 modalElem.removeClass("loading");
 
-                // Close modal on ofrp_submit_ajax_form_success event
+                // Close modal on pboot_submit_ajax_form_success event
                 if(args.closeOnAjaxFormSuccess)
                 {
-                    modalBodyElem.find("form.ajax-form").on("ofrp_submit_ajax_form_success", function(){
+                    modalBodyElem.find("form.ajax-form").on("pboot_submit_ajax_form_success", function(){
                         btModal.hide();
                     });
                 }

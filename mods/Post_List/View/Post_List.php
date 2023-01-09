@@ -2,13 +2,14 @@
 
 namespace PBOOT\Mod\Post_List\View;
 
-use WPSEEDE\Utils\Type_List;
+use WPSEEDE\Utils\Type_List as Utils_Type_List;
+use WPSEEDE\Utils\Type as Utils_Type;
 
 class Post_List extends \PBOOT\View\View 
 {
-    public function __construct($args, $default_args=[])
+    public function __construct($args, $args_default=[])
     {
-        $default_args = wp_parse_args($default_args, [
+        parent::__construct($args, wp_parse_args($args_default, [
             
             'list_title' => '',
 
@@ -16,7 +17,7 @@ class Post_List extends \PBOOT\View\View
             'items_total' => 0,
             'items_per_page' => 2,
 
-            'post_type' => 'post',
+            // 'post_type' => 'post',
             'type_class' => '\PBOOT\Type\Post',
 
             'q_args' => [],
@@ -31,7 +32,7 @@ class Post_List extends \PBOOT\View\View
             'item_view' => 'Post_List/post-list-item',
             'item_args' => [],
 
-            'filters_view' => 'Post_List/list-filters-hidden',
+            'filters_view' => 'Post_List/post-list-filters-form',
             'filters_args' => [],
 
             'show_pager' => true,
@@ -39,9 +40,7 @@ class Post_List extends \PBOOT\View\View
             'pager_args' => [],
 
             'set_items' => true
-        ]);
-        
-        parent::__construct($args, $default_args);
+        ]));
 
         if($this->args['set_items'])
         {
@@ -55,12 +54,13 @@ class Post_List extends \PBOOT\View\View
         {
             $this->args['q_args'] = wp_parse_args($this->args['q_args'], [
                 'paged' => 1,
-                'post_type' => $this->args['post_type'],
+                // 'post_type' => $this->args['post_type'],
                 'orderby' => 'title',
                 'posts_per_page' => $this->args['items_per_page']
             ]);
+            $this->args['q_args'] = wp_parse_args(Utils_Type::getTypeRequestArgs($this->args['type_class'], [], true), $this->args['q_args']);
     
-            $items = Type_List::getItems($this->args['q_args'], $this->args['type_class']);
+            $items = Utils_Type_List::getItems($this->args['q_args'], $this->args['type_class']);
 
             $this->args['items'] = $items['items'];
             $this->args['items_total'] = $items['items_total'];
@@ -72,31 +72,33 @@ class Post_List extends \PBOOT\View\View
     protected function setHtmlParts()
     {
         $this->args['filters_args'] = wp_parse_args($this->args['filters_args'], [
-            'paged' => $this->args['q_args']['paged'],
+            'q_args' => $this->args['q_args'],
             'action_name' => $this->args['action_name'],
             'list_view' => $this->args['list_view'],
-            'list_args' => $this->orig_args
+            'list_args' => $this->args_ext
         ]);
         $this->setChildPart('filters_html', pboot_get_view($this->args['filters_view'], $this->args['filters_args']));
 
-        $items_html = [];
+        $items_html = '';
         if(!empty($this->args['items']))
         {
+            $_items = [];
             foreach($this->get_items() as $item)
             {
-                $items_html[] = pboot_get_view($this->args['item_view'], wp_parse_args($this->args['item_args'], [
+                $_items[] = pboot_get_view($this->args['item_view'], wp_parse_args($this->args['item_args'], [
                     // 'type_class' => $this->args['type_class'],
                     'item' => $item
                 ]));
             } 
-            $this->setChildPart('items_html', $this->renderItemsCols($items_html, $this->args['cols_num'], 'lg'));
+            $items_html = $this->renderItemsCols($_items, $this->args['cols_num'], 'lg');
         }
         elseif($this->args['list_nofound_view'] && $this->args['q_args']['paged'] === 1)
         {
-            $this->setChildPart('items_html', pboot_get_view($this->args['list_nofound_view'], [
+            $items_html = pboot_get_view($this->args['list_nofound_view'], [
                 'nofound_text' => $this->args['list_nofound_text']
-            ]));
+            ]);
         }
+        $this->setChildPart('items_html', $items_html);
 
         if($this->args['show_pager'])
         {

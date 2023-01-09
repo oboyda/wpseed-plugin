@@ -39,22 +39,18 @@ class Email extends Post
         return $this->getId() ? (bool)get_post_meta($this->getId(), '_inc_default_footer', true) : false;
     }
 
-    protected function replacePlaceholders($str, $placeholder_args=[])
+    protected function replacePlaceholders($str, $placeholders=[])
     {
-        $placeholder_args = apply_filters('pboot_action_email_placeholders', array_merge(
-            Utils_Email::getGlobalPlaceholders(), 
-            $placeholder_args,
-            $str,
-            $this
-        ));
+        $placeholders = apply_filters('pboot_action_email_placeholders', array_merge($placeholders, Utils_Email::getGlobalPlaceholders()));
 
-        if($placeholder_args)
+        if($str && $placeholders)
         {
-            $placeholder_keys = array_keys($placeholder_args);
-            $placeholder_vals = array_values($placeholder_args);
+            $placeholder_keys = array_keys($placeholders);
+            $placeholder_vals = array_values($placeholders);
 
             $str = str_replace($placeholder_keys, $placeholder_vals, $str);
         }
+
         return $str;
     }
 }
