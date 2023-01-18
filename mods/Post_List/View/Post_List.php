@@ -21,13 +21,13 @@ class Post_List extends \PBOOT\View\View
             'type_class' => '\PBOOT\Type\Post',
 
             'q_args' => [],
-            'action_name' => 'pboot_load_post_list',
+            'action_name' => 'eun_load_post_list',
 
             'cols_num' => 2,
 
             'list_view' => 'Post_List/post-list',
             'list_nofound_view' => 'Post_List/post-list-nofound',
-            'list_nofound_text' => __('No items found', 'pboot'),
+            'list_nofound_text' => __('No items found', 'eun'),
 
             'item_view' => 'Post_List/post-list-item',
             'item_args' => [],
@@ -41,6 +41,7 @@ class Post_List extends \PBOOT\View\View
 
             'set_items' => true
         ]));
+        $this->saveViewArgs($args);
 
         if($this->args['set_items'])
         {
@@ -74,10 +75,11 @@ class Post_List extends \PBOOT\View\View
         $this->args['filters_args'] = wp_parse_args($this->args['filters_args'], [
             'q_args' => $this->args['q_args'],
             'action_name' => $this->args['action_name'],
+            'list_view_id' => $this->getId(),
             'list_view' => $this->args['list_view'],
-            'list_args' => $this->args_ext
+            'list_args' => $this->getArgsExtPublic()
         ]);
-        $this->setChildPart('filters_html', pboot_get_view($this->args['filters_view'], $this->args['filters_args']));
+        $this->setChildPart('filters_html', eun_get_view($this->args['filters_view'], $this->args['filters_args']));
 
         $items_html = '';
         if(!empty($this->args['items']))
@@ -85,7 +87,7 @@ class Post_List extends \PBOOT\View\View
             $_items = [];
             foreach($this->get_items() as $item)
             {
-                $_items[] = pboot_get_view($this->args['item_view'], wp_parse_args($this->args['item_args'], [
+                $_items[] = eun_get_view($this->args['item_view'], wp_parse_args($this->args['item_args'], [
                     // 'type_class' => $this->args['type_class'],
                     'item' => $item
                 ]));
@@ -94,7 +96,7 @@ class Post_List extends \PBOOT\View\View
         }
         elseif($this->args['list_nofound_view'] && $this->args['q_args']['paged'] === 1)
         {
-            $items_html = pboot_get_view($this->args['list_nofound_view'], [
+            $items_html = eun_get_view($this->args['list_nofound_view'], [
                 'nofound_text' => $this->args['list_nofound_text']
             ]);
         }
@@ -109,7 +111,7 @@ class Post_List extends \PBOOT\View\View
                 'items_per_page' => $this->args['items_per_page'],
                 'paged' => isset($this->args['q_args']['paged']) ? $this->args['q_args']['paged'] : 1
             ]);
-            $this->setChildPart('pager_html', pboot_get_view($this->args['pager_view'], $this->args['pager_args']));
+            $this->setChildPart('pager_html', eun_get_view($this->args['pager_view'], $this->args['pager_args']));
         }
     }
 }

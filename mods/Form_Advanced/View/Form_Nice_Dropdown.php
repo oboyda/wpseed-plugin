@@ -13,7 +13,7 @@ class Form_Nice_Dropdown extends \PBOOT\View\View
             'input_name' => '',
             'input_data_atts' => [],
             'multiple' => false,
-            'label' => __('Select', 'ofrp'),
+            'label' => __('Select', 'pboot'),
             'update_label' => true,
             'empty_name' => '',
             'selected' => '',

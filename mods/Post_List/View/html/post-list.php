@@ -1,4 +1,4 @@
-<div class="<?php echo $view->getHtmlClass(); ?>" data-view="<?php echo $view->getName(); ?>">
+<div id="<?php echo $view->getId(); ?>" class="<?php echo $view->getHtmlClass(); ?>" data-view="<?php echo $view->getName(); ?>">
 
     <?php $view->openContainer(); ?>
 

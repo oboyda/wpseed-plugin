@@ -17,11 +17,12 @@ class Post_List_Filters_Form extends \PBOOT\View\View
             
             'q_args' => [],
             
-            'action_name' => 'pboot_load_post_list',
+            'action_name' => 'eun_load_post_list',
 
             'list_view' => '',
             'list_args' => []
         ]));
+        $this->saveViewArgs($args);
 
         $this->filterListArgs();
     }
@@ -57,7 +58,7 @@ class Post_List_Filters_Form extends \PBOOT\View\View
         <input type="hidden" name="list_view" value="<?php echo $this->get_list_view(); ?>" />
         <input type="hidden" name="list_args" value='<?php echo serialize($this->get_list_args()); ?>' />
         <input type="hidden" name="paged" class="change-submit" value="<?php echo $this->getQueryArg('paged', 1); ?>" />
-        <input type="hidden" name="post_id" class="change-submit" value="<?php echo $this->getPostId(); ?>" />
+        <input type="hidden" name="post_id" value="<?php echo $this->getPostId(); ?>" />
         <input type="hidden" name="action" value="<?php echo $this->get_action_name(); ?>" />
     <?php 
     }
