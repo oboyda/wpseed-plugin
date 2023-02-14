@@ -7,6 +7,8 @@ use WPSEEDE\Utils\Base as Utils_Base;
 
 class Post_List_Filters_Form extends \PBOOT\View\View 
 {
+    const MOD_NAME = 'Post_List';
+
     protected $req;
 
     public function __construct($args, $default_args=[])
@@ -17,10 +19,11 @@ class Post_List_Filters_Form extends \PBOOT\View\View
             
             'q_args' => [],
             
-            'action_name' => 'eun_load_post_list',
+            'action_name' => 'pboot_load_post_list',
 
             'list_view' => '',
-            'list_args' => []
+            'list_block_id' => ''
+            // 'list_args' => []
         ]));
         $this->saveViewArgs($args);
 
@@ -56,7 +59,9 @@ class Post_List_Filters_Form extends \PBOOT\View\View
     {
     ?>
         <input type="hidden" name="list_view" value="<?php echo $this->get_list_view(); ?>" />
-        <input type="hidden" name="list_args" value='<?php echo serialize($this->get_list_args()); ?>' />
+        <input type="hidden" name="list_view_id" value="<?php echo $this->get_list_view_id(); ?>" />
+        <input type="hidden" name="list_block_id" value="<?php echo $this->get_list_block_id(); ?>" />
+        <!-- <input type="hidden" name="list_args" value='<?php //echo serialize($this->get_list_args()); ?>' /> -->
         <input type="hidden" name="paged" class="change-submit" value="<?php echo $this->getQueryArg('paged', 1); ?>" />
         <input type="hidden" name="post_id" value="<?php echo $this->getPostId(); ?>" />
         <input type="hidden" name="action" value="<?php echo $this->get_action_name(); ?>" />

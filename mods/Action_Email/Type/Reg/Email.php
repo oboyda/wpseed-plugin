@@ -44,6 +44,6 @@ class Email
             'supports'            => array('title', 'editor')
         ];
 
-        register_post_type('action_email', $args);
+        register_post_type('pboot_action_email', $args);
     }
 }

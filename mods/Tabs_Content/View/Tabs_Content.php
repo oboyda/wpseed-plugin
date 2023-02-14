@@ -4,6 +4,8 @@ namespace PBOOT\Mod\Tabs_Content\View;
 
 class Tabs_Content extends \PBOOT\View\View 
 {
+    const MOD_NAME = 'Tabs_Content';
+    
     public function __construct($args)
     {
         parent::__construct($args, [

@@ -27,12 +27,11 @@
         $input_name = $view->has_multiple() ? $view->get_input_name() . '[]' : $view->get_input_name();
         ?>
     <div class="<?php echo implode(' ', $classes); ?>">
-        <input type="<?php echo $view->getInputType(); ?>" name="<?php echo $input_name; ?>" id="<?php echo $option_id; ?>" class="user-input <?php if($view->has_change_submit()) echo 'change-submit'; ?>" value="<?php echo $option['value']; ?>"<?php echo $checked . $required; ?>> 
+        <input type="<?php echo $view->get_input_type(); ?>" name="<?php echo $input_name; ?>" id="<?php echo $option_id; ?>" class="user-input <?php if($view->has_change_submit()) echo 'change-submit'; ?>" value="<?php echo $option['value']; ?>"<?php echo $checked . $required; ?>> 
         <label for="<?php echo $option_id; ?>">
             <?php if(!empty($option['icon_html'])): ?>
             <span class="label-icon"><?php echo $option['icon_html']; ?></span>
-            <?php endif; ?>
-            <?php if(!empty($option['icon_class'])): ?>
+            <?php elseif(!empty($option['icon_class'])): ?>
             <span class="label-icon"><i class="<?php echo $option['icon_class']; ?>"></i></span>
             <?php endif; ?>
             <span class="label-text"><?php echo $option['name']; ?></span>

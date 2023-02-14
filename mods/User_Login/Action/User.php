@@ -17,8 +17,8 @@ class User extends \WPSEED\Action
 
         add_action('wp_ajax_nopriv_pboot_resetpass', [$this, 'resetPass']);
 
-        add_filter('login_url', [$this, 'filterLoginUrl']);
-        add_action('admin_init', [$this, 'restrictWpAdminAccess']);
+        // add_filter('login_url', [$this, 'filterLoginUrl']);
+        // add_action('admin_init', [$this, 'restrictWpAdminAccess']);
 
         add_action('user_register', [$this, 'sendUserVerificationEmailUserRegister'], 20, 2);
 
@@ -227,11 +227,6 @@ class User extends \WPSEED\Action
         {
             $user = new Type_User($user);
         }
-        file_put_contents(ABSPATH . '/__debug.txt', print_r([
-            time(),
-            print_r($user, true)
-        ], true));
-        return;
 
         if(!$user->get_id())
         {

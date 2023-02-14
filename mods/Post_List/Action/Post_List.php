@@ -18,18 +18,23 @@ class Post_List extends \WPSEED\Action
     public function loadPostList()
     {
         $view_name = $this->getReq('list_view', 'text', 'Post_List/post-list');
-        // $view_args = maybe_unserialize(stripslashes($this->getReq('list_args', 'text', [])));
+
+        // $view_args = $this->getReq('list_args', 'text') ? maybe_unserialize(stripslashes($this->getReq('list_args', 'text'))) : [];
         // $view_args = wp_parse_args($view_args, [
+        //     'id' => $this->getReq('list_view_id'),
         //     'q_args' => []
         // ]);
         // $view_args['q_args']['paged'] = $this->getReq('paged', 'integer', 1);
 
         $view_args = [
             'id' => $this->getReq('list_view_id'),
+            'block_id' => $this->getReq('list_block_id'),
             'q_args' => [
                 'paged' => $this->getReq('paged', 'integer', 1)
             ]
         ];
+
+        $view_args = apply_filters('pboot_load_view_args', $view_args, $view_name, true);
 
         $view = pboot_get_view_object($view_name, $view_args);
 

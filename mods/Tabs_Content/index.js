@@ -4,7 +4,7 @@ jQuery(function($){
     .view.tabs-content
     --------------------------------------------------
     */
-    $(document.body).viewAddLoadedListener("view_loaded_tabs-content", function(e, view)
+    $(document.body).viewAddLoadedListener("pboot.tabs-content.tabs-content", function(e, view)
     {
         const tabTitles = view.find(".tab-titles .tab-title");
         const tabContents = view.find(".tab-contents .tab-content");

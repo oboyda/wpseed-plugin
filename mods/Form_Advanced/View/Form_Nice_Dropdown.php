@@ -4,6 +4,8 @@ namespace PBOOT\Mod\Form_Advanced\View;
 
 class Form_Nice_Dropdown extends \PBOOT\View\View 
 {
+    const MOD_NAME = 'Form_Advanced';
+
     public function __construct($args)
     {
         parent::__construct($args, [

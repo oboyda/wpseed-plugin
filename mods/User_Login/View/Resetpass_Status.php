@@ -4,6 +4,8 @@ namespace PBOOT\Mod\User_Login\View;
 
 class Resetpass_Status extends \PBOOT\View\View 
 {
+    const MOD_NAME = 'User_Login';
+    
     public function __construct($args)
     {
         parent::__construct($args, [

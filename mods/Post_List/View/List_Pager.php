@@ -4,6 +4,8 @@ namespace PBOOT\Mod\Post_List\View;
 
 class List_Pager extends \PBOOT\View\View 
 {
+    const MOD_NAME = 'Post_List';
+
     var $pages_max;
 
     public function __construct($args)

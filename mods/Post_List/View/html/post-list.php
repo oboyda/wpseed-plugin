@@ -6,7 +6,7 @@
         <h2 class="list-title"><?php echo $view->get_list_title(); ?></h2>
         <?php endif; ?>
 
-        <div class="list-filters part-filters_html">
+        <div class="list-filters">
             <?php echo $view->getChildPart('filters_html'); ?>
         </div>
 

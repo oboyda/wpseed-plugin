@@ -4,6 +4,8 @@ namespace PBOOT\Mod\Form_Advanced\View;
 
 class Form_Nice_Checkbox_Single extends Form_Nice_Checkbox 
 {
+    const MOD_NAME = 'Form_Advanced';
+
     public function __construct($args)
     {
         parent::__construct($args, [
@@ -15,7 +17,9 @@ class Form_Nice_Checkbox_Single extends Form_Nice_Checkbox
             'single_icon_html' => '',
             'single_icon_class' => '',
 
-            'checked' => false
+            'checked' => false,
+
+            'input_type' => 'checkbox'
         ]);
 
         $this->_setArgs();

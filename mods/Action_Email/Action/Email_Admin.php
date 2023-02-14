@@ -2,64 +2,57 @@
 
 namespace PBOOT\Mod\Action_Email\Action;
 
-use PBOOT\Mod\Action_Email\Utils\Email as Utils_Email;
 use PBOOT\Mod\Action_Email\Type\Email as Type_Email;
+use PBOOT\Mod\Action_Email\Utils\Email as Utils_Email;
 
 class Email_Admin extends \WPSEED\Action 
 {
+    protected $meta_box_updated;
+
     public function __construct()
     {
         parent::__construct();
         
-        add_action('add_meta_boxes', [$this, 'registerMetaBoxes']);
-        add_action('save_post_action_email', [$this, 'saveMetaboxEmailActionsData']);
+        add_action('add_meta_boxes', [$this, 'addMetaBox']);
+        add_action('save_post_pboot_action_email', [$this, 'saveMetaBoxData']);
     }
 
-    public function registerMetaBoxes()
+    public function addMetaBox()
     {
         add_meta_box(
             'email-actions-metabox', 
-            __('Email action', 'pboot'), 
+            __('Email details', 'pboot'), 
             [$this, 'renderMetaboxEmailActions'], 
-            'action_email',
-            'side'
+            'pboot_action_email',
+            // 'side'
         );
     }
 
-    public function saveMetaboxEmailActionsData($post_id)
+    public function saveMetaBoxData($post_id)
     {
-        $email_action = $this->getReq('pboot_email_action');
-        
-        if(isset($email_action))
+        if(!empty($this->meta_box_updated))
         {
-            if($email_action)
-            {
-                update_post_meta($post_id, '_email_action', $email_action);
-            }
-            else{
-                delete_post_meta($post_id, '_email_action');
-            }
+            return;
         }
 
-        $inc_header = (bool)filter_input(INPUT_POST, 'pboot_email_inc_default_header');
+        $email_action = $this->getReq('pboot_email_action__action', 'text', '');
+        $email_subject = $this->getReq('pboot_email_action__subject', 'text', '');
+        $inc_default_header = (bool)$this->getReq('pboot_email_action__inc_default_header');
+        $inc_default_footer = (bool)$this->getReq('pboot_email_action__inc_default_footer');
 
-        if($inc_header)
-        {
-            update_post_meta($post_id, '_inc_default_header', 1);
-        }
-        else{
-            delete_post_meta($post_id, '_inc_default_header');
-        }
+        // print_r([$email_action, $email_subject, $inc_default_header, $inc_default_footer]); 
+        // exit;
 
-        $inc_footer = (bool)filter_input(INPUT_POST, 'pboot_email_inc_default_footer');
+        $type_email = new Type_Email($post_id);
 
-        if($inc_footer)
-        {
-            update_post_meta($post_id, '_inc_default_footer', 1);
-        }
-        else{
-            delete_post_meta($post_id, '_inc_default_footer');
-        }
+        $type_email->set_prop('email_action', $email_action);
+        $type_email->set_prop('email_subject', $email_subject);
+        $type_email->set_prop('inc_default_header', $inc_default_header);
+        $type_email->set_prop('inc_default_footer', $inc_default_footer);
+
+        $this->meta_box_updated = true;
+
+        $type_email->persist();
     }
 
     public function renderMetaboxEmailActions($post)
@@ -67,29 +60,52 @@ class Email_Admin extends \WPSEED\Action
         $type_email = new Type_Email($post);
         ?>
 
-        <p>
-            <select name="pboot_email_action">
-                <option value="">--</option>
-                <?php foreach(Utils_Email::getEmailActions() as $h => $action_name): 
-                    $selected = ($h == $type_email->getAction()) ? ' selected' : '';
-                    ?>
-                <option value="<?php echo $h; ?>"<?php echo $selected; ?>><?php echo $action_name; ?></option>
-                <?php endforeach; ?>
-            </select>
-        </p>
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th><label><?php _e('Email action', 'pboot'); ?></label></th>
+                <td>
+                    <select name="pboot_email_action__action">
+                        <option value="">--</option>
+                        <?php 
+                        foreach(Utils_Email::getEmailActions() as $h => $action_name): 
+                            $selected = ($h == $type_email->get_email_action()) ? ' selected' : '';
+                            ?>
+                        <option value="<?php echo $h; ?>"<?php echo $selected; ?>><?php echo $action_name; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
+            </tr>
 
-        <!--<p>
-            <label>
-                <input type="checkbox" name="pboot_email_inc_default_header" value="1" <?php checked($type_email->hasDefaultHeader(), true); ?> />
-                <?php _e('Include default header.', 'pboot'); ?>
-            </label>
-        </p>
-        <p>
-            <label>
-                <input type="checkbox" name="pboot_email_inc_default_footer" value="1"<?php checked($type_email->hasDefaultFooter(), true); ?> />
-                <?php _e('Include default footer.', 'pboot'); ?>
-            </label>
-        </p>-->
+            <?php if(!in_array($type_email->get_email_action(), ['default_header', 'default_footer'])): ?>
+            <tr>
+                <th><label><?php _e('Email subject', 'pboot'); ?></label></th>
+                <td>
+                    <input type="text" class="regular-text" name="pboot_email_action__subject" value="<?php echo $type_email->get_email_subject(); ?>" />
+                </td>
+            </tr>
+            <?php endif; ?>
+
+            <?php if(!in_array($type_email->get_email_action(), ['default_header', 'default_footer'])): ?>
+            <tr>
+                <th><label><?php _e('Include default header.', 'pboot'); ?></label></th>
+                <td>
+                    <input type="checkbox" name="pboot_email_action__inc_default_header" value="1" <?php checked($type_email->has_default_header(), true); ?> />
+                </td>
+            </tr>
+            <?php endif; ?>
+
+            <?php if(!in_array($type_email->get_email_action(), ['default_header', 'default_footer'])): ?>
+            <tr>
+                <th><label><?php _e('Include default footer.', 'pboot'); ?></label></th>
+                <td>
+                    <input type="checkbox" name="pboot_email_action__inc_default_footer" value="1"<?php checked($type_email->has_default_footer(), true); ?> />
+                </td>
+            </tr>
+            <?php endif; ?>
+
+            </tbody>
+        </table>
         <?php 
     }
 }

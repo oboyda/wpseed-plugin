@@ -50,7 +50,7 @@ Shadow
 */
 
 .shad-s1 {
-    box-shadow: 0px 0px 0.2143rem rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.4);
 }
 
 /*
@@ -251,6 +251,9 @@ form
 body.wp-admin .edit-post-visual-editor form,
 body:not(.wp-admin) form {
 
+    font-size: 1rem;
+    line-height: 1.4em;
+
     input[type='text'], 
     input[type='email'], 
     input[type='number'], 
@@ -261,11 +264,9 @@ body:not(.wp-admin) form {
         width: 100%;
         padding: 0.75em 1.25em;
         font-family: $font_light;
-        font-size: 1rem;
-        line-height: 1.4em;
         margin: 0;
         border: 2px solid $color_grey2;
-        border-radius: 0.2143rem;
+        border-radius: 3px;
     }
 
     textarea {
@@ -276,7 +277,7 @@ body:not(.wp-admin) form {
         font-size: inherit;
         .selected-label {
             border: 2px solid $color_grey2;
-            border-radius: 0.2143rem;
+            border-radius: 3px;
             box-shadow: none;
         }
     }
@@ -289,13 +290,13 @@ body:not(.wp-admin) form {
         input[type='password'],
         textarea {
             border: none;
-            box-shadow: 0px 0px 0.2143rem rgba(0,0,0,0.4);            
+            box-shadow: 0px 0px 3px rgba(0,0,0,0.4);            
         }
 
         .view.form-nice-dropdown {
             .selected-label {
                 border: none;
-                box-shadow: 0px 0px 0.2143rem rgba(0,0,0,0.4);            
+                box-shadow: 0px 0px 3px rgba(0,0,0,0.4);            
             }
         }
     }
@@ -330,27 +331,29 @@ body:not(.wp-admin) form {
 
     label {
         display: block;
-        padding: 0 0 0.25rem;
+        padding: 0 0 0.25em;
         margin: 0;
         // font-family: $font_semibold;
     }
     .input-desc {
-        font-size: 0.8rem;
+        font-size: 0.8em;
         line-height: 1.4em;
         color: $color_grey2;
-        padding: 0 0 1rem;
+        padding: 0 0 1em;
     }
 
     .form-block {
-        padding: 0 0 1.25rem;
+        position: relative;
+        padding: 0 0 1.25em;
     }
     .form-input {
-        padding: 0 0 0.75rem;
+        position: relative;
+        padding: 0 0 0.75em;
     }
 
     .field-info {
         position: relative;
-        font-size: 0.857rem;
+        font-size: 0.857em;
         line-height: 1.4em;
         padding: 0.7143em 1.2857em 0.7143em 2.83em;
         color: $color_grey2;
@@ -374,7 +377,6 @@ body:not(.wp-admin) form {
 
 .nice-checkbox:not(.view) {
 
-    font-size: 1em;
     display: inline-block;
 
     input {
@@ -385,9 +387,6 @@ body:not(.wp-admin) form {
         display: block;
         position: relative;
         cursor: pointer;
-
-        font-size: 1em;
-        line-height: 1.4em;
     }
 
     &.pos-left,  &:not(.pos-right) {
@@ -512,14 +511,14 @@ body:not(.wp-admin) form {
     text-decoration: none;
     text-align: center;
     opacity: 1;
-    box-shadow: 1px 1px 0.2143rem rgba(0,0,0,0.4);
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     cursor: pointer;
 
     &.active, &:disabled, &:hover, &:visited {
         opacity: 0.7;
         transition-property: opacity;
         transition-duration: 0.3s;
-        box-shadow: 1px 1px 0.2143rem rgba(0,0,0,0.6);
+        box-shadow: 1px 1px 3px rgba(0,0,0,0.6);
         color: $color_white;
     }
     &:disabled {

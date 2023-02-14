@@ -4,6 +4,8 @@ namespace PBOOT\Mod\Post_List\View;
 
 class Post_List_Item extends \PBOOT\View\View 
 {
+    const MOD_NAME = 'Post_List';
+
     public $item;
 
     public function __construct($args, $default_args=[])

@@ -1,10 +1,10 @@
 @import "../Boot_Styler/vars.scss";
 
 /*
-.view.form-files-drop
+.view.pboot.form-advanced.form-files-drop
 --------------------------------------------------
 */
-.view.form-files-drop {
+.view.pboot.form-advanced.form-files-drop {
 
     padding: 0 0 2em;
     border-radius: 3px;
@@ -50,10 +50,10 @@
 }
 
 /*
-.view.form-files-preview
+.view.pboot.form-advanced.form-files-preview
 --------------------------------------------------
 */
-.view.form-files-preview {
+.view.pboot.form-advanced.form-files-preview {
 
     .file-items {
         padding: 0.25em;
@@ -146,11 +146,11 @@
 }
 
 /*
-.view.form-input-dates
+.view.pboot.form-advanced.form-input-dates
 ----------------------------------------
 */
 
-.view.form-input-dates {
+.view.pboot.form-advanced.form-input-dates {
 
     .datepicker {
         position: relative;
@@ -168,11 +168,11 @@
 }
 
 /*
-.view.form-input-location
+.view.pboot.form-advanced.form-input-location
 ----------------------------------------
 */
 
-// .view.form-input-location {
+// .view.pboot.form-advanced.form-input-location {
 
 // }
 
@@ -181,11 +181,11 @@
 }
 
 /*
-.view.form-nice-checkbox
+.view.pboot.form-advanced.form-nice-checkbox
 ----------------------------------------
 */
 
-.view.form-nice-checkbox {
+.view.pboot.form-advanced.form-nice-checkbox {
 
     .title-label {
         padding: 0 0 1em;
@@ -207,11 +207,11 @@
 }
 
 /*
-.view.form-nice-dropdown
+.view.pboot.form-advanced.form-nice-dropdown
 ----------------------------------------
 */
 
-.view.form-nice-dropdown {
+.view.pboot.form-advanced.form-nice-dropdown {
 
     position: relative;
 
@@ -398,11 +398,11 @@
 }
 
 /*
-.view.form-time-picker
+.view.pboot.form-advanced.form-time-picker
 ----------------------------------------
 */
 
-.view.form-time-picker {
+.view.pboot.form-advanced.form-time-picker {
 
     font-size: 0.83rem;
     line-height: 1.4em;

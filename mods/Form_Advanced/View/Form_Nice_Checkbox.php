@@ -4,6 +4,8 @@ namespace PBOOT\Mod\Form_Advanced\View;
 
 class Form_Nice_Checkbox extends \PBOOT\View\View 
 {
+    const MOD_NAME = 'Form_Advanced';
+
     public function __construct($args, $args_default=[])
     {
         parent::__construct($args, wp_parse_args($args_default, [
@@ -15,7 +17,14 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
             'multiple' => false,
             'update_label' => true,
             'selected' => '',
-            'options' => [],
+            'options' => [
+                // [
+                //     'name' => '',
+                //     'value' => '',
+                //     'icon_html' => '',
+                //     'icon_class' => ''
+                // ]
+            ],
             'inline' => false,
             'checkbox_pos' => 'left',
             'size' => 'normal', #normal, large,
@@ -25,7 +34,9 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
             'parent_value' => '',
             'parent_enabled' => [],
             'data_atts' => [],
-            'change_submit' => false
+            'change_submit' => false,
+
+            'input_type' => null
         ]));
 
         if(empty($args_default))
@@ -63,6 +74,11 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
         {
             $this->args['selected'] = [$this->args['selected']];
         }
+
+        if(!isset($this->args['input_type']))
+        {
+            $this->args['input_type'] = $this->args['multiple'] ? 'checkbox' : 'radio';
+        }
     }
 
     protected function setOptions()
@@ -92,7 +108,8 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
     protected function _setHtmlClass()
     {
         $this->addHtmlClass($this->get_input_name());
-        $this->addHtmlClass('type-' . $this->getInputType());
+        
+        $this->addHtmlClass('type-' . $this->args['input_type']);
 
         if($this->has_selected())
         {
@@ -128,10 +145,5 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
     public function getOptionsNum()
     {
         return is_array($this->args['options']) ? count($this->args['options']) : 0;
-    }
-
-    public function getInputType()
-    {
-        return $this->has_multiple() ? 'checkbox' : (($this->getOptionsNum() > 1) ? 'radio' : 'checkbox');
     }
 }

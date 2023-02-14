@@ -2,8 +2,9 @@
 
 namespace PBOOT\Mod\User_Login\Utils;
 
-use PBOOT\Utils\Base as Utils_Base;
 use PBOOT\Type\User as Type_User;
+use PBOOT\Utils\Base as Utils_Base;
+use PBOOT\Mod\Action_Email\Utils\Email as Utils_Action_Email;
 
 class User
 {
@@ -96,7 +97,7 @@ class User
             'resetpasshash' => $hash
         ], get_site_url()));
 
-        return Utils_Email::sendEmailByAction(
+        return Utils_Action_Email::sendEmailByAction(
             $user_email,
             'resetpass',
             [
@@ -108,6 +109,11 @@ class User
 
     static function sendVerificationEmail($user, $placeholders=[])
     {
+        if(!self::emailVerificationEnabled())
+        {
+            return false;
+        }
+
         $type_user = is_a($user, '\PBOOT\Type\User') ? $user : new Type_User($user);
 
         $user_email = $type_user->getEmail();
@@ -122,7 +128,7 @@ class User
             'reghash' => self::addHash($user_email)
         ], get_site_url());
 
-        return Utils_Email::sendEmailByAction(
+        return Utils_Action_Email::sendEmailByAction(
             $user_email,
             'email_verification',
             wp_parse_args($placeholders, [
