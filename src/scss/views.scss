@@ -42,7 +42,7 @@
         left: 0;
         width: 100%;
 
-        @media (min-width: var(--breakpoint-desktop))
+        @media (min-width: $breakpoint-desktop)
         {
             top: -3.57em;
         }
@@ -58,7 +58,7 @@
         }
         .img-resp {
             max-width: 9.33em;
-            @media (min-width: var(--breakpoint-desktop))
+            @media (min-width: $breakpoint-desktop)
             {
                 max-width: 7.64em;
             }
@@ -90,7 +90,7 @@
                     position: relative;
                     padding-left: 3em !important;
 
-                    @media (min-width: var(--breakpoint-desktop))
+                    @media (min-width: $breakpoint-desktop)
                     {
                         padding-left: 2em !important;
                     }
@@ -105,7 +105,7 @@
                         font-size: inherit;
                         line-height: inherit;
 
-                        @media (min-width: var(--breakpoint-desktop))
+                        @media (min-width: $breakpoint-desktop)
                         {
                             padding: 0.5em 0.5em;
                         }
@@ -420,7 +420,7 @@
             display: flex;
             flex-direction: row;
             justify-content: center;
-            @media (min-width: var(--breakpoint-desktop))
+            @media (min-width: $breakpoint-desktop)
             {
                 justify-content: flex-end;
             }
@@ -432,7 +432,7 @@
 
     .copy-info {
         text-align: center;
-        @media (min-width: var(--breakpoint-desktop))
+        @media (min-width: $breakpoint-desktop)
         {
             text-align: right;
         }

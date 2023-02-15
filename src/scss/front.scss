@@ -18,7 +18,7 @@ html, body {
     font-weight: 400;
     color: var(--color-grey1);
 
-    @media (min-width: var(--breakpoint-desktop))
+    @media (min-width: $breakpoint-desktop)
     {
         font-size: 14px;
     }
