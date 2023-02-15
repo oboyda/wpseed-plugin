@@ -1,3 +1,21 @@
+/*
+Breakpoints
+------------------------- 
+*/
+
+$breakpoint-mobile-max: 991px;
+$breakpoint-desktop-under: 991px;
+$breakpoint-desktop: 992px;
+
+$breakpoint-desktop-lg-under: 1199px;
+$breakpoint-desktop-lg: 1200px;
+
+$breakpoint-desktop-xl-under: 1599px;
+$breakpoint-desktop-xl: 1600px;
+
+$breakpoint-desktop-xxl-under: 1999px;
+$breakpoint-desktop-xxl: 2000px;
+
 :root {
     /*
     Fonts
@@ -15,18 +33,19 @@
     ------------------------- 
     */
 
-    --breakpoint-mobile-max: 991px;
-    --breakpoint-desktop-under: 991px;
-    --breakpoint-desktop: 992px;
+    // --breakpoint-mobile-max: #{$breakpoint-mobile-max};
+    // --breakpoint-desktop-under: #{breakpoint-desktop-under};
+    // --breakpoint-desktop: #{breakpoint-desktop};
 
-    --breakpoint-desktop-lg-under: 1199px;
-    --breakpoint-desktop-lg: 1200px;
+    // --breakpoint-desktop-lg-under: #{breakpoint-desktop-lg-under};
+    // --breakpoint-desktop-lg: #{breakpoint-desktop-lg};
 
-    --breakpoint-desktop-xl-under: 1599px;
-    --breakpoint-desktop-xl: 1600px;
+    // --breakpoint-desktop-xl-under: #{breakpoint-desktop-xl-under};
+    // --breakpoint-desktop-xl: #{breakpoint-desktop-xl};
 
-    --breakpoint-desktop-xxl-under: 1999px;
-    --breakpoint-desktop-xxl: 2000px;
+    // --breakpoint-desktop-xxl-under: #{breakpoint-desktop-xxl-under};
+    // --breakpoint-desktop-xxl: #{breakpoint-desktop-xxl};
+
 
     /*
     Colors
@@ -52,7 +71,7 @@ Functions
 ------------------------- 
 */
 
-@function toRem($value) {
-    $remValue: calc(round(calc($value / --body-font-size) * 1000) / 1000) + rem; 
-    @return $remValue;
-}
+// @function toRem($value) {
+//     $remValue: calc(round(calc($value / $body-font-size) * 1000) / 1000) + rem; 
+//     @return $remValue;
+// }
