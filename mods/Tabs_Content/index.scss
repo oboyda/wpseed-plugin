@@ -20,7 +20,7 @@ view.tabs-content
 
         .tab-title {
             cursor: pointer;
-            font-family: $font_semibold;
+            font-family: var(--font-semibold);
 
             &.active {
                 border-left-color: #ff1e0f;
@@ -30,7 +30,7 @@ view.tabs-content
     }
     &.pos-top .tab-titles {
 
-        @media (min-width: $breakpoint_desktop)
+        @media (min-width: var(--breakpoint-desktop))
         {
             display: flex;
             flex-direction: row;

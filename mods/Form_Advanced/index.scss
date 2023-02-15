@@ -128,7 +128,7 @@
         }
     }
 
-    @media (min-width: $breakpoint_desktop)
+    @media (min-width: var(--breakpoint-desktop))
     {
         &.cols-num-2 .file-item {
             width: calc((100% / 2) - (0.75em * 2));
@@ -407,7 +407,7 @@
     font-size: 0.83rem;
     line-height: 1.4em;
 
-    @media (min-width: $breakpoint_desktop)
+    @media (min-width: var(--breakpoint-desktop))
     {
         font-size: 1em;
         line-height: 1.4em;
@@ -454,7 +454,7 @@
         }
     }
 
-    @media(min-width: $breakpoint_desktop)
+    @media(min-width: var(--breakpoint-desktop))
     {
         &.has-ranges .t-opt {
             button.app-btn {

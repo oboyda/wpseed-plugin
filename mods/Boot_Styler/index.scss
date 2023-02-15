@@ -18,14 +18,14 @@ Background colors
 */
 
 .bc-white {
-    background-color: $color_white !important;
+    background-color: var(--color-white) !important;
 }
 .bc-black {
-    background-color: $color_black !important;
+    background-color: var(--color-black) !important;
 }
 
 .bc-grey2 {
-    background-color: $color_grey2 !important;
+    background-color: var(--color-grey2) !important;
 }
 
 /*
@@ -34,14 +34,14 @@ Text colors
 */
 
 .c-white {
-    color: $color_white !important;
+    color: var(--color-white) !important;
 }
 .c-black {
-    color: $color_black !important;
+    color: var(--color-black) !important;
 }
 
 .c-grey2 {
-    color: $color_grey2 !important;
+    color: var(--color-grey2) !important;
 }
 
 /*
@@ -263,9 +263,9 @@ body:not(.wp-admin) form {
         display: block;
         width: 100%;
         padding: 0.75em 1.25em;
-        font-family: $font_light;
+        font-family: var(--font-light);
         margin: 0;
-        border: 2px solid $color_grey2;
+        border: 2px solid var(--color-grey2);
         border-radius: 3px;
     }
 
@@ -276,7 +276,7 @@ body:not(.wp-admin) form {
     .view.form-nice-dropdown {
         font-size: inherit;
         .selected-label {
-            border: 2px solid $color_grey2;
+            border: 2px solid var(--color-grey2);
             border-radius: 3px;
             box-shadow: none;
         }
@@ -307,7 +307,7 @@ body:not(.wp-admin) form {
         padding-bottom: 0;
         border-radius: 0;
         border-top: none;
-        border-right: 1px solid $color_grey2;
+        border-right: 1px solid var(--color-grey2);
         border-bottom: none;
         border-left: 0;
         background-color: transparent;
@@ -333,12 +333,12 @@ body:not(.wp-admin) form {
         display: block;
         padding: 0 0 0.25em;
         margin: 0;
-        // font-family: $font_semibold;
+        // font-family: var(--font-semibold);
     }
     .input-desc {
         font-size: 0.8em;
         line-height: 1.4em;
-        color: $color_grey2;
+        color: var(--color-grey2);
         padding: 0 0 1em;
     }
 
@@ -356,7 +356,7 @@ body:not(.wp-admin) form {
         font-size: 0.857em;
         line-height: 1.4em;
         padding: 0.7143em 1.2857em 0.7143em 2.83em;
-        color: $color_grey2;
+        color: var(--color-grey2);
 
         &::before {
             position: absolute;
@@ -405,12 +405,12 @@ body:not(.wp-admin) form {
             height: 1.4em;
 
             background-color: #ffffff;
-            border: 2px solid $color_grey2;
+            border: 2px solid var(--color-grey2);
         }
 
         input:checked + label:before {
-            background-color: $color_grey2;
-            border-color: $color_grey2;
+            background-color: var(--color-grey2);
+            border-color: var(--color-grey2);
         }
 
         &.size-large label {
@@ -455,12 +455,12 @@ body:not(.wp-admin) form {
             height: 1.4em;
 
             background-color: #ffffff;
-            border: 2px solid $color_grey2;
+            border: 2px solid var(--color-grey2);
         }
 
         input:checked + label:after {
-            background-color: $color_grey2;
-            border-color: $color_grey2;
+            background-color: var(--color-grey2);
+            border-color: var(--color-grey2);
         }
 
         &.size-large {
@@ -503,11 +503,11 @@ body:not(.wp-admin) form {
     display: inline-block;
     font-size: 1rem;
     line-height: 1.4em;
-    font-family: $font_regular;
+    font-family: var(--font-regular);
     border: none;
     border-radius: 0.1875em;
-    background-color: $color_grey2;
-    color: $color_white;
+    background-color: var(--color-grey2);
+    color: var(--color-white);
     text-decoration: none;
     text-align: center;
     opacity: 1;
@@ -519,7 +519,7 @@ body:not(.wp-admin) form {
         transition-property: opacity;
         transition-duration: 0.3s;
         box-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-        color: $color_white;
+        color: var(--color-white);
     }
     &:disabled {
         cursor: not-allowed;

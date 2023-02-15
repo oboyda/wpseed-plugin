@@ -17,7 +17,7 @@
     font-size: 1rem;
     line-height: 1.4em;
 
-    background-color: $color_grey2;
+    background-color: var(--color-grey2);
     color: #ffffff;
     // box-shadow: 1px 1px 0.2143rem rgba(0,0,0,0.4);
 
@@ -42,7 +42,7 @@
         left: 0;
         width: 100%;
 
-        @media (min-width: $breakpoint_desktop)
+        @media (min-width: var(--breakpoint-desktop))
         {
             top: -3.57em;
         }
@@ -58,7 +58,7 @@
         }
         .img-resp {
             max-width: 9.33em;
-            @media (min-width: $breakpoint_desktop)
+            @media (min-width: var(--breakpoint-desktop))
             {
                 max-width: 7.64em;
             }
@@ -75,7 +75,7 @@
 
             li {
                 a {
-                    font-family: $font_regular;
+                    font-family: var(--font-regular);
                     color: inherit !important;
                     border-bottom: 2px solid transparent;
                     transition-property: border-bottom-color;
@@ -90,7 +90,7 @@
                     position: relative;
                     padding-left: 3em !important;
 
-                    @media (min-width: $breakpoint_desktop)
+                    @media (min-width: var(--breakpoint-desktop))
                     {
                         padding-left: 2em !important;
                     }
@@ -105,7 +105,7 @@
                         font-size: inherit;
                         line-height: inherit;
 
-                        @media (min-width: $breakpoint_desktop)
+                        @media (min-width: var(--breakpoint-desktop))
                         {
                             padding: 0.5em 0.5em;
                         }
@@ -302,11 +302,11 @@
                     display: block;
                     padding: 0;
                     text-decoration: none;
-                    font-family: $font_light;
+                    font-family: var(--font-light);
                     color: inherit;
 
                     &:hover {
-                        color: $color_grey2;
+                        color: var(--color-grey2);
                     }
                 }
             }
@@ -347,7 +347,7 @@
                     color: inherit;
 
                     &:hover {
-                        color: $color_grey2;
+                        color: var(--color-grey2);
                     }
                 }
             }
@@ -362,12 +362,12 @@
 
 .view.footer {
     padding: 2em 0 2em;
-    border-top: 0.2143rem solid $color_black;
-    background-color: $color_grey1;
+    border-top: 0.2143rem solid var(--color-black);
+    background-color: var(--color-grey1);
     color: #ffffff;
     font-size: 1rem;
     line-height: 1.4em;
-    font-family: $font_light;
+    font-family: var(--font-light);
 
     p {
         font-size: 0.857em;
@@ -384,7 +384,7 @@
             .widget-title {
                 font-size: 1em;
                 line-height: 1.4em;
-                font-family: $font_semibold;
+                font-family: var(--font-semibold);
                 padding: 0 0 1em;
                 margin: 0;
             }
@@ -401,11 +401,11 @@
                     a {
                         font-size: 0.857em;
                         line-height: 1.4em;
-                        font-family: $font_light;
+                        font-family: var(--font-light);
                         color: inherit;
     
                         &:hover {
-                            // color: $color_grey2;
+                            // color: var(--color-grey2);
                             text-decoration: underline;
                         }
                     }
@@ -420,7 +420,7 @@
             display: flex;
             flex-direction: row;
             justify-content: center;
-            @media (min-width: $breakpoint_desktop)
+            @media (min-width: var(--breakpoint-desktop))
             {
                 justify-content: flex-end;
             }
@@ -432,7 +432,7 @@
 
     .copy-info {
         text-align: center;
-        @media (min-width: $breakpoint_desktop)
+        @media (min-width: var(--breakpoint-desktop))
         {
             text-align: right;
         }

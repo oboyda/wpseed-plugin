@@ -1,56 +1,58 @@
-/*
-Fonts
--------------------------
-*/
+:root {
+    /*
+    Fonts
+    -------------------------
+    */
 
-$font_regular: "Open Sans Regular", sans-serif;
-$font_extrabold: "Open Sans Extrabold", sans-serif;
-$font_bold: "Open Sans Bold", sans-serif;
-$font_semibold: "Open Sans Semibold", sans-serif;
-$font_light: "Open Sans Light", sans-serif;
+    --font-regular: "Open Sans Regular", sans-serif;
+    --font-extrabold: "Open Sans Extrabold", sans-serif;
+    --font-bold: "Open Sans Bold", sans-serif;
+    --font-semibold: "Open Sans Semibold", sans-serif;
+    --font-light: "Open Sans Light", sans-serif;
 
-/*
-Breakpoints
-------------------------- 
-*/
+    /*
+    Breakpoints
+    ------------------------- 
+    */
 
-$breakpoint_mobile_max: 991px;
-$breakpoint_desktop_under: 991px;
-$breakpoint_desktop: 992px;
+    --breakpoint-mobile-max: 991px;
+    --breakpoint-desktop-under: 991px;
+    --breakpoint-desktop: 992px;
 
-$breakpoint_desktop_lg_under: 1199px;
-$breakpoint_desktop_lg: 1200px;
+    --breakpoint-desktop-lg-under: 1199px;
+    --breakpoint-desktop-lg: 1200px;
 
-$breakpoint_desktop_xl_under: 1599px;
-$breakpoint_desktop_xl: 1600px;
+    --breakpoint-desktop-xl-under: 1599px;
+    --breakpoint-desktop-xl: 1600px;
 
-$breakpoint_desktop_xxl_under: 1999px;
-$breakpoint_desktop_xxl: 2000px;
+    --breakpoint-desktop-xxl-under: 1999px;
+    --breakpoint-desktop-xxl: 2000px;
 
-/*
-Colors
-------------------------- 
-*/
+    /*
+    Colors
+    ------------------------- 
+    */
 
-$color_white: #ffffff;
-$color_black: #000000;
+    --color-white: #ffffff;
+    --color-black: #000000;
 
-$color_grey1: #333333;
-$color_grey2: #555555;
+    --color-grey1: #333333;
+    --color-grey2: #555555;
 
-/*
-Misc
-------------------------- 
-*/
+    /*
+    Misc
+    ------------------------- 
+    */
 
-$body_font_size: 14;
+    --body-font-size: 14;
+}
 
 /*
 Functions
 ------------------------- 
 */
 
-// @function toRem($value) {
-//     $remValue: calc(round(calc($value / $body_font_size) * 1000) / 1000) + rem; 
-//     @return $remValue;
-// }
+@function toRem($value) {
+    $remValue: calc(round(calc($value / --body-font-size) * 1000) / 1000) + rem; 
+    @return $remValue;
+}

@@ -12,13 +12,13 @@ Global
 */
 
 html, body {
-    font-family: $font_light;
+    font-family: var(--font-light);
     font-size: 12px;
     line-height: 1.4em;
     font-weight: 400;
-    color: $color_grey1;
+    color: var(--color-grey1);
 
-    @media (min-width: $breakpoint_desktop)
+    @media (min-width: var(--breakpoint-desktop))
     {
         font-size: 14px;
     }
@@ -36,14 +36,14 @@ Links
 a:not(.s-btn)
 {
     text-decoration: none;
-    color: $color_grey2;
+    color: var(--color-grey2);
 
     transition-property: color;
     transition-duration: 0.3s;
 
     &:hover, &:visited {
         text-decoration: none;
-        color: $color_grey2;
+        color: var(--color-grey2);
     }
 }
 
@@ -61,7 +61,7 @@ Headings
 */
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: $font_semibold;
+    font-family: var(--font-semibold);
     line-height: 1.4em;
     padding: 0 0 0.75em;
     margin: 0;
