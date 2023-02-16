@@ -21,7 +21,7 @@ function pboot_register_blocks()
             'name'				=> 'test-block',
             'title'				=> __('PBOOT Test Block', 'pboot'),
             //'description'		=> __('Block description.', 'pboot'),
-            'render_callback'	=> [$pboot_setup->view_loader, 'renderViewAcf'],
+            'render_callback'	=> isset($pboot_setup) ? [$pboot_setup->view_loader, 'renderViewAcf'] : false,
             'category'			=> 'pboot-blocks',
             //'icon'				=> 'admin-comments'
             //'keywords'			=> [''],
