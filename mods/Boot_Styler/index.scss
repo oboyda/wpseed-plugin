@@ -3,16 +3,6 @@
 @import "./layout.scss";
 
 /*
-.view
-----------------------------------------
-*/
-
-.view {
-    font-size: 1rem;
-    line-height: 1.4em;
-}
-
-/*
 Background colors
 ----------------------------------------
 */
@@ -179,16 +169,19 @@ Responsive image
 }
 .img-resp img {
     display: block;
+    width: 100%;
+    height: auto;
+}
+.img-rel img {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
     height: 100%;
 }
-.img-resp.img-cover img {
+.img-rel.img-cover img {
     object-fit: cover;
 }
-.img-resp.img-contain img {
+.img-rel.img-contain img {
     object-fit: contain;
 }
 

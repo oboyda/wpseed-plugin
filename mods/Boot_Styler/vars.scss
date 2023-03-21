@@ -3,7 +3,9 @@ Breakpoints
 ------------------------- 
 */
 
-$breakpoint-mobile-max: 991px;
+$breakpoint-tablet-under: 767px;
+$breakpoint-tablet: 768px;
+
 $breakpoint-desktop-under: 991px;
 $breakpoint-desktop: 992px;
 
@@ -33,7 +35,9 @@ $breakpoint-desktop-xxl: 2000px;
     ------------------------- 
     */
 
-    // --breakpoint-mobile-max: #{$breakpoint-mobile-max};
+    // --breakpoint-tablet-under: #{breakpoint-tablet-under};
+    // --breakpoint-tablet: #{breakpoint-tablet};
+
     // --breakpoint-desktop-under: #{breakpoint-desktop-under};
     // --breakpoint-desktop: #{breakpoint-desktop};
 

@@ -1,4 +1,4 @@
-<div class="<?php echo $view->getHtmlClass(); ?>" data-view="<?php echo $view->getName(); ?>">
+<div class="<?php echo $view->getHtmlClass('advanced-input'); ?>" data-view="<?php echo $view->getName(); ?>">
     <?php if($view->has_input_name_from() && $view->has_input_name_till()): ?>
     <div class="row">
         <div class="col-lg-6">

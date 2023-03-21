@@ -10,7 +10,10 @@ class Form_Nice_Dropdown extends \PBOOT\View\View
     {
         parent::__construct($args, [
 
-            'enabled' => true,
+            'disabled' => false,
+            'enabled' => null, # keep for backward compatibility
+            'readonly' => false,
+
             'input_id_pref' => '',
             'input_name' => '',
             'input_data_atts' => [],
@@ -20,7 +23,7 @@ class Form_Nice_Dropdown extends \PBOOT\View\View
             'empty_name' => '',
             'selected' => '',
             'options' => [],
-            
+
             'parent' => '',
             'parent_value' => '',
             'parent_enabled' => [],
@@ -35,6 +38,11 @@ class Form_Nice_Dropdown extends \PBOOT\View\View
 
     protected function setArgs()
     {
+        if(isset($this->args['enabled']))
+        {
+            $this->args['disabled'] = !$this->args['enabled'];
+        }
+
         if(!$this->args['label'])
         {
             $this->args['label'] = $this->args['empty_name'];
@@ -52,12 +60,12 @@ class Form_Nice_Dropdown extends \PBOOT\View\View
             $this->args['parent'] && $this->args['parent_enabled'] 
             && (!$this->args['parent_value'] || !in_array($this->args['parent_value'], $this->args['parent_enabled']))
         ){
-            $this->args['enabled'] = false;
+            $this->args['disabled'] = true;
         }
 
         if(!$this->args['options'])
         {
-            $this->args['enabled'] = false;
+            $this->args['disabled'] = true;
         }
     }
 
@@ -102,9 +110,13 @@ class Form_Nice_Dropdown extends \PBOOT\View\View
             $this->addHtmlClass('is-child');
         }
 
-        if(!$this->args['enabled'])
+        if($this->args['disabled'])
         {
             $this->addHtmlClass("disabled");
+        }
+        if($this->args['readonly'])
+        {
+            $this->addHtmlClass("readonly");
         }
     }
 

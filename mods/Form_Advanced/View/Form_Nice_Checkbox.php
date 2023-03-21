@@ -10,8 +10,11 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
     {
         parent::__construct($args, wp_parse_args($args_default, [
 
+            'disabled' => false,
+            'enabled' => null, # keep for backward compatibility
+            'readonly' => false,
+
             'title' => '',
-            'enabled' => true,
             'input_id_pref' => '',
             'input_name' => '',
             'multiple' => false,
@@ -49,6 +52,11 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
 
     protected function setArgs()
     {
+        if(isset($this->args['enabled']))
+        {
+            $this->args['disabled'] = !$this->args['enabled'];
+        }
+
         if($this->args['parent'])
         {
             $this->args['data_atts']['data-parent'] = $this->args['parent'];
@@ -62,13 +70,13 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
             $this->args['parent'] && $this->args['parent_enabled'] 
             && (!$this->args['parent_value'] || !in_array($this->args['parent_value'], $this->args['parent_enabled']))
         ){
-            $this->args['enabled'] = false;
+            $this->args['disabled'] = true;
         }
 
-        if(!$this->args['options'])
-        {
-            $this->args['enabled'] = false;
-        }
+        // if(!$this->args['options'])
+        // {
+        //     $this->args['disabled'] = true;
+        // }
 
         if(!is_array($this->args['selected']))
         {
@@ -121,14 +129,18 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
             $this->addHtmlClass('is-child');
         }
 
-        if(!$this->args['enabled'])
-        {
-            $this->addHtmlClass("disabled");
-        }
-
         if($this->args['inline'])
         {
             $this->addHtmlClass("opts-inline");
+        }
+
+        if($this->args['disabled'])
+        {
+            $this->addHtmlClass("disabled");
+        }
+        if($this->args['readonly'])
+        {
+            $this->addHtmlClass("readonly");
         }
     }
 

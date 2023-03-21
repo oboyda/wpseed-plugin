@@ -11,9 +11,11 @@ jQuery(function($)
     });
     // $(document.body).on("view_loaded", function(e, view){
     $(document.body).viewAddLoadedListener("view_loaded", function(e, view){
-        view.find(".view.pboot form.ajax-form, form.ajax-form.pboot").each(function(){
-            const ajaxForm = new AjaxForm($(this));
-        });
+        if(view.hasClass("pboot")){
+            view.find("form.ajax-form").each(function(){
+                const ajaxForm = new AjaxForm($(this));
+            });
+        }
     });
 
     /*
@@ -235,7 +237,7 @@ jQuery(function($)
 
         function toggle()
         {
-            if(!view.hasClass("disabled"))
+            if(!view.hasClass("disabled") && !view.hasClass("readonly"))
             {
                 view.toggleClass("opened");
             }

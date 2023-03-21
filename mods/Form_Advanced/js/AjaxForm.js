@@ -50,7 +50,10 @@ export class AjaxForm
     handleInputChange(e)
     {
         // e.preventDefault();
-        this.submitForm();
+        // Let inputs to update (paged etc.)
+        setTimeout(() => {
+            this.submitForm();
+        }, 200);
     }
 
     /* ------------------------- */
@@ -88,10 +91,12 @@ export class AjaxForm
                 if(resp.redirect)
                 {
                     location.assign(resp.redirect);
+                    return;
                 }
                 else if(resp.reload)
                 {
                     location.reload();
+                    return;
                 }
 
                 if(_this.form.hasClass("submit-reset"))

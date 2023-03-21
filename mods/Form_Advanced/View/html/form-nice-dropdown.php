@@ -1,4 +1,4 @@
-<div class="<?php echo $view->getHtmlClass(); ?>" <?php echo $view->getDataAtts(); ?> data-input_name="<?php echo $view->get_input_name(); ?>" data-view="<?php echo $view->getName(); ?>">
+<div class="<?php echo $view->getHtmlClass('advanced-input'); ?>" <?php echo $view->getDataAtts(); ?> data-input_name="<?php echo $view->get_input_name(); ?>" data-view="<?php echo $view->getName(); ?>">
     <?php 
     $elem_class = ['selected-label'];
     if($view->has_label()) $elem_class[] = 'has-label';
@@ -15,7 +15,7 @@
         <ul>
             <?php 
             $input_name = ($view->has_input_name() && $view->getInputType() === 'checkbox') ? $view->get_input_name() . '[]' : $view->get_input_name();
-            $disabled = $view->has_enabled() ? '' : ' disabled';
+            $disabled = $view->has_disabled() ? ' disabled' : '';
             
             if($view->getInputType() == 'radio' && $view->has_empty_name()): ?>
                 <li class="no-option type-<?php echo $view->getInputType(); ?>">

@@ -1,4 +1,4 @@
-<div class="<?php echo $view->getHtmlClass(); ?>" data-view="<?php echo $view->getName(); ?>">
+<div class="<?php echo $view->getHtmlClass('advanced-input'); ?>" data-view="<?php echo $view->getName(); ?>">
     <?php if($view->has_label()): ?>
     <label><?php echo $view->get_label(); ?></label>
     <?php endif; ?>

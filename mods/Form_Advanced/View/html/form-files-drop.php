@@ -1,4 +1,4 @@
-<div class="<?php echo $view->getHtmlClass(); ?>" data-view="<?php echo $view->getName(); ?>">
+<div class="<?php echo $view->getHtmlClass('advanced-input'); ?>" data-view="<?php echo $view->getName(); ?>">
     <div class="drop-area d-none d-lg-block">
         <div class="drop-label"><?php echo $view->get_drop_label(); ?></div>
         <div class="drop-summary"></div>

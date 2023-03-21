@@ -61,6 +61,8 @@ class Post_List extends \PBOOT\View\View
                 'posts_per_page' => $this->args['items_per_page']
             ]);
             $this->args['q_args'] = wp_parse_args(Utils_Type::getTypeRequestArgs($this->args['type_class'], [], true), $this->args['q_args']);
+
+            $this->args['q_args'] = apply_filters('pboot_post_list_query_args', $this->args['q_args'], $this->args['type_class']);
     
             $items = Utils_Type_List::getItems($this->args['q_args'], $this->args['type_class']);
 
