@@ -47,6 +47,12 @@
     &.has-files .clear-file {
         display: block;
     }
+
+    &.has-input-label {
+        input {
+            display: none;
+        }
+    }
 }
 
 /*

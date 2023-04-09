@@ -11,8 +11,20 @@ class Form_Files_Drop extends \PBOOT\View\View
         parent::__construct($args, [
             'input_name' => '',
             'drop_label' => __('Drop files here or choose files below', 'pboot'),
+            'input_class' => 'action-btn',
+            'input_label' => '',
+            'label_class' => '',
             'multiple' => false
         ]);
+
+        $this->setHtmlClass();
+    }
+
+    private function setHtmlClass()
+    {
+        if($this->has_input_label()):
+            $this->addHtmlClass('has-input-label');
+        endif;
     }
 
     public function getInputName()

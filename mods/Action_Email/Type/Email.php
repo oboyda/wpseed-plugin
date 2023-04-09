@@ -45,7 +45,7 @@ class Email extends \WPSEEDE\Post
 
     public function getBody($placeholder_args=[])
     {
-        return $this->replacePlaceholders($this->getContent(true), $placeholder_args);
+        return $this->replacePlaceholders($this->getContent(false), $placeholder_args);
     }
 
     protected function replacePlaceholders($str, $placeholders=[])

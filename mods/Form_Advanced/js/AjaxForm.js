@@ -27,7 +27,7 @@ export class AjaxForm
         this.addEventListeners();
 
         this.form.addClass("ajax-form-init");
-        this.form.trigger("ajax_form_loaded", [this.form]);
+        this.form.trigger("pboot_ajax_form_loaded", [this.form]);
     }
 
     addEventListeners()
@@ -36,7 +36,7 @@ export class AjaxForm
         this.form.on("change", ".change-submit", this.handleInputChange.bind(this));
 
         this.form.addClass("ajax-form-init");
-        this.form.trigger("ajax_form_loaded", [this.form]);
+        this.form.trigger("pboot_ajax_form_loaded", [this.form]);
     }
 
     /* ------------------------- */
@@ -109,8 +109,8 @@ export class AjaxForm
 
             _this.showFormStatus(resp);
 
-            // _this.form.trigger("pboot_submit_ajax_form_success", [resp, formData]);
-            _this.form.trigger("pboot_submit_ajax_form_after", [resp, formData]);
+            // _this.form.trigger("pboot_submit_ajax_form_success", [resp, reqArgs, _this.form]);
+            _this.form.trigger("pboot_submit_ajax_form_after", [resp, reqArgs, _this.form]);
 
             if(typeof cbk === "function")
             {
@@ -119,35 +119,36 @@ export class AjaxForm
         })
         .fail(function(error){
             // console.log("ERROR : ", error);
-            _this.form.trigger("pboot_submit_ajax_form_after", [{ status: false }, formData, error]);
+            _this.form.trigger("pboot_submit_ajax_form_after", [{ status: false }, reqArgs, _this.form, error]);
+        })
+        .always(function(resp){
+            // _this.form.trigger("pboot_submit_ajax_form_after", [resp, reqArgs]);
+
+            jQuery(document.body).trigger("pboot_ajax_response", [resp, reqArgs, _this.form]);
         });
-        // .always(function(resp){
-        //     console.log(resp);
-        //     _this.form.trigger("pboot_submit_ajax_form_after", [resp, formData]);
-        // });
     }
 
     /* ------------------------- */
 
-    getFileSummary(files)
-    {
-        let summ = [];
-        const filesArr = Array.isArray(files) ? files : Array.from(files);
-        filesArr.forEach((file) => {
-            if(typeof file.name !== 'undefined')
-            {
-                summ.push(file.name);
-            }
-        });
-        return summ.join(', ');
-    }
+    // getFileSummary(files)
+    // {
+    //     let summ = [];
+    //     const filesArr = Array.isArray(files) ? files : Array.from(files);
+    //     filesArr.forEach((file) => {
+    //         if(typeof file.name !== 'undefined')
+    //         {
+    //             summ.push(file.name);
+    //         }
+    //     });
+    //     return summ.join(', ');
+    // }
 
-    resetFileInput(fileInput)
-    {
-        // fileInput.get(0).files = new FileList;
-        fileInput.val("");
-        fileInput.trigger("change");
-    }
+    // resetFileInput(fileInput)
+    // {
+    //     // fileInput.get(0).files = new FileList;
+    //     fileInput.val("");
+    //     fileInput.trigger("change");
+    // }
 
     showFormStatus(resp)
     {

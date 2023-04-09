@@ -30,6 +30,26 @@ jQuery(function($)
         const fileInputElem = fileInput.get(0);
         const fileClear = view.find(".clear-file .clear-btn");
 
+        function getFileSummary(files)
+        {
+            let summ = [];
+            const filesArr = Array.isArray(files) ? files : Array.from(files);
+            filesArr.forEach((file) => {
+                if(typeof file.name !== 'undefined')
+                {
+                    summ.push(file.name);
+                }
+            });
+            return summ.join(', ');
+        }
+    
+        function resetFileInput(fileInput)
+        {
+            // fileInput.get(0).files = new FileList;
+            fileInput.val("");
+            fileInput.trigger("change");
+        }
+    
         dropArea.on("dragenter", function(e){
             dropArea.addClass("file-over");
         });
@@ -57,10 +77,10 @@ jQuery(function($)
             }else{
                 view.removeClass("has-files");
             }
-            dropSummary.html(_this.getFileSummary(fileInputElem.files));
+            dropSummary.html(getFileSummary(fileInputElem.files));
         });
         fileClear.on("click", function(){
-            _this.resetFileInput(fileInput);
+            resetFileInput(fileInput);
         });
     });
 

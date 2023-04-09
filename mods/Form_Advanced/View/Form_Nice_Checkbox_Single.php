@@ -13,7 +13,7 @@ class Form_Nice_Checkbox_Single extends Form_Nice_Checkbox
             'multiple' => false,
 
             'single_name' => '',
-            'single_value' => '',
+            'single_value' => 1,
             'single_icon_html' => '',
             'single_icon_class' => '',
 

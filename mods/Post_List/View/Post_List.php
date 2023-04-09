@@ -22,7 +22,9 @@ class Post_List extends \PBOOT\View\View
             // 'post_type' => 'post',
             'type_class' => '\PBOOT\Type\Post',
 
-            'q_args' => [],
+            'q_args' => [
+                'paged' => 1
+            ],
             'action_name' => 'pboot_load_post_list',
 
             'cols_num' => 2,

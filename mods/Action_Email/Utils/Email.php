@@ -76,7 +76,21 @@ class Email
             }
         }
 
-        $sent = wp_mail($to_email, $subject, $body, $headers);
+        $mail_args = apply_filters('pboot_action_email_args', [
+            'to_email' => $to_email,
+            'subject' => $subject,
+            'body' => $body,
+            'headers' => $headers,
+            'attachments' => []
+        ], $action, $placeholder_args);
+
+        $sent = wp_mail(
+            $mail_args['to_email'], 
+            $mail_args['subject'], 
+            $mail_args['body'], 
+            $mail_args['headers'],
+            $mail_args['attachments']
+        );
 
         if($sent && $return_body)
         {
