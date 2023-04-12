@@ -46,11 +46,11 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
         {
             $this->setArgs();
             $this->setOptions();
-            $this->_setHtmlClass();
+            $this->setHtmlClass();
         }
     }
 
-    protected function setArgs()
+    private function setArgs()
     {
         if(isset($this->args['enabled']))
         {
@@ -113,7 +113,7 @@ class Form_Nice_Checkbox extends \PBOOT\View\View
         $this->args['options'] = $_options;
     }
 
-    protected function _setHtmlClass()
+    private function setHtmlClass()
     {
         $this->addHtmlClass($this->get_input_name());
         

@@ -12,6 +12,8 @@ class Login_Form extends \PBOOT\View\View
     {
         parent::__construct($args, wp_parse_args($args_default, [
             
+            'redirect' => 1, #1 to admin_url() or other value
+            'show_remember' => false
         ]));
 
         $this->req = new \WPSEED\Req();

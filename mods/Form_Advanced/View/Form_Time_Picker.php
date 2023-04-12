@@ -17,10 +17,10 @@ class Form_Time_Picker extends \PBOOT\View\View
             'value' => ''
         ]);
 
-        $this->_setHtmlClass();
+        $this->setHtmlClass();
     }
 
-    protected function _setHtmlClass()
+    private function setHtmlClass()
     {
         if($this->has_ranges())
         {

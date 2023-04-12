@@ -2,8 +2,8 @@
 
     <?php $view->openContainer(); ?>
 
-    <div class="switch-contents">
-        <div class="switch-content content-login-form<?php if($view->isFormActive('login')) echo ' active'; ?>">
+    <div class="toggle-contents">
+        <div class="toggle-content content-login-form<?php if($view->isFormActive('login')) echo ' active'; ?>">
 
             <h3 class="form-title"><?php _e('Log in', 'pboot'); ?></h3>
 
@@ -28,24 +28,31 @@
                 <div class="form-block remember-recover">
                     <div class="row">
                         <div class="col-6">
-                            <div class="nice-checkbox s1">
+                            <?php if($view->has_show_remember()): ?>
+                            <div class="nice-checkbox">
                                 <input type="checkbox" id="remember" name="remember" value="1" checked /> 
                                 <label for="remember"><?php _e('Remember me', 'pboot'); ?></label>
                             </div>
+                            <?php endif; ?>
                         </div>
                         <div class="col-6">
                             <div class="recover-pass ta-right">
-                                <a href="#" class="switch-content-btn" data-content_name="content-resetpass-form"><?php _e('Forgot your password?', 'pboot'); ?></a>
+                                <a href="#" class="toggle-content-btn" data-content_name="content-resetpass-form"><?php _e('Forgot your password?', 'pboot'); ?></a>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <?php if($view->has_redirect()): ?>
+                <input type="hidden" name="redirect" value="<?php echo $view->get_redirect(); ?>" />
+                <?php endif; ?>
+
                 <input type="hidden" name="action" value="pboot_user_login" />
 
                 <div class="messages-cont"></div>
             </form>
         </div>
-        <div class="switch-content content-resetpass-form<?php if($view->isFormActive('resetpass')) echo ' active'; ?>">
+        <div class="toggle-content content-resetpass-form<?php if($view->isFormActive('resetpass')) echo ' active'; ?>">
 
             <h3 class="form-title"><?php _e('Reset password', 'pboot'); ?></h3>
 
@@ -72,7 +79,7 @@
                 </div>
                 <?php if(!($view->hasReq('resetpasshash') && $view->hasReq('user_login'))): ?>
                 <div class="form-block ta-right">
-                    <a href="#" class="switch-content-btn" data-content_name="content-login-form"><?php _e('Back to login', 'pboot'); ?></a>
+                    <a href="#" class="toggle-content-btn" data-content_name="content-login-form"><?php _e('Back to login', 'pboot'); ?></a>
                 </div>
                 <?php endif; ?>
 

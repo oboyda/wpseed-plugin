@@ -22,6 +22,9 @@ import './Status_Message/index.scss';
 import './Tabs_Content/index.js';
 import './Tabs_Content/index.scss';
 
+import './Toggle_Content/index.js';
+import './Toggle_Content/index.scss';
+
 import './User_Login/index.js';
 import './User_Login/index.scss';
 

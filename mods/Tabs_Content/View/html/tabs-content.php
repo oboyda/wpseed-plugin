@@ -13,7 +13,7 @@
         
                 <div class="tab-titles">
                     <?php foreach($view->get_items() as $i => $item): ?>
-                    <div class="tab-title switch-content-btn<?php if(!$i) echo ' active'; ?>">
+                    <div class="tab-title toggle-content-btn<?php if(!$i) echo ' active'; ?>">
                         <span class="title-text"><?php echo $item['tab_title']; ?></span>
                     </div>
                     <?php endforeach; ?>

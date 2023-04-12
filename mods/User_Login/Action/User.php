@@ -31,7 +31,7 @@ class User extends \WPSEED\Action
         $inputs = [
             'user_login' => $this->getReq('user_login'),
             'user_pass' => $this->getReq('user_pass'),
-            'remember' => (bool)$this->getReq('remember'),
+            'remember' => (bool)$this->getReq('remember', 1),
             'redirect' => $this->getReq('redirect')
         ];
 

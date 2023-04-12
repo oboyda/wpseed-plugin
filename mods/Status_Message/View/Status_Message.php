@@ -19,7 +19,7 @@ class Status_Message extends \PBOOT\View\View
         ]);
 
         $this->setIconClass();
-        $this->_setHtmlClass();
+        $this->setHtmlClass();
     }
 
     public function setIconClass()
@@ -44,7 +44,7 @@ class Status_Message extends \PBOOT\View\View
         }
     }
 
-    protected function _setHtmlClass()
+    private function setHtmlClass()
     {
         $this->addHtmlClass('type-' . $this->args['type']);
         $this->addHtmlClass('size-' . $this->args['size']);

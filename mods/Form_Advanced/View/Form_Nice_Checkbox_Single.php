@@ -52,6 +52,6 @@ class Form_Nice_Checkbox_Single extends Form_Nice_Checkbox
     protected function __setHtmlClass()
     {
         $this->addHtmlClass('form-nice-checkbox');
-        $this->_setHtmlClass();
+        $this->setHtmlClass();
     }
 }

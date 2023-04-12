@@ -23,10 +23,10 @@ class List_Pager extends \PBOOT\View\View
         ]);
 
         $this->setArgs();
-        $this->_setHtmlClass();
+        $this->setHtmlClass();
     }
 
-    protected function setArgs()
+    private function setArgs()
     {
         if(!$this->args['items_total'])
         {
@@ -53,7 +53,7 @@ class List_Pager extends \PBOOT\View\View
         $this->args['page_next'] = ($this->args['paged'] < $this->pages_max) ? $this->args['paged'] + 1 : $this->pages_max;
     }
 
-    protected function _setHtmlClass()
+    private function setHtmlClass()
     {
         if($this->args['ajax_pager'])
         {

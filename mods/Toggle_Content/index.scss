@@ -1,0 +1,13 @@
+/*
+.toggle-contents
+----------------------------------------
+*/
+
+.toggle-contents {
+    .toggle-content {
+        display: none;
+        &.active {
+            display: block;
+        }
+    }
+}

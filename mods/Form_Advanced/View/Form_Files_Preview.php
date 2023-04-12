@@ -22,7 +22,7 @@ class Form_Files_Preview extends \PBOOT\View\View
         ]);
 
         // $this->setItemsHtml();
-        $this->_setHtmlClass();
+        $this->setHtmlClass();
     }
 
     // protected function setItemsHtml()
@@ -63,7 +63,7 @@ class Form_Files_Preview extends \PBOOT\View\View
     //     }
     // }
 
-    protected function _setHtmlClass()
+    private function setHtmlClass()
     {
         $this->addHtmlClass('cols-num-' . $this->args['cols']);
 
