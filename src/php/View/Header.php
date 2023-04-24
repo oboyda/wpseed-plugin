@@ -16,10 +16,10 @@ class Header extends View
             'logo_html' => $this->getCustomLogo(),
         ]);
 
-        $this->_setHtmlClass();
+        $this->setHtmlClass();
     }
 
-    protected function _setHtmlClass()
+    private function setHtmlClass()
     {
         if($this->has_show_nav_top())
         {
