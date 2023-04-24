@@ -11,14 +11,27 @@
 
     .drop-area {
 
+        position: relative;
         text-align: center;
         padding: 3em 2em 2em;
         margin: 0 0 1em;
-        // background-color: #efefef;
         border: 2px dashed #999999;
+
+        .drop-over {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
 
         &.file-over {
             background-color: #cccccc;
+
+            .drop-over {
+                display: block;
+            }
         }
     }
 

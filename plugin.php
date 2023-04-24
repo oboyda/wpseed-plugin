@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WPSEED Plugin
  * Description: WPSEED Plugin Bootstrap
- * Version: 1.1.0
+ * Version: 1.0.0
  * Author: Alexis Boyda
  * Author URI: https://aleapp.com
  * Text Domain: pboot

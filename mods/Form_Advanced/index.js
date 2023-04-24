@@ -51,10 +51,14 @@ jQuery(function($)
         }
     
         dropArea.on("dragenter", function(e){
-            dropArea.addClass("file-over");
+            // if($(e.target).hasClass("drop-area")){
+                dropArea.addClass("file-over");
+            // }
         });
         dropArea.on("dragleave", function(e){
-            dropArea.removeClass("file-over");
+            if($(e.target).hasClass("drop-over")){
+                dropArea.removeClass("file-over");
+            }
         });
         dropArea.on("dragover", function(e){
             e.preventDefault();
@@ -70,6 +74,8 @@ jQuery(function($)
                 fileInputElem.files = _e.dataTransfer.files;
                 fileInput.trigger("change");
             }
+
+            dropArea.removeClass("file-over");
         });
         fileInput.on("change", function(){
             if(fileInputElem.files.length){

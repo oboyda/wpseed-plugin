@@ -13,14 +13,14 @@ Global
 
 html, body {
     font-family: var(--font-light);
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.4em;
     font-weight: 400;
     color: var(--color-grey1);
 
     @media (min-width: $breakpoint-desktop)
     {
-        font-size: 14px;
+        font-size: 16px;
     }
 }
 
