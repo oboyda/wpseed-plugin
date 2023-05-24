@@ -38,17 +38,18 @@ $pboot_setup = new \WPSEEDE\Setup([
         'config/acf-fields.php'
     ],
 
-    // 'load_modules' => [
-    //     'Action_Email',
-    //     'Form_Advanced',
-    //     'Post_List',
-    //     'Site_Loader',
-    //     'Site_Modal',
-    //     'Status_Message',
-    //     'Tabs_Content',
-    //     'User_Login'
-    // ]
-    'load_modules' => 'all'
+    'load_modules' => [
+        'Boot_Styler',
+        'Form_Advanced',
+        'Post_List',
+        // 'User_Login',
+        // 'Action_Email',
+        // 'Site_Loader',
+        // 'Site_Modal',
+        // 'Status_Message',
+        // 'Tabs_Content',
+    ]
+    // 'load_modules' => 'all'
 ]);
 $pboot_setup->initScripts([
     // 'style_regs' => [

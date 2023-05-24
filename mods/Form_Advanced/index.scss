@@ -1,4 +1,4 @@
-@import "../Boot_Styler/vars.scss";
+// @import "../Boot_Styler/vars.scss";
 
 /*
 .view.pboot.form-advanced.form-files-drop
@@ -147,7 +147,7 @@
         }
     }
 
-    @media (min-width: $breakpoint-desktop)
+    @media (min-width: 992px)
     {
         &.cols-num-2 .file-item {
             width: calc((100% / 2) - (0.75em * 2));
@@ -426,7 +426,7 @@
     font-size: 0.83rem;
     line-height: 1.4em;
 
-    @media (min-width: $breakpoint-desktop)
+    @media (min-width: 992px)
     {
         font-size: 1em;
         line-height: 1.4em;
@@ -473,7 +473,7 @@
         }
     }
 
-    @media(min-width: $breakpoint-desktop)
+    @media(min-width: 992px)
     {
         &.has-ranges .t-opt {
             button.app-btn {

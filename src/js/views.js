@@ -56,5 +56,7 @@ jQuery(function($){
     Load views
     --------------------------------------------------
     */
-    $(".view.pboot").viewTriggerLoaded();
+    setTimeout(() => {
+        $(".view.pboot").viewTriggerLoaded();
+    }, 500)
 });

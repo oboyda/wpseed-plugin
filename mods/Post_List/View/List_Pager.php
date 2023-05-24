@@ -19,7 +19,11 @@ class List_Pager extends \PBOOT\View\View
             'items_per_page' => 10,
             'pages_visible' => 10,
             'ajax_pager' => false,
-            'align' => 'center'
+            'align' => 'center',
+
+            'btn_class' => 'app-btn size-small',
+            'btn_prev_icon_html' => '<i class="bi bi-chevron-left"></i>',
+            'btn_next_icon_html' => '<i class="bi bi-chevron-right"></i>'
         ]);
 
         $this->setArgs();

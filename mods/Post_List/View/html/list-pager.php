@@ -16,16 +16,13 @@
 
             <?php if($view->get_paged() > 1): ?>
             <li class="page page-prev">
-                <a href="<?php echo add_query_arg('paged', $view->get_page_prev()); ?>" class="app-btn size-small icon-only" data-page="<?php echo $view->get_page_prev(); ?>">
-                    <i class="bi bi-chevron-left"></i>
-                    <?php //_e('Prev', 'pboot'); ?>
-                </a>
+                <a href="<?php echo get_pagenum_link($view->get_page_prev()); ?>" class="<?php echo $view->get_btn_class(); ?> icon-only" data-page="<?php echo $view->get_page_prev(); ?>"><?php echo $view->get_btn_prev_icon_html(); ?></a>
             </li>
             <?php endif; ?>
 
             <?php if($ci > 0): ?>
             <li class="page group-prev">
-                <a href="<?php echo add_query_arg('paged', $chunk_page_prev); ?>" class="app-btn size-small" data-page="<?php echo $chunk_page_prev; ?>">...</a>
+                <a href="<?php echo get_pagenum_link($chunk_page_prev); ?>" class="<?php echo $view->get_btn_class(); ?>" data-page="<?php echo $chunk_page_prev; ?>">...</a>
             </li>
             <?php endif; ?>
         
@@ -33,22 +30,19 @@
                 $active_class = ($page === $view->get_paged()) ? ' active' : '';
                 ?>
             <li class="page<?php echo $active_class; ?>">
-                <a href="<?php echo add_query_arg('paged', $page); ?>" class="app-btn size-small" data-page="<?php echo $page; ?>"><?php echo $page; ?></a>
+                <a href="<?php echo get_pagenum_link($page); ?>" class="<?php echo $view->get_btn_class(); ?>" data-page="<?php echo $page; ?>"><?php echo $page; ?></a>
             </li>
             <?php endforeach; ?>
 
             <?php if($ci+1 < $view->get_page_chunks_num()): ?>
             <li class="page group-next">
-                <a href="<?php echo add_query_arg('paged', $chunk_page_next); ?>" class="app-btn size-small" data-page="<?php echo $chunk_page_next; ?>">...</a>
+                <a href="<?php echo get_pagenum_link($chunk_page_next); ?>" class="<?php echo $view->get_btn_class(); ?>" data-page="<?php echo $chunk_page_next; ?>">...</a>
             </li>
             <?php endif; ?>
 
             <?php if($view->get_paged() < $view->pages_max): ?>
             <li class="page page-next">
-                <a href="<?php echo add_query_arg('paged', $view->get_page_next()); ?>" class="app-btn size-small icon-only" data-page="<?php echo $view->get_page_next(); ?>">
-                    <i class="bi bi-chevron-right"></i>
-                    <?php //_e('Next', 'pboot'); ?>
-                </a>
+                <a href="<?php echo get_pagenum_link($view->get_page_next()); ?>" class="<?php echo $view->get_btn_class(); ?> icon-only" data-page="<?php echo $view->get_page_next(); ?>"><?php echo $view->get_btn_next_icon_html(); ?></a>
             </li>
             <?php endif; ?>
 
