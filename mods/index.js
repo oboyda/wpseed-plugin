@@ -1,6 +1,4 @@
 
-import './Boot_Styler/index.scss';
-
 import './Form_Advanced/index.js';
 import './Form_Advanced/index.scss';
 

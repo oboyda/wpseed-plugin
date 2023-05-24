@@ -39,7 +39,7 @@ $pboot_setup = new \WPSEEDE\Setup([
     ],
 
     'load_modules' => [
-        'Boot_Styler',
+        // 'Boot_Styler',
         'Form_Advanced',
         'Post_List',
         // 'User_Login',
