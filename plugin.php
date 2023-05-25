@@ -23,6 +23,7 @@ $pboot_setup = new \WPSEEDE\Setup([
     'textdom' => 'pboot',
     'base_dir' => PBOOT_DIR,
     'base_dir_url' => PBOOT_INDEX,
+    'view_dir' => PBOOT_DIR . '/src/php/View/html',
     'version' => PBOOT_VERSION,
 
     'plugin_deps' => [
